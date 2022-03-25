@@ -1,0 +1,5 @@
+the npc features:
+can initiate events if too close
+should go around in a random manner(Math.random)
+if there is a action going on the NPC s may flee the scene to make space(boolean isAction)
+some will stay still and have a info button on top (boolean isImportant)

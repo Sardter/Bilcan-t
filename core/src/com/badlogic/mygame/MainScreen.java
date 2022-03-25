@@ -16,6 +16,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainScreen implements Screen {
     private  BilcantGame game;
@@ -24,6 +26,7 @@ public class MainScreen implements Screen {
     private Player character;
     private GameMap map;
     private ArrayList<GameObject> objects;
+    private ArrayList<NonPlayerCharacter> NPC;
     private Stage stage;
     private Table table;
     private BitmapFont font;
@@ -33,6 +36,7 @@ public class MainScreen implements Screen {
 
     final static int BOUNDRY_X = 800, BOUNDRY_Y = 480;
     final static int STARTING_POSITION_X = BOUNDRY_X / 2, STARTING_POSITION_Y = BOUNDRY_Y / 2;
+    //final NonPlayerCharacter n = new NonPlayerCharacter();
 
     public MainScreen(BilcantGame game) {
         this.game = game;
@@ -76,6 +80,15 @@ public class MainScreen implements Screen {
         objects = new ArrayList<>();
         objects.add(object1);
         objects.add(object2);
+
+        NonPlayerCharacter np1 = new NonPlayerCharacter(false);
+        NonPlayerCharacter np2 = new NonPlayerCharacter(true);
+        NonPlayerCharacter np3 = new NonPlayerCharacter(false);
+        NPC = new ArrayList<>();
+        NPC.add(np1);
+        NPC.add(np2);
+        NPC.add(np3);
+
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -152,6 +165,7 @@ public class MainScreen implements Screen {
         ScreenUtils.clear(0, 0, 0.2f, 1);
         camera.update();
 
+
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(map.getTexture(), map.x, map.y);
@@ -160,6 +174,13 @@ public class MainScreen implements Screen {
         for (GameObject object: objects) {
             batch.draw(object.getTexture(), object.x, object.y);
         }
+
+
+        for(NonPlayerCharacter n : NPC) {
+                    n.move();
+                    batch.draw(n.getTexture(), n.x, n.y);
+        }
+
         batch.end();
 
 
