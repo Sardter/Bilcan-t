@@ -7,110 +7,131 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class Controller {
     final static float SPEED = 4;
-    static boolean moveOnMouse = false;
 
     static  float newX = 0, newY = 0;
 
-    public static  void move(Rectangle character, OrthographicCamera camera, ArrayList<GameObject> objects, Stage stage) {
+    public static  void move(MainScreen mainScreen) {
         final Input input = Gdx.input;
 
-        float prevX = character.x, prevY = character.y;
+        float prevX = mainScreen.getCharacter().x, prevY = mainScreen.getCharacter().y;
 
         if(input.isTouched()) {
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            camera.unproject(touchPos);
-            moveOnMouse = true;
+            mainScreen.getCamera().unproject(touchPos);
+            mainScreen.setMoveOnMouse(true);
             newX = touchPos.x - 64 / 2;
             newY = touchPos.y - 64 / 2;
         }
 
-        if (moveOnMouse) {
+        if (mainScreen.getMoveOnMouse()) {
 
             if (newX > prevX) {
-                character.x += SPEED;
-                camera.position.x += SPEED;
+                mainScreen.getCharacter().x += SPEED;
+                mainScreen.getCamera().position.x += SPEED;
             } else if (newX < prevX) {
-                character.x -= SPEED;
-                camera.position.x -= SPEED;
+                mainScreen.getCharacter().x -= SPEED;
+                mainScreen.getCamera().position.x -= SPEED;
             }
 
             if (newY > prevY) {
-                character.y += SPEED;
-                camera.position.y += SPEED;
+                mainScreen.getCharacter().y += SPEED;
+                mainScreen.getCamera().position.y += SPEED;
             } else if (newY < prevY) {
-                character.y -= SPEED;
-                camera.position.y -= SPEED;
+                mainScreen.getCharacter().y -= SPEED;
+                mainScreen.getCamera().position.y -= SPEED;
             }
 
             if (prevX < newX + 5 && prevX > newX - 5 && prevY < newY + 5 && prevY > newY - 5) {
-                moveOnMouse = false;
+                mainScreen.setMoveOnMouse(false);
             }
         }
 
         if (input.isKeyPressed(Input.Keys.ANY_KEY)) {
-            moveOnMouse = false;
+            mainScreen.setMoveOnMouse(false);
         }
         if (input.isKeyPressed(Input.Keys.LEFT) || input.isKeyPressed(Input.Keys.A)) {
-            character.x -= SPEED;
-            camera.position.x -= SPEED;
+            mainScreen.getCharacter().x -= SPEED;
+            mainScreen.getCamera().position.x -= SPEED;
         }
         if (input.isKeyPressed(Input.Keys.RIGHT) || input.isKeyPressed(Input.Keys.D)) {
-            character.x += SPEED;
-            camera.position.x += SPEED;
+            mainScreen.getCharacter().x += SPEED;
+            mainScreen.getCamera().position.x += SPEED;
         }
         if (input.isKeyPressed(Input.Keys.UP) || input.isKeyPressed(Input.Keys.W)) {
-            character.y += SPEED;
-            camera.position.y += SPEED;
+            mainScreen.getCharacter().y += SPEED;
+            mainScreen.getCamera().position.y += SPEED;
         }
         if (input.isKeyPressed(Input.Keys.DOWN) || input.isKeyPressed(Input.Keys.S)) {
-            character.y -= SPEED;
-            camera.position.y -= SPEED;
+            mainScreen.getCharacter().y -= SPEED;
+            mainScreen.getCamera().position.y -= SPEED;
         }
 
 
-        if(character.x < 0) {
-            character.x = 0;
-            camera.position.x = 0;
-            moveOnMouse = false;
+        if(mainScreen.getCharacter().x < 0) {
+            mainScreen.getCharacter().x = 0;
+            mainScreen.getCamera().position.x = 0;
+            mainScreen.setMoveOnMouse(false);
+
         }
-        if(character.x > 800 - 64) {
-            character.x = 800 - 64;
-            camera.position.x = 800 -64;
-            moveOnMouse = false;
+        if(mainScreen.getCharacter().x > 800 - 64) {
+            mainScreen.getCharacter().x = 800 - 64;
+            mainScreen.getCamera().position.x = 800 -64;
+            mainScreen.setMoveOnMouse(false);
         }
-        if(character.y < 0) {
-            character.y = 0;
-            camera.position.y = 0;
-            moveOnMouse = false;
+        if(mainScreen.getCharacter().y < 0) {
+            mainScreen.getCharacter().y = 0;
+            mainScreen.getCamera().position.y = 0;
+            mainScreen.setMoveOnMouse(false);
         }
-        if(character.y > 400 + 16) {
-            camera.position.y = 400 + 16;
-            character.y = 400 + 16;
-            moveOnMouse = false;
+        if(mainScreen.getCharacter().y > 400 + 16) {
+            mainScreen.getCamera().position.y = 400 + 16;
+            mainScreen.getCharacter().y = 400 + 16;
+            mainScreen.setMoveOnMouse(false);
         }
 
-        for (GameObject object : objects) {
-            if (onCollision(character, camera,object, prevX, prevY)) {
+        boolean onAnyVicinity = false;
+        for (GameObject object : mainScreen.objects()) {
+
+            if (onCollision(mainScreen.getCharacter(), mainScreen.getCamera(),object, prevX, prevY)) {
                 //System.out.println(object.getId());
-                moveOnMouse = false;
+                mainScreen.setMoveOnMouse(false);
             }
 
-            if (onVicinity(character, camera, object)) {
-                //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                //System.out.println(object.getId());
 
-                stage.act(Gdx.graphics.getDeltaTime());
-                stage.draw();
-            };
+            if (onVicinity(mainScreen.getCharacter(), mainScreen.getCamera(), object)) {
+                mainScreen.getInteractButton().setVisible(true);
+                onAnyVicinity = true;
+            } else {
+                if (!onAnyVicinity) {
+                    mainScreen.getInteractButton().setVisible(false);
+                    onAnyVicinity = true;
+                }
+            }
         }
 
+    }
+
+    public static void interactOnVicinity(ArrayList<GameObject> objects) {
+        for ( GameObject object : objects) {
+            if (object.getOnVicinity()) {
+                object.interact();
+                break;
+            }
+        }
     }
 
     private static boolean onCollision(Rectangle character, OrthographicCamera camera , GameObject object, float prevX, float prevY) {
@@ -169,7 +190,8 @@ public class Controller {
 
 
 
-        if (currCharX <= currObjX + 100 && currCharX >= currObjX - 100 && currCharY <= currObjY + 100 && currCharY >= currObjY - 100) {
+        if (currCharX <= currObjX + 100 && currCharX >= currObjX - 100
+                && currCharY <= currObjY + 100 && currCharY >= currObjY - 100) {
             //System.out.println(currCharX);
             if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
                 object.interact();

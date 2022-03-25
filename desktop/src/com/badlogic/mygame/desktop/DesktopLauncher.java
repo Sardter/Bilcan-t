@@ -8,8 +8,8 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Bilcant";
-		config.width = 800;
-		config.height = 480;
+		config.width = 900;
+		config.height = 580;
 		new LwjglApplication(new BilcantGame(), config);
 	}
 }

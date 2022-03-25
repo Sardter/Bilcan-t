@@ -31,10 +31,7 @@ public class GameObject extends Rectangle {
 
 
     public void interact() {
-        if (canInteract) {
-            System.out.println("smt"+ id);
-            canInteract = false;
-        }
+        System.out.println("smt"+ id);
 
     }
 }
