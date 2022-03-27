@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -81,6 +82,7 @@ public class MainScreen implements Screen {
         objects.add(object1);
         objects.add(object2);
 
+
         NonPlayerCharacter np1 = new NonPlayerCharacter(false);
         NonPlayerCharacter np2 = new NonPlayerCharacter(true);
         NonPlayerCharacter np3 = new NonPlayerCharacter(false);
@@ -142,6 +144,12 @@ public class MainScreen implements Screen {
                 break;
             }
         }
+        for ( NonPlayerCharacter npc : NPC) {
+            if (npc.getOnVicinity() && npc.getISImportant()) {
+                npc.interact();
+                break;
+            }
+        }
     }
 
     public void saveGame() {
@@ -164,25 +172,22 @@ public class MainScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.2f, 1);
         camera.update();
-
-
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(map.getTexture(), map.x, map.y);
-
         batch.draw(character.getTexture(), character.x, character.y);
+
         for (GameObject object: objects) {
             batch.draw(object.getTexture(), object.x, object.y);
         }
 
-
-        for(NonPlayerCharacter n : NPC) {
+        for(NonPlayerCharacter n: NPC) {
                     n.move();
                     batch.draw(n.getTexture(), n.x, n.y);
+                    //n.incrementByOne();
         }
 
         batch.end();
-
 
         Controller.move(this);
 
