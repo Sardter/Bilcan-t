@@ -11,6 +11,7 @@ import java.util.Random;
 
 public class NonPlayerCharacter extends GameObject{
     private boolean isImportant;
+    private boolean first = true;
     //protected int x;
     int nextX = MathUtils.random(0,1);
     int nextY = MathUtils.random(0,1);
@@ -21,7 +22,7 @@ public class NonPlayerCharacter extends GameObject{
         super(-1,"bucket.png", 64, 64);
         this.isImportant = isImportant;
         //this.doesFlee = flee;
-        initialize();
+
     }
     public NonPlayerCharacter(){
         super(-1,"bucket.png", 64, 64, 200, 200);
@@ -61,33 +62,35 @@ public class NonPlayerCharacter extends GameObject{
      */
     public void move(){
         if(!this.isImportant){
-
-                if((TimeUtils.nanoTime() - moveTimeX) > 2000000000){
+                if(first){
+                    initialize();
+                    first = false;
+                }
+                if((TimeUtils.nanoTime() - moveTimeX) > 500000000){
                     nextX = MathUtils.random(0,1);
                     initializeX();
                 }
-                if((TimeUtils.nanoTime() - moveTimeY) > 1000000000){
+                if((TimeUtils.nanoTime() - moveTimeY) > 500000000){
                     nextY = MathUtils.random(0,1);
                     initializeY();
                 }
 
                 if(nextX == 0){
-                    nextX = -(int) (100 * Gdx.graphics.getDeltaTime());
+                    this.x -= (100 * Gdx.graphics.getDeltaTime());
                 }
                 else if(nextX == 1){
-                    nextX = (int) (100 * Gdx.graphics.getDeltaTime());
+                    this.x += (100 * Gdx.graphics.getDeltaTime());
                 }
                 if(nextY == 0){
-                    nextY = -(int) (100 * Gdx.graphics.getDeltaTime());
+                    this.y -= (100 * Gdx.graphics.getDeltaTime());
                 }
                 else if(nextY == 1){
-                    nextY = (int) (100 * Gdx.graphics.getDeltaTime());
+                    this.y += (100 * Gdx.graphics.getDeltaTime());
                 }
-                this.x = this.x + nextX;
-                this.y = (int) (this.y + nextY);
+
              if(!(this.x < Gdx.graphics.getWidth()) || !(this.x > 0) || !(this.y > 0) || !(this.y < 200)){
                  int outOfBounds = MathUtils.random(0, (int) (Gdx.graphics.getWidth() - 1));
-                 this.x = 100;
+                 this.x = outOfBounds;
                  this.y = 100;
              }
         }
