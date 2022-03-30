@@ -3,16 +3,25 @@ package com.badlogic.mygame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.TimeUtils;
+import java.util.ArrayList;
+import java.awt.Point;
+
+/*
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Random;
+
+ */
 
 
 
 public class NonPlayerCharacter extends GameObject{
     private boolean isImportant;
     private boolean first = true;
+    private byte route;
     //protected int x;
+    private static final ArrayList<float[]> moves = new ArrayList<>();
     int nextX = MathUtils.random(0,1);
     int nextY = MathUtils.random(0,1);
     private static long moveTimeX;
@@ -21,11 +30,16 @@ public class NonPlayerCharacter extends GameObject{
     public NonPlayerCharacter(boolean isImportant){
         super(-1,"bucket.png", 64, 64);
         this.isImportant = isImportant;
+        initializeMoves();
         //this.doesFlee = flee;
 
     }
     public NonPlayerCharacter(){
         super(-1,"bucket.png", 64, 64, 200, 200);
+    }
+    public NonPlayerCharacter(byte a){
+        super(-1,"bucket.png", 64, 64, 200, 200);
+        route = a;
     }
     /**
      * takes a boolean
@@ -95,6 +109,12 @@ public class NonPlayerCharacter extends GameObject{
              }
         }
     }
+    public void moveFromArrayList(){
+        int a = 0;
+        //while(!(moves.get(route)[a] == null)){
+
+        //}
+    }
     public boolean getISImportant(){
         return isImportant;
     }
@@ -107,5 +127,23 @@ public class NonPlayerCharacter extends GameObject{
     }
     private static void initializeY(){
         moveTimeY = TimeUtils.nanoTime();
+    }
+
+    /**
+     * initialize final moves that are basically left right and up down
+     * the odd numbered variables do x
+     * th even numbered ones do y
+     */
+    private static void initializeMoves(){
+        final float[] FIRST = new float[3]; FIRST[0] = 100 * Gdx.graphics.getDeltaTime(); FIRST[1] = 50 * Gdx.graphics.getDeltaTime(); FIRST[2] = 400 * Gdx.graphics.getDeltaTime();
+        final float[] SECOND = new float[3]; FIRST[0] = 200* Gdx.graphics.getDeltaTime(); FIRST[1] = 100* Gdx.graphics.getDeltaTime(); FIRST[2] = 300;
+        final float[] THIRD = new float[3]; FIRST[0] = 50* Gdx.graphics.getDeltaTime(); FIRST[1] = 50* Gdx.graphics.getDeltaTime(); FIRST[2] = 450* Gdx.graphics.getDeltaTime();
+        final float[] FOURTH = new float[3]; FIRST[0] = 450* Gdx.graphics.getDeltaTime(); FIRST[1] = 150* Gdx.graphics.getDeltaTime(); FIRST[2] = 50* Gdx.graphics.getDeltaTime();
+
+        moves.add(FIRST);
+        moves.add(SECOND);
+        moves.add(THIRD);
+        moves.add(FOURTH);
+
     }
 }
