@@ -19,9 +19,11 @@ import java.util.Random;
 public class NonPlayerCharacter extends GameObject{
     private boolean isImportant;
     private boolean first = true;
-    private byte route;
+    private int[] route;
+    private int a = 0;
+    private int b = 0;
+    private int speed;
     //protected int x;
-    private static final ArrayList<float[]> moves = new ArrayList<>();
     int nextX = MathUtils.random(0,1);
     int nextY = MathUtils.random(0,1);
     private static long moveTimeX;
@@ -30,17 +32,24 @@ public class NonPlayerCharacter extends GameObject{
     public NonPlayerCharacter(boolean isImportant){
         super(-1,"bucket.png", 64, 64);
         this.isImportant = isImportant;
-        initializeMoves();
         //this.doesFlee = flee;
 
     }
+    /**
+    enter fist x and then y and so on
+     */
+    public NonPlayerCharacter(boolean isImportant, int a, int b, int c, int d, int speed){
+        super(-1,"bucket.png", 64, 64);
+        this.isImportant = isImportant;
+        route = new int[4];
+        route[0] = a; route[1] = b; route[2] = c; route[3] = d;
+        this.speed = speed;
+    }
+
     public NonPlayerCharacter(){
         super(-1,"bucket.png", 64, 64, 200, 200);
     }
-    public NonPlayerCharacter(byte a){
-        super(-1,"bucket.png", 64, 64, 200, 200);
-        route = a;
-    }
+
     /**
      * takes a boolean
      * if a event happens call this function to make the NPC s
@@ -109,11 +118,56 @@ public class NonPlayerCharacter extends GameObject{
              }
         }
     }
-    public void moveFromArrayList(){
-        int a = 0;
-        //while(!(moves.get(route)[a] == null)){
-
-        //}
+    public void moveBySpecificIndex(){
+        if(!this.isImportant) {
+            if (a > route[b]) {
+                if (b < 3) {
+                    b++;
+                    a = 0;
+                } else {
+                    b = 0;
+                    a = 0;
+                }
+            } else {
+                if (b % 2 == 0) {
+                    this.x += speed;
+                    a += speed;
+                } else {
+                    this.y += speed;
+                    a += speed;
+                }
+            }
+        }
+    }
+    public void moveBySpecificIndexLoop(){
+        /**
+         * make a better out of bounds exception
+         */
+        if(this.x < 0 || this.x > Gdx.graphics.getWidth()){
+           this.x -= route[0] - route[2];
+        }
+        if(this.y < 0 || this.y > Gdx.graphics.getHeight()){
+            this.y -= route[1] - route[3];
+        }
+        if(!this.isImportant) {
+            if (a > route[b]) {
+                if (b < 3) {
+                    b++;
+                    a = 0;
+                } else {
+                    b = 0;
+                    a = 0;
+                }
+            } else {
+                if (b % 2 == 0) {
+                    this.x += speed;
+                    a += speed;
+                } else {
+                    this.y += speed;
+                    a += speed;
+                }
+            }
+        }
     }
     public boolean getISImportant(){
         return isImportant;
@@ -134,16 +188,5 @@ public class NonPlayerCharacter extends GameObject{
      * the odd numbered variables do x
      * th even numbered ones do y
      */
-    private static void initializeMoves(){
-        final float[] FIRST = new float[3]; FIRST[0] = 100 * Gdx.graphics.getDeltaTime(); FIRST[1] = 50 * Gdx.graphics.getDeltaTime(); FIRST[2] = 400 * Gdx.graphics.getDeltaTime();
-        final float[] SECOND = new float[3]; FIRST[0] = 200* Gdx.graphics.getDeltaTime(); FIRST[1] = 100* Gdx.graphics.getDeltaTime(); FIRST[2] = 300;
-        final float[] THIRD = new float[3]; FIRST[0] = 50* Gdx.graphics.getDeltaTime(); FIRST[1] = 50* Gdx.graphics.getDeltaTime(); FIRST[2] = 450* Gdx.graphics.getDeltaTime();
-        final float[] FOURTH = new float[3]; FIRST[0] = 450* Gdx.graphics.getDeltaTime(); FIRST[1] = 150* Gdx.graphics.getDeltaTime(); FIRST[2] = 50* Gdx.graphics.getDeltaTime();
 
-        moves.add(FIRST);
-        moves.add(SECOND);
-        moves.add(THIRD);
-        moves.add(FOURTH);
-
-    }
 }
