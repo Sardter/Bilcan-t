@@ -66,11 +66,11 @@ public class NonPlayerCharacter extends GameObject{
                     initialize();
                     first = false;
                 }
-                if((TimeUtils.nanoTime() - moveTimeX) > 500000000){
+                if((TimeUtils.nanoTime() - moveTimeX) > 5000000){
                     nextX = MathUtils.random(0,1);
                     initializeX();
                 }
-                if((TimeUtils.nanoTime() - moveTimeY) > 500000000){
+                if((TimeUtils.nanoTime() - moveTimeY) > 5000000){
                     nextY = MathUtils.random(0,1);
                     initializeY();
                 }

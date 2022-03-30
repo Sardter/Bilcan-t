@@ -86,10 +86,18 @@ public class MainScreen implements Screen {
         NonPlayerCharacter np1 = new NonPlayerCharacter(false);
         NonPlayerCharacter np2 = new NonPlayerCharacter(true);
         NonPlayerCharacter np3 = new NonPlayerCharacter(false);
+        NonPlayerCharacter np4 = new NonPlayerCharacter(false);
+        NonPlayerCharacter np5 = new NonPlayerCharacter(false);
+        NonPlayerCharacter np6 = new NonPlayerCharacter(false);
+
         NPC = new ArrayList<>();
         NPC.add(np1);
         NPC.add(np2);
         NPC.add(np3);
+        NPC.add(np4);
+        NPC.add(np5);
+        NPC.add(np6);
+
 
 
         stage = new Stage();
