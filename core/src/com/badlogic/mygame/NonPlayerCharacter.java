@@ -22,6 +22,8 @@ public class NonPlayerCharacter extends GameObject{
     private int[] route;
     private int a = 0;
     private int b = 0;
+    private int initialX;
+    private int initialY;
     private int speed;
     //protected int x;
     int nextX = MathUtils.random(0,1);
@@ -38,9 +40,11 @@ public class NonPlayerCharacter extends GameObject{
     /**
     enter fist x and then y and so on
      */
-    public NonPlayerCharacter(boolean isImportant, int a, int b, int c, int d, int speed){
-        super(-1,"bucket.png", 64, 64);
+    public NonPlayerCharacter(boolean isImportant, int a, int b, int c, int d, int speed, int x, int y){
+        super(-1,"bucket.png", 64, 64, x, y);
         this.isImportant = isImportant;
+        this.initialX = x;
+        this.initialY = y;
         route = new int[4];
         route[0] = a; route[1] = b; route[2] = c; route[3] = d;
         this.speed = speed;
@@ -143,18 +147,15 @@ public class NonPlayerCharacter extends GameObject{
         /**
          * make a better out of bounds exception
          */
-        if(this.x < 0 || this.x > Gdx.graphics.getWidth()){
-           this.x -= route[0] - route[2];
-        }
-        if(this.y < 0 || this.y > Gdx.graphics.getHeight()){
-            this.y -= route[1] - route[3];
-        }
+
         if(!this.isImportant) {
             if (a > route[b]) {
                 if (b < 3) {
                     b++;
                     a = 0;
                 } else {
+                    this.x = initialX;
+                    this.y = initialY;
                     b = 0;
                     a = 0;
                 }

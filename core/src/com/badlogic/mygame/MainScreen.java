@@ -83,12 +83,12 @@ public class MainScreen implements Screen {
         objects.add(object2);
 
 
-        NonPlayerCharacter np1 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2);
-        NonPlayerCharacter np2 = new NonPlayerCharacter(true,100, 200, 100, 200, 1);
-        NonPlayerCharacter np3 = new NonPlayerCharacter(false, 100, 200, 100, 200, 3);
-        NonPlayerCharacter np4 = new NonPlayerCharacter(false, 100, 200, 100, 200, 4);
-        NonPlayerCharacter np5 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2);
-        NonPlayerCharacter np6 = new NonPlayerCharacter(false, 100, 200, 100, 200, 1);
+        NonPlayerCharacter np1 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 200, 200);
+        NonPlayerCharacter np2 = new NonPlayerCharacter(true,100, 200, 100, 200, 1, 300, 300);
+        NonPlayerCharacter np3 = new NonPlayerCharacter(false, 100, 200, 100, 200, 3, 100, 100);
+        NonPlayerCharacter np4 = new NonPlayerCharacter(false, 100, 200, 100, 200, 4, 200, 200);
+        NonPlayerCharacter np5 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 150, 150);
+        NonPlayerCharacter np6 = new NonPlayerCharacter(false, 100, 200, 100, 200, 1, 200, 2004);
 
         NPC = new ArrayList<>();
         NPC.add(np1);
