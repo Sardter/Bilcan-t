@@ -6,15 +6,6 @@ import com.badlogic.gdx.utils.TimeUtils;
 import java.util.ArrayList;
 import java.awt.Point;
 
-/*
-
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Random;
-
- */
-
-
 
 public class NonPlayerCharacter extends GameObject{
     private boolean isImportant;
@@ -122,27 +113,35 @@ public class NonPlayerCharacter extends GameObject{
              }
         }
     }
+
+    /**
+     * this method is to make an NPC move to a certain place
+     * for a mission for example
+     */
     public void moveBySpecificIndex(){
-        if(!this.isImportant) {
-            if (a > route[b]) {
-                if (b < 3) {
-                    b++;
-                    a = 0;
-                } else {
-                    b = 0;
-                    a = 0;
-                }
+        if (a > route[b]) {
+            if (b < 3) {
+                b++;
+                a = 0;
             } else {
-                if (b % 2 == 0) {
-                    this.x += speed;
-                    a += speed;
-                } else {
-                    this.y += speed;
-                    a += speed;
-                }
+                b = 0;
+                a = 0;
+            }
+        } else {
+            if (b % 2 == 0) {
+                this.x += speed;
+                a += speed;
+            } else {
+                this.y += speed;
+                a += speed;
             }
         }
     }
+
+    /**
+     * to make an NPC move in a specific loop
+     * there is a speed variable to make them look more random and realistic
+     */
     public void moveBySpecificIndexLoop(){
         /**
          * make a better out of bounds exception
@@ -190,4 +189,9 @@ public class NonPlayerCharacter extends GameObject{
      * th even numbered ones do y
      */
 
+    public void interact(NonPlayerCharacter n){
+        if(n.isImportant){
+            
+        }
+    }
 }
