@@ -191,7 +191,7 @@ public class NonPlayerCharacter extends GameObject{
 
     public void interact(NonPlayerCharacter n){
         if(n.isImportant){
-            
+
         }
     }
 }
