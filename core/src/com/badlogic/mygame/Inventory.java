@@ -18,17 +18,24 @@ public class Inventory{
     //variables
     private ArrayList<Items> items;
     private Json json;
-
+    private Food food;
     //constructor
     public Inventory(){
         json = new Json();
         FileHandle file = Gdx.files.local("items");
 
-
     }
 
     //methods
     public void addTo(Items item){
+        items.add(item);
+    }
+    public void delete(Items item){
+        for (int i = 0; i < items.size(); i++) {
+            if(item == items.get(i)){
+                items.remove(item);
+            }
+        }
 
     }
 

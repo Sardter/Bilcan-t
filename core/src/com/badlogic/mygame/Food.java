@@ -11,7 +11,6 @@ public class Food extends Items{
     private int ID;
     private String name;
     private boolean useable;
-
     //constructor
 
     public Food(String aname){
@@ -24,9 +23,10 @@ public class Food extends Items{
     public int getID(){
         return ID;
     }
-    public void use(){
+    public void use(Player player){
         useable = false;
-        eat();
+
+        eat(player);
 
     }
     public void setID(){
@@ -36,10 +36,12 @@ public class Food extends Items{
     /*must interact with the avatar to use the food when used replenishes the avatars energy
     must interact with inventory to delete itself from it
     */
-    private void eat(){
+    public void eat(Player player){
         //adds energy to the avatar
-
+        player.restoreEnergy();
         //deletes itself from inventory
+        Inventory inventori = player.getInventory();
+        inventori.delete(this);
     }
 
 }
