@@ -16,6 +16,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainScreen implements Screen {
     private  BilcantGame game;
@@ -24,6 +27,7 @@ public class MainScreen implements Screen {
     private Player character;
     private GameMap map;
     private ArrayList<GameObject> objects;
+    private ArrayList<NonPlayerCharacter> NPC;
     private Stage stage;
     private Table table;
     private BitmapFont font;
@@ -33,6 +37,7 @@ public class MainScreen implements Screen {
 
     final static int BOUNDRY_X = 800, BOUNDRY_Y = 480;
     final static int STARTING_POSITION_X = BOUNDRY_X / 2, STARTING_POSITION_Y = BOUNDRY_Y / 2;
+    //final NonPlayerCharacter n = new NonPlayerCharacter();
 
     public MainScreen(BilcantGame game) {
         this.game = game;
@@ -76,6 +81,24 @@ public class MainScreen implements Screen {
         objects = new ArrayList<>();
         objects.add(object1);
         objects.add(object2);
+
+
+        NonPlayerCharacter np1 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 200, 200);
+        NonPlayerCharacter np2 = new NonPlayerCharacter(true,100, 200, 100, 200, 1, 300, 300);
+        NonPlayerCharacter np3 = new NonPlayerCharacter(false, 100, 200, 100, 200, 3, 100, 100);
+        NonPlayerCharacter np4 = new NonPlayerCharacter(false, 100, 200, 100, 200, 4, 200, 200);
+        NonPlayerCharacter np5 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 150, 150);
+        NonPlayerCharacter np6 = new NonPlayerCharacter(false, 100, 200, 100, 200, 1, 200, 2004);
+
+        NPC = new ArrayList<>();
+        NPC.add(np1);
+        NPC.add(np2);
+        NPC.add(np3);
+        NPC.add(np4);
+        NPC.add(np5);
+        NPC.add(np6);
+
+
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -129,6 +152,12 @@ public class MainScreen implements Screen {
                 break;
             }
         }
+        for ( NonPlayerCharacter npc : NPC) {
+            if (npc.getOnVicinity() && npc.getISImportant()) {
+                npc.interact();
+                break;
+            }
+        }
     }
 
     public void saveGame() {
@@ -151,17 +180,22 @@ public class MainScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.2f, 1);
         camera.update();
-
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         batch.draw(map.getTexture(), map.x, map.y);
-
         batch.draw(character.getTexture(), character.x, character.y);
+
         for (GameObject object: objects) {
             batch.draw(object.getTexture(), object.x, object.y);
         }
-        batch.end();
 
+        for(NonPlayerCharacter n: NPC) {
+                    n.moveBySpecificIndexLoop();
+                    batch.draw(n.getTexture(), n.x, n.y);
+                    //n.incrementByOne();
+        }
+
+        batch.end();
 
         Controller.move(this);
 
