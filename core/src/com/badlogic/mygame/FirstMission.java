@@ -6,6 +6,7 @@ public class FirstMission extends Mission{
 
     //ID card item
     private Items idcard;
+    private String name;
 
     //constructor
     public FirstMission(Player player){
@@ -24,6 +25,7 @@ public class FirstMission extends Mission{
     public void setDifficulty(){
         //no difficulty
     }
+    public String getName() {return name;}
     public void GetExperience(){
         player.giveXP(100);
     }

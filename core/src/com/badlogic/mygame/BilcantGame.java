@@ -13,12 +13,16 @@ public class BilcantGame extends Game {
     private AppPreferences preferences;
     private MissionScreen missionScreen;
     private PlayerDetailScreen playerDetailScreen;
+    private Player player;
 
     public BilcantGame() {
         preferences = new AppPreferences();
+        player = new Player("rectext.png", 32, 32,
+                0, 0);
     }
 
-    public  AppPreferences getPreferences() {return this.preferences;}
+    public AppPreferences getPreferences() {return this.preferences;}
+    public Player getPlayer() {return  this.player;}
 
     public final static int MENU = 0;
     public final static int PREFERENCES = 1;

@@ -10,4 +10,5 @@ public abstract class Mission {
     public abstract void Ifcompleted();
     public abstract void GetExperience();
     public abstract String getQuestExplanation();
+    public abstract String getName();
 }

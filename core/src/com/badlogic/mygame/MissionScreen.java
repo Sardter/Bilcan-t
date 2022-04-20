@@ -27,10 +27,6 @@ public class MissionScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
-    private class SmallMission {
-        Label title, description;
-    }
-
     @Override
     public void show() {
         Table table = new Table();
@@ -54,9 +50,14 @@ public class MissionScreen implements Screen {
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture(Gdx.files.internal("back2.jpeg"))));
         table.setBackground(textureRegionDrawableBg);
-        //List missionsContainer = new List<SmallMission>();
-        //ScrollPane scrollPane = new ScrollPane(missionsContainer);
-        //table.add(scrollPane);
+        List missionsContainer = new List<MissionIdentifier>(skin);
+        ScrollPane scrollPane = new ScrollPane(missionsContainer);
+        table.add(scrollPane);
+
+        Mission[] missions = {
+                new FirstMission(game.getPlayer())
+        };
+        missionsContainer.setItems(missions);
     }
 
     @Override

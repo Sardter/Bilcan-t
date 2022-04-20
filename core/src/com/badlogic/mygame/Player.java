@@ -35,7 +35,8 @@ public class Player extends Rectangle {
         setPopularity(100);
         setExperience(0);
 
-        texture = new Texture(textureUrl);
+        System.out.println(textureUrl);
+        texture = new Texture(Gdx.files.internal("rectex.png"));
         setInventory();
     }
 
