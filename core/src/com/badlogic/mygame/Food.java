@@ -11,6 +11,7 @@ public class Food extends Items{
     private int ID;
     private String name;
     private boolean useable;
+    private static int eatCount = 0;
     //constructor
 
     public Food(String aname){
@@ -46,9 +47,12 @@ public class Food extends Items{
         //deletes itself from inventory
         Inventory inventori = player.getInventory();
         inventori.delete(this);
+        eatCount++;
+
     }
     public int getFoodCount(){
         return IDcounter;
     }
+    public int getEatCount() {return eatCount; }
 
 }

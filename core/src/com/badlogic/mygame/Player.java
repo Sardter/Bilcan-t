@@ -23,6 +23,7 @@ public class Player extends Rectangle {
     private double Popularity; //0-1
     private Inventory inventory;
     private long experience;
+    private static int eatCount = 0;
 
     public Player(String textureUrl, int width, int height, int x, int y) {
         super();
