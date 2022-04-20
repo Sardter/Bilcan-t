@@ -74,6 +74,9 @@ public class MainScreen implements Screen {
         }
         map = new GameMap("map.png", 800, 480, - BOUNDRY_X,  -BOUNDRY_Y);
 
+
+        GameObject building = new Building(2, "rectext.png", 150,
+                64, 500, 100);
         GameObject object1 = new GameObject(0,"rectext.png", 64,
                 64, 200, 200);
         GameObject object2 = new GameObject(1,"rectext.png", 64,
@@ -81,6 +84,7 @@ public class MainScreen implements Screen {
         objects = new ArrayList<>();
         objects.add(object1);
         objects.add(object2);
+        objects.add(building);
 
 
         NonPlayerCharacter np1 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 200, 200);
@@ -176,6 +180,7 @@ public class MainScreen implements Screen {
         camera.position.x = preferences.getFloat("x");
         camera.position.y = preferences.getFloat("y");
         System.out.println("here");
+
     }
 
     @Override
