@@ -22,6 +22,7 @@ public class Inventory{
     //constructor
     public Inventory(){
         items = new ArrayList<Items>();
+
     }
 
     //methods
@@ -35,6 +36,14 @@ public class Inventory{
             }
         }
 
+    }
+    public Items get(String ItemName){
+        for (int i = 0; i < items.size(); i++) {
+            if(items.get(i).getName().equals(ItemName)){
+                return items.get(i);
+            }
+        }
+        return null;
     }
 
 

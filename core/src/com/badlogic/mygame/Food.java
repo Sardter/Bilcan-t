@@ -19,6 +19,10 @@ public class Food extends Items{
         this.useable = true;
     }
 
+    public String getName(){
+        return name;
+    }
+
     //methods
     public int getID(){
         return ID;
@@ -42,6 +46,9 @@ public class Food extends Items{
         //deletes itself from inventory
         Inventory inventori = player.getInventory();
         inventori.delete(this);
+    }
+    public int getFoodCount(){
+        return IDcounter;
     }
 
 }
