@@ -53,8 +53,8 @@ public class NonPlayerCharacter extends GameObject{
      * @param x
      * @param y
      */
-    public NonPlayerCharacter(boolean isImportant, int a, int b, int c, int d, int speed, int x, int y){
-        super(-1,"bucket.png", 64, 64, x, y);
+    public NonPlayerCharacter(boolean isImportant, int a, int b, int c, int d, int speed, int x, int y, int width, int height){
+        super(-1,"bucket.png", width, height, x, y);
         shapeRenderer = new ShapeRenderer();
         this.isImportant = isImportant;
         this.initialX = x;
