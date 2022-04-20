@@ -51,6 +51,7 @@ public class Player extends Rectangle {
         this.inventory = new Inventory();
     }
     public void setExperience(int xp){ experience = xp;}
+    public void increaseEatCount(){ eatCount++;}
 
     //JSon for inventory
     public void openJsonInventory(){
@@ -72,6 +73,7 @@ public class Player extends Rectangle {
     public Inventory getInventory() {
         return inventory;
     }
+    public int getEatCount() { return eatCount;}
 
     //mission methods
     public void restoreEnergy(){

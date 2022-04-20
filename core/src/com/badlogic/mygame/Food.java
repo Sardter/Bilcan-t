@@ -15,7 +15,6 @@ public class Food extends Items{
     //constructor
 
     public Food(String aname){
-        super();
         this.name = aname;
         this.useable = true;
     }
@@ -47,6 +46,7 @@ public class Food extends Items{
         //deletes itself from inventory
         Inventory inventori = player.getInventory();
         inventori.delete(this);
+        player.increaseEatCount();
         eatCount++;
 
     }
