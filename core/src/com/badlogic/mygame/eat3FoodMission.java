@@ -14,5 +14,7 @@ public class eat3FoodMission extends Mission{
     public String getQuestExplanation(){
 
     }
-    public String getName()
+    public String getName(){
+
+    }
 }

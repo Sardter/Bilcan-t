@@ -68,3 +68,4 @@ public class BilcantGame extends Game {
         setScreen(loadingScreen);
     }
 }
+æ
