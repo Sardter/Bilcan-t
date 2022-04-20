@@ -83,12 +83,12 @@ public class MainScreen implements Screen {
         objects.add(object2);
 
 
-        NonPlayerCharacter np1 = new NonPlayerCharacter(false);
-        NonPlayerCharacter np2 = new NonPlayerCharacter(true);
-        NonPlayerCharacter np3 = new NonPlayerCharacter(false);
-        NonPlayerCharacter np4 = new NonPlayerCharacter(false);
-        NonPlayerCharacter np5 = new NonPlayerCharacter(false);
-        NonPlayerCharacter np6 = new NonPlayerCharacter(false);
+        NonPlayerCharacter np1 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 200, 200);
+        NonPlayerCharacter np2 = new NonPlayerCharacter(true,100, 200, 100, 200, 1, 100, 300);
+        NonPlayerCharacter np3 = new NonPlayerCharacter(false, 100, 200, 100, 200, 3, 100, 100);
+        NonPlayerCharacter np4 = new NonPlayerCharacter(false, 100, 200, 100, 200, 4, 200, 200);
+        NonPlayerCharacter np5 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 150, 150);
+        NonPlayerCharacter np6 = new NonPlayerCharacter(false, 100, 200, 100, 200, 1, 200, 200);
 
         NPC = new ArrayList<>();
         NPC.add(np1);
@@ -147,15 +147,17 @@ public class MainScreen implements Screen {
 
     public void interactOnVicinity() {
         for ( GameObject object : objects) {
-            if (object.getOnVicinity()) {
-                object.interact();
-                break;
-            }
-        }
-        for ( NonPlayerCharacter npc : NPC) {
-            if (npc.getOnVicinity() && npc.getISImportant()) {
-                npc.interact();
-                break;
+            if (object instanceof  NonPlayerCharacter) {
+                NonPlayerCharacter npc = (NonPlayerCharacter) object;
+                if (npc.getOnVicinity() && npc.getISImportant()) {
+                    npc.interact();
+                    break;
+                }
+            } else {
+                if (object.getOnVicinity()) {
+                    object.interact();
+                    break;
+                }
             }
         }
     }
@@ -190,7 +192,7 @@ public class MainScreen implements Screen {
         }
 
         for(NonPlayerCharacter n: NPC) {
-                    n.move();
+                    n.moveBySpecificIndexLoop();
                     batch.draw(n.getTexture(), n.x, n.y);
                     //n.incrementByOne();
         }
