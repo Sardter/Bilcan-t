@@ -7,7 +7,6 @@ public abstract class Mission {
     public Mission(Player aplayer){
         player = aplayer;
     }
-    //public abstract void display();
     public abstract void Ifcompleted();
     public abstract void GetExperience();
     public abstract String getQuestExplanation();
