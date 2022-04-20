@@ -23,7 +23,6 @@ public class Inventory{
     public Inventory(){
         json = new Json();
         FileHandle file = Gdx.files.local("items");
-
     }
 
     //methods
