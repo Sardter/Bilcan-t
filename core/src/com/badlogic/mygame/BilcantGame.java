@@ -12,6 +12,7 @@ public class BilcantGame extends Game {
     private EndScreen endScreen;
     private AppPreferences preferences;
     private MissionScreen2 missionScreen2;
+    private PlayerDetailScreen playerDetailScreen;
 
     public BilcantGame() {
         preferences = new AppPreferences();
@@ -25,6 +26,7 @@ public class BilcantGame extends Game {
     public final static int ENDGAME = 3;
     public final static int LOADGAME = 4;
     public final static int MISSIONS = 6;
+    public final static int DETAIL = 5;
 
     public void changeScreen(int screen){
         switch(screen){
@@ -53,6 +55,10 @@ public class BilcantGame extends Game {
                 this.setScreen(mainScreen);
                 break;
 
+            case DETAIL:
+                playerDetailScreen = new PlayerDetailScreen(this);
+                this.setScreen(playerDetailScreen);
+                break;
         }
     }
 

@@ -15,8 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,9 +25,9 @@ public class MainScreen implements Screen {
     private Player character;
     private GameMap map;
     private ArrayList<GameObject> objects;
-    private ArrayList<NonPlayerCharacter> NPC;
+    //private ArrayList<NonPlayerCharacter> NPC;
     private Stage stage;
-    private Table table;
+    private Table table1, table2;
     private BitmapFont font;
     private TextButton interactButton;
     private boolean moveOnMouse, isIneteracting;
@@ -83,60 +81,63 @@ public class MainScreen implements Screen {
         objects.add(object2);
 
 
-        NonPlayerCharacter np1 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 200, 200);
-        NonPlayerCharacter np2 = new NonPlayerCharacter(true,100, 200, 100, 200, 1, 100, 300);
-        NonPlayerCharacter np3 = new NonPlayerCharacter(false, 100, 200, 100, 200, 3, 100, 100);
-        NonPlayerCharacter np4 = new NonPlayerCharacter(false, 100, 200, 100, 200, 4, 200, 200);
-        NonPlayerCharacter np5 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 150, 150);
-        NonPlayerCharacter np6 = new NonPlayerCharacter(false, 100, 200, 100, 200, 1, 200, 200);
+        NonPlayerCharacter np1 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 200, 200, 64, 64);
+        NonPlayerCharacter np2 = new NonPlayerCharacter(true,100, 200, 100, 200, 1, 100, 300, 64, 64);
+        NonPlayerCharacter np3 = new NonPlayerCharacter(false, 100, 200, 100, 200, 3, 100, 100, 128, 128);
+        NonPlayerCharacter np4 = new NonPlayerCharacter(false, 100, 200, 100, 200, 4, 200, 200, 128, 128);
+        NonPlayerCharacter np5 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 150, 150, 128 ,128);
+        NonPlayerCharacter np6 = new NonPlayerCharacter(false, 100, 200, 100, 200, 1, 200, 200, 128 ,128);
 
-        NPC = new ArrayList<>();
-        NPC.add(np1);
-        NPC.add(np2);
-        NPC.add(np3);
-        NPC.add(np4);
-        NPC.add(np5);
-        NPC.add(np6);
+        //NPC = new ArrayList<>();
+        objects.add(np1);
+        objects.add(np2);
+        //objects.add(np3);
+        //objects.add(np4);
+        //objects.add(np5);
+        //objects.add(np6);
 
 
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        table = new Table();
-        table.setFillParent(true);
-        stage.addActor(table);
+        table1 = new Table();
+        table1.setFillParent(true);
+        stage.addActor(table1);
 
         Skin skin = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
-
-        TextButton menuButton = new TextButton("Menu", skin);
-
-
 
         interactButton = new TextButton("Interact", skin);
         interactButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
-                isIneteracting = true;
                 interactOnVicinity();
 
             }
         });
         interactButton.setVisible(false);
-        table.add(interactButton).expandY();
-        table.row();
+        table1.add(interactButton).expandY();
+        table1.row();
 
         interactButton.setPosition(0,0);
-        table.setDebug(false);
+        table1.setDebug(false);
 
-        table.add(menuButton);
+        table2 = new Table();
+        stage.addActor(table2);
+        table2.setFillParent(true);
+        TextButton menuButton = new TextButton("Menu", skin);
+        
+        table2.top().left();
+
+        table2.add(menuButton).pad(10);
         menuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(BilcantGame.MENU);
+                saveGame();
+                game.changeScreen(BilcantGame.DETAIL);
             }
         });
         TextButton saveButton = new TextButton("Save", skin);
-        table.add(saveButton);
+        //table1.add(saveButton).pad(10);
         saveButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -145,16 +146,31 @@ public class MainScreen implements Screen {
         });
     }
 
+    public void onInteract() {
+        isIneteracting = true;
+        moveOnMouse = false;
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("here");
+                //isIneteracting = false;
+
+            }
+        }, 1000);
+    }
+
     public void interactOnVicinity() {
         for ( GameObject object : objects) {
             if (object instanceof  NonPlayerCharacter) {
                 NonPlayerCharacter npc = (NonPlayerCharacter) object;
                 if (npc.getOnVicinity() && npc.getISImportant()) {
+                    onInteract();
                     npc.interact();
                     break;
                 }
             } else {
                 if (object.getOnVicinity()) {
+                    onInteract();
                     object.interact();
                     break;
                 }
@@ -188,14 +204,13 @@ public class MainScreen implements Screen {
         batch.draw(character.getTexture(), character.x, character.y);
 
         for (GameObject object: objects) {
+            if (object instanceof NonPlayerCharacter) {
+                ((NonPlayerCharacter) object).moveBySpecificIndexLoop();
+            }
             batch.draw(object.getTexture(), object.x, object.y);
         }
 
-        for(NonPlayerCharacter n: NPC) {
-                    n.moveBySpecificIndexLoop();
-                    batch.draw(n.getTexture(), n.x, n.y);
-                    //n.incrementByOne();
-        }
+
 
         batch.end();
 

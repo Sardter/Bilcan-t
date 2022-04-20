@@ -28,6 +28,7 @@ public class Controller {
 
         float prevX = mainScreen.getCharacter().x, prevY = mainScreen.getCharacter().y;
 
+        //System.out.println(mainScreen.getIsIneteracting());
         if(input.isTouched()) {
             Vector3 touchPos = new Vector3();
             touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
@@ -36,8 +37,9 @@ public class Controller {
             newX = touchPos.x - 64 / 2;
             newY = touchPos.y - 64 / 2;
         }
+        //mainScreen.setisIneteracting(false);
 
-        if (mainScreen.getMoveOnMouse()) {
+        if (mainScreen.getMoveOnMouse() && !mainScreen.getIsIneteracting()) {
 
             if (newX > prevX) {
                 mainScreen.getCharacter().x += SPEED;
