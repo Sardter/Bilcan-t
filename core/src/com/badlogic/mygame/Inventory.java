@@ -21,8 +21,7 @@ public class Inventory{
     private Food food;
     //constructor
     public Inventory(){
-        json = new Json();
-        FileHandle file = Gdx.files.local("items");
+        items = new ArrayList<Items>();
     }
 
     //methods
