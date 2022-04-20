@@ -11,7 +11,7 @@ public class BilcantGame extends Game {
     private MainScreen mainScreen;
     private EndScreen endScreen;
     private AppPreferences preferences;
-    private MissionScreen2 missionScreen2;
+    private MissionScreen missionScreen;
     private PlayerDetailScreen playerDetailScreen;
 
     public BilcantGame() {
@@ -51,8 +51,8 @@ public class BilcantGame extends Game {
                 this.setScreen(mainScreen);
                 break;
             case MISSIONS:
-                missionScreen2 = new MissionScreen2(this, true);
-                this.setScreen(mainScreen);
+                missionScreen = new MissionScreen(this);
+                this.setScreen(missionScreen);
                 break;
 
             case DETAIL:
@@ -68,4 +68,3 @@ public class BilcantGame extends Game {
         setScreen(loadingScreen);
     }
 }
-æ

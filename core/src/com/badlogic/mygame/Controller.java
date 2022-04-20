@@ -39,7 +39,7 @@ public class Controller {
         }
         //mainScreen.setisIneteracting(false);
 
-        if (mainScreen.getMoveOnMouse() && !mainScreen.getIsIneteracting()) {
+        /* if (mainScreen.getMoveOnMouse() && !mainScreen.getIsIneteracting()) {
 
             if (newX > prevX) {
                 mainScreen.getCharacter().x += SPEED;
@@ -59,6 +59,26 @@ public class Controller {
 
             if (prevX < newX + 5 && prevX > newX - 5 && prevY < newY + 5 && prevY > newY - 5) {
                 mainScreen.setMoveOnMouse(false);
+            }
+        } */
+
+        if (mainScreen.getTouchpad().isTouched()) {
+            float newX = mainScreen.getTouchpad().getKnobPercentX();
+            float newY = mainScreen.getTouchpad().getKnobPercentY();
+            if (newX < 0) {
+                mainScreen.getCharacter().x -= SPEED;
+                mainScreen.getCamera().position.x -= SPEED;
+            } else if (newX > 0) {
+                mainScreen.getCharacter().x += SPEED;
+                mainScreen.getCamera().position.x += SPEED;
+            }
+
+            if (newY < 0) {
+                mainScreen.getCharacter().y -= SPEED;
+                mainScreen.getCamera().position.y -= SPEED;
+            } else if (newY > 0) {
+                mainScreen.getCharacter().y += SPEED;
+                mainScreen.getCamera().position.y += SPEED;
             }
         }
 

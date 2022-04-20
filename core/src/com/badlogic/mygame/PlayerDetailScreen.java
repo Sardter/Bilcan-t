@@ -62,6 +62,13 @@ public class PlayerDetailScreen implements Screen {
         TextButton inventory = new TextButton("Inventory", skin2);
         TextButton info = new TextButton("Info", skin2);
 
+        missions.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.changeScreen(BilcantGame.MISSIONS);
+            }
+        });
+
         table2.add(missions).pad(10);
         table2.row();
         table2.add(inventory).pad(10);

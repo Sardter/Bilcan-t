@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -32,6 +33,7 @@ public class MainScreen implements Screen {
     private TextButton interactButton;
     private boolean moveOnMouse, isIneteracting;
     private boolean willBeLoaded;
+    private Touchpad touchpad;
 
     final static int BOUNDRY_X = 800, BOUNDRY_Y = 480;
     final static int STARTING_POSITION_X = BOUNDRY_X / 2, STARTING_POSITION_Y = BOUNDRY_Y / 2;
@@ -52,6 +54,7 @@ public class MainScreen implements Screen {
     public OrthographicCamera getCamera() {return camera;}
     public ArrayList<GameObject> objects() {return objects;}
     public TextButton getInteractButton() {return interactButton;}
+    public Touchpad getTouchpad() {return touchpad;}
     public boolean getMoveOnMouse() {return moveOnMouse;}
     public boolean getIsIneteracting() {return isIneteracting;}
 
@@ -105,9 +108,10 @@ public class MainScreen implements Screen {
         table1.setFillParent(true);
         stage.addActor(table1);
 
-        Skin skin = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+        Skin skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
-        interactButton = new TextButton("Interact", skin);
+        interactButton = new TextButton("Interact", skin1);
         interactButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 interactOnVicinity();
@@ -124,7 +128,7 @@ public class MainScreen implements Screen {
         table2 = new Table();
         stage.addActor(table2);
         table2.setFillParent(true);
-        TextButton menuButton = new TextButton("Menu", skin);
+        TextButton menuButton = new TextButton("Menu", skin1);
         
         table2.top().left();
 
@@ -136,7 +140,7 @@ public class MainScreen implements Screen {
                 game.changeScreen(BilcantGame.DETAIL);
             }
         });
-        TextButton saveButton = new TextButton("Save", skin);
+        TextButton saveButton = new TextButton("Save", skin1);
         //table1.add(saveButton).pad(10);
         saveButton.addListener(new ChangeListener() {
             @Override
@@ -144,6 +148,14 @@ public class MainScreen implements Screen {
                 saveGame();
             }
         });
+
+        Table table3 = new Table();
+        table3.setFillParent(true);
+        stage.addActor(table3);
+
+        touchpad = new Touchpad(10, skin1);
+        table3.add(touchpad).pad(20);
+        table3.bottom().right();
     }
 
     public void onInteract() {

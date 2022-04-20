@@ -12,9 +12,9 @@ public class eat3FoodMission extends Mission{
 
     }
     public String getQuestExplanation(){
-
+        return null;
     }
     public String getName(){
-
+        return null;
     }
 }
