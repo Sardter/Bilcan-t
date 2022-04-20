@@ -1,7 +1,8 @@
 package com.badlogic.mygame;
 
 public class eat3FoodMission extends Mission{
-    public Mission(Player aplayer){
+    public eat3FoodMission(Player aplayer){
+        super(aplayer);
         player = aplayer;
     }
     public void Ifcompleted(){
@@ -13,4 +14,5 @@ public class eat3FoodMission extends Mission{
     public String getQuestExplanation(){
 
     }
+    public String getName()
 }
