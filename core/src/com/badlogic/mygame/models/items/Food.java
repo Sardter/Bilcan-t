@@ -1,6 +1,8 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.models;
 
-public class Food extends Items{
+import com.badlogic.gdx.graphics.Texture;
+
+public class Food implements Item {
 
 
     //constants
@@ -10,25 +12,33 @@ public class Food extends Items{
     private static int IDcounter = 0;
     private int ID;
     private String name;
-    private boolean useable;
+    private boolean isUsable;
+    private Texture texture;
+    private String description;
     //constructor
 
-    public Food(String aname){
+    public Food(String name, String description ,String textureUrl){
         super();
-        this.name = aname;
-        this.useable = true;
+        this.name = name;
+        this.isUsable = true;
+        this.description = description;
+        this.texture = new Texture(textureUrl);
     }
+
+    public Texture getTexture() {return this.texture;}
 
     public String getName(){
         return name;
     }
+
+    public String getDescription() {return this.description;}
 
     //methods
     public int getID(){
         return ID;
     }
     public void use(Player player){
-        useable = false;
+        isUsable = false;
 
         eat(player);
 
@@ -44,11 +54,12 @@ public class Food extends Items{
         //adds energy to the avatar
         player.restoreEnergy();
         //deletes itself from inventory
-        Inventory inventori = player.getInventory();
-        inventori.delete(this);
+        Inventory inventory = player.getInventory();
+        inventory.delete(this);
     }
     public int getFoodCount(){
         return IDcounter;
     }
+    public boolean getIsUsable() {return isUsable;}
 
 }

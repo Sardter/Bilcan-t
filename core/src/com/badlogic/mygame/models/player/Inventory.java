@@ -1,35 +1,32 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.models;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonReader;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.FileHandler;
-
-import jdk.nashorn.internal.parser.JSONParser;
 
 public class Inventory{
     //constants
 
     //variables
-    private ArrayList<Items> items;
+    private ArrayList<Item> items;
     private Json json;
     private Food food;
+    private final int LIMIT = 16;
     //constructor
     public Inventory(){
-        items = new ArrayList<Items>();
+        items = new ArrayList<Item>();
 
     }
 
     //methods
-    public void addTo(Items item){
-        items.add(item);
+    public boolean addTo(Item item){
+        if (items.size() <= LIMIT) {
+            items.add(item);
+            return  true;
+        }
+        return false;
     }
-    public void delete(Items item){
+    public void delete(Item item){
         for (int i = 0; i < items.size(); i++) {
             if(item == items.get(i)){
                 items.remove(item);
@@ -37,7 +34,7 @@ public class Inventory{
         }
 
     }
-    public Items get(String ItemName){
+    public Item get(String ItemName){
         for (int i = 0; i < items.size(); i++) {
             if(items.get(i).getName().equals(ItemName)){
                 return items.get(i);
@@ -46,5 +43,6 @@ public class Inventory{
         return null;
     }
 
+    public ArrayList<Item> getItems() {return this.items;}
 
 }

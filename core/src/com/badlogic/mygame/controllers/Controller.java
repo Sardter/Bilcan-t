@@ -131,6 +131,9 @@ public class Controller {
             if (onCollision(mainScreen.getCharacter(), mainScreen.getCamera(),object, prevX, prevY)) {
                 //System.out.println(object.getId());
                 mainScreen.setMoveOnMouse(false);
+                if (object instanceof NonPlayerCharacter) {
+                    ((NonPlayerCharacter) object).setIsInCollision(true);
+                }
             }
 
 

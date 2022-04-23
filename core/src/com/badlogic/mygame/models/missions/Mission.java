@@ -1,4 +1,4 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.models;
 
 public abstract class Mission {
     //variables

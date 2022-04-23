@@ -1,6 +1,9 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.missions;
 
-public class eat3FoodMission extends Mission{
+import com.badlogic.mygame.models.Mission;
+import com.badlogic.mygame.models.Player;
+
+public class eat3FoodMission extends Mission {
     public eat3FoodMission(Player aplayer){
         super(aplayer);
         player = aplayer;

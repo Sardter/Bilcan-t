@@ -1,13 +1,12 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.screens;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.mygame.BilcantGame;
 
-public class LoadingScreen implements Screen {
-    private final BilcantGame game;
+public class EndScreen implements Screen {
+    private BilcantGame game;
 
-    public LoadingScreen(BilcantGame game) {
+    public EndScreen(BilcantGame game) {
         this.game = game;
     }
 
@@ -18,7 +17,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        game.changeScreen(BilcantGame.MENU);
+        // TODO Auto-generated method stub
     }
 
     @Override

@@ -1,32 +1,50 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.mygame.BilcantGame;
+import com.badlogic.mygame.controllers.Controller;
+import com.badlogic.mygame.models.DialogItem;
+import com.badlogic.mygame.models.DialogOption;
+import com.badlogic.mygame.models.GameMap;
+import com.badlogic.mygame.models.GameObject;
+import com.badlogic.mygame.models.NPCDialog;
+import com.badlogic.mygame.models.NPCRoute;
+import com.badlogic.mygame.models.NPCRouter;
+import com.badlogic.mygame.models.NonPlayerCharacter;
+import com.badlogic.mygame.models.Player;
+import com.badlogic.mygame.windows.InteractWindow;
+import com.badlogic.mygame.windows.NPCInteractWindow;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Arrays;
 
 public class MainScreen implements Screen {
-    private  BilcantGame game;
+    private BilcantGame game;
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Player character;
     private GameMap map;
     private ArrayList<GameObject> objects;
-    //private ArrayList<NonPlayerCharacter> NPC;
+    private InteractWindow interactWindow;
+    private NPCInteractWindow npcInteractWindow;
     private Stage stage;
     private Table table1, table2;
     private BitmapFont font;
@@ -55,6 +73,7 @@ public class MainScreen implements Screen {
     public ArrayList<GameObject> objects() {return objects;}
     public TextButton getInteractButton() {return interactButton;}
     public Touchpad getTouchpad() {return touchpad;}
+    public InteractWindow getInteractWindow() {return interactWindow;}
     public boolean getMoveOnMouse() {return moveOnMouse;}
     public boolean getIsIneteracting() {return isIneteracting;}
 
@@ -64,45 +83,35 @@ public class MainScreen implements Screen {
         camera.setToOrtho(false, 800, 480);
         camera.position.x = STARTING_POSITION_X;
         camera.position.y = STARTING_POSITION_Y;
-
+        objects = new ArrayList<>();
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
         batch = new SpriteBatch();
 
+        interactWindow = new InteractWindow("Interact", new Window.WindowStyle(
+                new BitmapFont(),
+                new Color(),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("itemWindowBackground.png")))
+        ));
+        npcInteractWindow = new NPCInteractWindow("NPC Interact", new Window.WindowStyle(
+                new BitmapFont(),
+                new Color(),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("itemWindowBackground.png")))
+        ));
 
         character = new Player("rectext.png", 32, 32,
                 STARTING_POSITION_X, STARTING_POSITION_Y);
+        game.setPlayer(character);
+        //System.out.println(game.getPlayer());
         if (willBeLoaded) {
             loadGame();
         }
         map = new GameMap("map.png", 800, 480, - BOUNDRY_X,  -BOUNDRY_Y);
-
-        GameObject object1 = new GameObject(0,"rectext.png", 64,
-                64, 200, 200);
-        GameObject object2 = new GameObject(1,"rectext.png", 64,
-                64, 360, 360);
-        objects = new ArrayList<>();
-        objects.add(object1);
-        objects.add(object2);
-
-
-        NonPlayerCharacter np1 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 200, 200, 64, 64);
-        NonPlayerCharacter np2 = new NonPlayerCharacter(true,100, 200, 100, 200, 1, 100, 300, 64, 64);
-        NonPlayerCharacter np3 = new NonPlayerCharacter(false, 100, 200, 100, 200, 3, 100, 100, 128, 128);
-        NonPlayerCharacter np4 = new NonPlayerCharacter(false, 100, 200, 100, 200, 4, 200, 200, 128, 128);
-        NonPlayerCharacter np5 = new NonPlayerCharacter(false, 100, 200, 100, 200, 2, 150, 150, 128 ,128);
-        NonPlayerCharacter np6 = new NonPlayerCharacter(false, 100, 200, 100, 200, 1, 200, 200, 128 ,128);
-
-        //NPC = new ArrayList<>();
-        objects.add(np1);
-        objects.add(np2);
-        //objects.add(np3);
-        //objects.add(np4);
-        //objects.add(np5);
-        //objects.add(np6);
-
-
-
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
+        createObjects();
 
         table1 = new Table();
         table1.setFillParent(true);
@@ -140,14 +149,6 @@ public class MainScreen implements Screen {
                 game.changeScreen(BilcantGame.DETAIL);
             }
         });
-        TextButton saveButton = new TextButton("Save", skin1);
-        //table1.add(saveButton).pad(10);
-        saveButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                saveGame();
-            }
-        });
 
         Table table3 = new Table();
         table3.setFillParent(true);
@@ -156,19 +157,59 @@ public class MainScreen implements Screen {
         touchpad = new Touchpad(10, skin1);
         table3.add(touchpad).pad(20);
         table3.bottom().right();
+
+        interactWindow.setVisible(false);
+        interactWindow.setPosition(380, 220);
+        stage.addActor(interactWindow);
+
+        npcInteractWindow.setVisible(false);
+        npcInteractWindow.setPosition(300, 150);
+        npcInteractWindow.setSize(300,300);
+        stage.addActor(npcInteractWindow);
     }
 
-    public void onInteract() {
-        isIneteracting = true;
-        moveOnMouse = false;
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("here");
-                //isIneteracting = false;
 
-            }
-        }, 1000);
+    public void createObjects() {
+        GameObject[] gameObjects = {
+                new GameObject("rectext.png", "Obj1", "desc1",
+                        64,64, 200, 200),
+                new GameObject("rectext.png", "Obj2", "desc2",
+                        64, 64, 360, 360),
+        };
+
+        DialogOption[] options = {
+                new DialogOption("good, you?", 1, true),
+                new DialogOption("shut up, beach", -1, false)
+        };
+
+        DialogItem[] dialogItems = {
+                new DialogItem("hey man, how are you?", options),
+                new DialogItem("uga uga", null)
+        };
+
+        NonPlayerCharacter[] nonPlayerCharacters = {
+                new NonPlayerCharacter("bucket.png", "important", "npc desc",
+                        true, 100, 200, new NPCDialog(dialogItems)),
+                new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
+                true, 100, 100, new NPCDialog(null)),
+                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
+                        100, 300)*/
+                new NonPlayerCharacter("bucket.png", "npc", "npc desc",
+                        false, 200, 100, new NPCDialog(null))
+        };
+
+        for (NonPlayerCharacter npc : nonPlayerCharacters) {
+            NPCRoute[] routes = {
+                    new NPCRoute(300, 300),
+                    new NPCRoute(350, 300),
+                    new NPCRoute(400, 400)
+            };
+            NPCRouter router = new NPCRouter(npc, routes);
+            npc.setRouter(router);
+        }
+
+        this.objects.addAll(Arrays.asList(gameObjects));
+        this.objects.addAll(Arrays.asList(nonPlayerCharacters));
     }
 
     public void interactOnVicinity() {
@@ -176,14 +217,12 @@ public class MainScreen implements Screen {
             if (object instanceof  NonPlayerCharacter) {
                 NonPlayerCharacter npc = (NonPlayerCharacter) object;
                 if (npc.getOnVicinity() && npc.getISImportant()) {
-                    onInteract();
-                    npc.interact();
+                    npc.interact(npcInteractWindow);
                     break;
                 }
             } else {
                 if (object.getOnVicinity()) {
-                    onInteract();
-                    object.interact();
+                    object.interact(interactWindow);
                     break;
                 }
             }
@@ -217,7 +256,8 @@ public class MainScreen implements Screen {
 
         for (GameObject object: objects) {
             if (object instanceof NonPlayerCharacter) {
-                ((NonPlayerCharacter) object).moveBySpecificIndexLoop();
+                //((NonPlayerCharacter) object).moveBySpecificIndexLoop();
+                ((NonPlayerCharacter) object).traverse();
             }
             batch.draw(object.getTexture(), object.x, object.y);
         }

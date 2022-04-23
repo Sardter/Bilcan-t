@@ -1,4 +1,4 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -8,15 +8,14 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.TimeUtils;
-
-import java.util.ArrayList;
-import java.awt.Point;
-import java.util.concurrent.TimeUnit;
+import com.badlogic.mygame.windows.InteractiveWindow;
+import com.badlogic.mygame.windows.NPCInteractWindow;
 
 
 public class NonPlayerCharacter extends GameObject{
     private boolean isImportant;
     private boolean first = true;
+    private boolean isInCollision;
     private int[] route;
     private int a = 0;
     private int b = 0;
@@ -29,6 +28,17 @@ public class NonPlayerCharacter extends GameObject{
     private static long moveTimeX;
     private static long moveTimeY;
     private ShapeRenderer shapeRenderer;
+    private NPCDialog dialog;
+
+    private NPCRouter router;
+
+    public NPCDialog getDialog() {
+        return dialog;
+    }
+
+    public void setDialog(NPCDialog dialog) {
+        this.dialog = dialog;
+    }
 
     /**
      * base constructer
@@ -39,8 +49,10 @@ public class NonPlayerCharacter extends GameObject{
         shapeRenderer = new ShapeRenderer();
         this.isImportant = isImportant;
         //this.doesFlee = flee;
-
+        this.isInCollision = false;
     }
+
+    public void setIsInCollision(boolean condition) {this.isInCollision = condition;}
 
     /**
      * enter first x and then y and so on
@@ -53,8 +65,9 @@ public class NonPlayerCharacter extends GameObject{
      * @param x
      * @param y
      */
-    public NonPlayerCharacter(boolean isImportant, int a, int b, int c, int d, int speed, int x, int y, int width, int height){
-        super(-1,"bucket.png", width, height, x, y);
+    public NonPlayerCharacter(boolean isImportant, int a, int b, int c, int d, int speed,
+                              int x, int y){
+        super("bucket.png", "npc","npc desc", 64, 64, x, y);
         shapeRenderer = new ShapeRenderer();
         this.isImportant = isImportant;
         this.initialX = x;
@@ -62,11 +75,36 @@ public class NonPlayerCharacter extends GameObject{
         route = new int[4];
         route[0] = a; route[1] = b; route[2] = c; route[3] = d;
         this.speed = speed;
+        this.dialog = new NPCDialog(null);
+    }
+
+    public NonPlayerCharacter(String textureUrl, String name, String description,
+                              boolean isImportant, int posX, int posY, NPCDialog dialog) {
+            super(textureUrl, name, description, 64, 64, posX, posY);
+            this.isImportant = isImportant;
+            this.speed = 2;
+            this.dialog = dialog;
+    }
+
+    public void setRouter(NPCRouter router) {
+        this.router = router;
+    }
+
+    public boolean isInCollision() {
+        return isInCollision;
     }
 
     public NonPlayerCharacter(){
-        super(-1,"bucket.png", 64, 64, 200, 200);
+        super("bucket.png", "npc", "npc desc",64, 64, 200, 200);
         shapeRenderer = new ShapeRenderer();
+    }
+
+    @Override
+    public void interact(InteractiveWindow interactWindow) {
+        if (!(interactWindow instanceof NPCInteractWindow)) return;
+        System.out.println(this);
+        interactWindow.setObject(this);
+        interactWindow.setVisible(true);
     }
 
     /**
@@ -103,7 +141,7 @@ public class NonPlayerCharacter extends GameObject{
      * always gets in initialize again in loop
      */
     public void move(){
-        if(!this.isImportant){
+        if(!this.isImportant && !isInCollision){
                 if(first){
                     initialize();
                     first = false;
@@ -162,6 +200,10 @@ public class NonPlayerCharacter extends GameObject{
         }
     }
 
+    public void traverse() {
+        router.traverse(this.speed);
+    }
+
     /**
      * to make an NPC move in a specific loop
      * there is a speed variable to make them look more random and realistic
@@ -171,7 +213,7 @@ public class NonPlayerCharacter extends GameObject{
          * make a better out of bounds exception
          */
 
-        if(!this.isImportant) {
+        if(!isInCollision && !this.isImportant) {
             if (a > route[b]) {
                 if (b < 3) {
                     b++;

@@ -1,6 +1,7 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.screens;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.mygame.BilcantGame;
 
 public class LoadSaveScreen implements Screen {
     private final BilcantGame game;
