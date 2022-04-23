@@ -1,6 +1,8 @@
-package com.badlogic.mygame.models;
+package com.badlogic.mygame.models.player;
 
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.mygame.models.items.Food;
+import com.badlogic.mygame.models.items.Item;
 
 import java.util.ArrayList;
 

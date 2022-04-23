@@ -1,8 +1,6 @@
-package com.badlogic.mygame.screens;
+package com.badlogic.mygame.views.screens;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
 
 public class LoadingScreen implements Screen {

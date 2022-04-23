@@ -1,4 +1,4 @@
-package com.badlogic.mygame.screens;
+package com.badlogic.mygame.views.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -14,8 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-
-import org.w3c.dom.Text;
 
 public class PlayerDetailScreen implements Screen {
     private final BilcantGame game;

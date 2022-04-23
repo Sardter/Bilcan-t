@@ -1,4 +1,4 @@
-package com.badlogic.mygame.models;
+package com.badlogic.mygame.models.npc;
 
 public class NPCRouter {
     private final NonPlayerCharacter npc;

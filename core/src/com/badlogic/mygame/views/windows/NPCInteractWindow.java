@@ -1,4 +1,4 @@
-package com.badlogic.mygame.windows;
+package com.badlogic.mygame.views.windows;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -8,9 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.mygame.models.DialogItem;
-import com.badlogic.mygame.models.DialogOption;
-import com.badlogic.mygame.models.NonPlayerCharacter;
+import com.badlogic.mygame.models.npc.DialogOption;
+import com.badlogic.mygame.models.npc.NonPlayerCharacter;
 
 public class NPCInteractWindow extends InteractiveWindow {
     private NonPlayerCharacter npc;

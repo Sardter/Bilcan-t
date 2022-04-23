@@ -1,28 +1,39 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.mygame.views.windows.InteractiveWindow;
 
 import java.util.Random;
 
 
 public class GameObject extends Rectangle {
+    private static int ID = 0;
+
     private Texture objectTexture;
-    private int id;
     private boolean onVicinity = false;
     private boolean canInteract = true;
-    Random rand = new Random();
+    private int id;
+    protected String name, description;
 
-    public  GameObject(int id ,String textureUrl ,int width, int height, int x, int y) {
+
+    private Random rand = new Random();
+
+    public  GameObject(String textureUrl, String name, String description,
+                       int width, int height, int posX, int posY) {
         super();
         super.height = height;
         super.width = width;
-        super.x = x;
-        super.y = y;
+        super.x = posX;
+        super.y = posY;
 
-        this.id = id;
+        this.id = ID;
+        ID++;
+
+        this.name = name;
+        this.description = description;
 
         this.objectTexture = new Texture(Gdx.files.internal(textureUrl));
     }
@@ -43,11 +54,14 @@ public class GameObject extends Rectangle {
     public int  getId() {return  id;}
     public  boolean getOnVicinity() {return  onVicinity;}
     public Texture getTexture() {return objectTexture;}
+    public String getName() {return this.name;}
+    public String getDescription() {return this.description;}
 
     public void setOnVicinity(boolean bool) {this.onVicinity = bool;}
 
-
-    public void interact() {
-        System.out.println("smt"+ id);
+    public void interact(InteractiveWindow interactWindow) {
+        //System.out.println("smt"+ id);
+        interactWindow.setObject(this);
+        interactWindow.setVisible(true);
     }
 }

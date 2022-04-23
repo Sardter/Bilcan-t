@@ -217,8 +217,8 @@ progress-bar-h
 progress-bar-knob-h
   rotate: false
   xy: 1, 1007
-  size: 266, 7
-  orig: 266, 7
+  size: 7, 7
+  orig: 7, 7
   offset: 0, 0
   index: -1
 progress-bar-knob-v

@@ -1,4 +1,4 @@
-package com.badlogic.mygame.screens;
+package com.badlogic.mygame.views.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -24,10 +24,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.models.Food;
-import com.badlogic.mygame.models.Inventory;
-import com.badlogic.mygame.models.Item;
-import com.badlogic.mygame.windows.ItemWindow;
+import com.badlogic.mygame.models.items.Food;
+import com.badlogic.mygame.models.player.Inventory;
+import com.badlogic.mygame.models.items.Item;
+import com.badlogic.mygame.views.windows.ItemWindow;
 
 import java.util.ArrayList;
 

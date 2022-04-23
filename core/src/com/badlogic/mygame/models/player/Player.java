@@ -1,4 +1,4 @@
-package com.badlogic.mygame.models;
+package com.badlogic.mygame.models.player;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;

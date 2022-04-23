@@ -1,4 +1,4 @@
-package com.badlogic.mygame;
+package com.badlogic.mygame.controllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,16 +7,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
+import com.badlogic.mygame.models.GameObject;
+import com.badlogic.mygame.models.npc.NonPlayerCharacter;
+import com.badlogic.mygame.views.windows.InteractWindow;
+import com.badlogic.mygame.views.screens.MainScreen;
 
 public class Controller {
     final static float SPEED = 4;
@@ -39,28 +33,6 @@ public class Controller {
         }
         //mainScreen.setisIneteracting(false);
 
-        /* if (mainScreen.getMoveOnMouse() && !mainScreen.getIsIneteracting()) {
-
-            if (newX > prevX) {
-                mainScreen.getCharacter().x += SPEED;
-                mainScreen.getCamera().position.x += SPEED;
-            } else if (newX < prevX) {
-                mainScreen.getCharacter().x -= SPEED;
-                mainScreen.getCamera().position.x -= SPEED;
-            }
-
-            if (newY > prevY) {
-                mainScreen.getCharacter().y += SPEED;
-                mainScreen.getCamera().position.y += SPEED;
-            } else if (newY < prevY) {
-                mainScreen.getCharacter().y -= SPEED;
-                mainScreen.getCamera().position.y -= SPEED;
-            }
-
-            if (prevX < newX + 5 && prevX > newX - 5 && prevY < newY + 5 && prevY > newY - 5) {
-                mainScreen.setMoveOnMouse(false);
-            }
-        } */
 
         if (mainScreen.getTouchpad().isTouched()) {
             float newX = mainScreen.getTouchpad().getKnobPercentX();
@@ -134,10 +106,14 @@ public class Controller {
                 if (object instanceof NonPlayerCharacter) {
                     ((NonPlayerCharacter) object).setIsInCollision(true);
                 }
+            } else {
+                if (object instanceof NonPlayerCharacter) {
+                    ((NonPlayerCharacter) object).setIsInCollision(false);
+                }
             }
 
 
-            if (onVicinity(mainScreen.getCharacter(), mainScreen.getCamera(), object)) {
+            if (onVicinity(mainScreen.getCharacter(), mainScreen.getCamera(), object, mainScreen.getInteractWindow())) {
                 mainScreen.getInteractButton().setVisible(true);
                 onAnyVicinity = true;
             } else {
@@ -150,14 +126,6 @@ public class Controller {
 
     }
 
-    public static void interactOnVicinity(ArrayList<GameObject> objects) {
-        for ( GameObject object : objects) {
-            if (object.getOnVicinity()) {
-                object.interact();
-                break;
-            }
-        }
-    }
 
     private static boolean onCollision(Rectangle character, OrthographicCamera camera , GameObject object, float prevX, float prevY) {
         Vector2 characterVec = new Vector2(character.x, character.y);
@@ -202,7 +170,8 @@ public class Controller {
         return  result;
     }
 
-    private static boolean onVicinity(Rectangle character, OrthographicCamera camera , GameObject object) {
+    private static boolean onVicinity(Rectangle character, OrthographicCamera camera ,
+                                      GameObject object, InteractWindow interactWindow) {
         Vector2 characterVec = new Vector2(character.x, character.y);
         Vector2 objectVec = new Vector2(object.x, object.y);
 
@@ -219,7 +188,7 @@ public class Controller {
                 && currCharY <= currObjY + 100 && currCharY >= currObjY - 100) {
             //System.out.println(currCharX);
             if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
-                object.interact();
+                object.interact(interactWindow);
             }
             object.setOnVicinity(true);
             return true;

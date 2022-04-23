@@ -1,23 +1,16 @@
-package com.badlogic.mygame.windows;
+package com.badlogic.mygame.views.windows;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.SnapshotArray;
-import com.badlogic.mygame.models.Item;
-import com.badlogic.mygame.models.Player;
-import com.badlogic.mygame.screens.InventoryScreen;
+import com.badlogic.mygame.models.items.Item;
+import com.badlogic.mygame.models.player.Player;
+import com.badlogic.mygame.views.screens.InventoryScreen;
 
 public class ItemWindow extends InteractiveWindow {
     private Player player;

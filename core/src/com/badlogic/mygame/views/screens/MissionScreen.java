@@ -1,4 +1,4 @@
-package com.badlogic.mygame.screens;
+package com.badlogic.mygame.views.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -19,8 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.missions.FirstMission;
-import com.badlogic.mygame.models.Mission;
+import com.badlogic.mygame.models.missions.FirstMission;
+import com.badlogic.mygame.models.missions.Mission;
 
 public class MissionScreen implements Screen {
     private final BilcantGame game;

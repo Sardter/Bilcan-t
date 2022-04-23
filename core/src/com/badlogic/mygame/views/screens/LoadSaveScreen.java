@@ -1,4 +1,4 @@
-package com.badlogic.mygame.screens;
+package com.badlogic.mygame.views.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.mygame.BilcantGame;

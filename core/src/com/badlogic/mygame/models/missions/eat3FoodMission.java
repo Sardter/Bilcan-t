@@ -1,16 +1,18 @@
-package com.badlogic.mygame.missions;
+package com.badlogic.mygame.models.missions;
 
-import com.badlogic.mygame.models.Mission;
-import com.badlogic.mygame.models.Player;
+import com.badlogic.mygame.models.player.Player;
 
 public class eat3FoodMission extends Mission {
-    public eat3FoodMission(Player aplayer){
-        super(aplayer);
-        player = aplayer;
+    public eat3FoodMission(Player aplayer, Task[] tasks){
+        super(aplayer, "Eat 3 Foods",
+                "I need to eat three foods.", 100, null, tasks);
     }
-    public void Ifcompleted(){
+
+    @Override
+    public void ifCompleted() {
 
     }
+
     public void GetExperience(){
 
     }

@@ -1,4 +1,4 @@
-package com.badlogic.mygame.models;
+package com.badlogic.mygame.models.npc;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -8,11 +8,12 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.mygame.windows.InteractiveWindow;
-import com.badlogic.mygame.windows.NPCInteractWindow;
+import com.badlogic.mygame.models.GameObject;
+import com.badlogic.mygame.views.windows.InteractiveWindow;
+import com.badlogic.mygame.views.windows.NPCInteractWindow;
 
 
-public class NonPlayerCharacter extends GameObject{
+public class NonPlayerCharacter extends GameObject {
     private boolean isImportant;
     private boolean first = true;
     private boolean isInCollision;

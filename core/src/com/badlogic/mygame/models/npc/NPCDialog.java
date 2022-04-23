@@ -1,4 +1,4 @@
-package com.badlogic.mygame.models;
+package com.badlogic.mygame.models.npc;
 
 import java.util.Random;
 

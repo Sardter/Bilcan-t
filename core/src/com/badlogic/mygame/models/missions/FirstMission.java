@@ -1,36 +1,27 @@
-package com.badlogic.mygame.missions;
+package com.badlogic.mygame.models.missions;
 
-import com.badlogic.mygame.models.Item;
-import com.badlogic.mygame.models.Mission;
-import com.badlogic.mygame.models.Player;
+import com.badlogic.mygame.models.items.Item;
+import com.badlogic.mygame.models.player.Player;
 
 public class FirstMission extends Mission {
     //variables
-    private String explanation;
 
     //ID card item
     private Item idcard;
-    private String name;
 
     //constructor
     public FirstMission(Player player){
-        super(player);
-        explanation = "Go to the B building and get the bilcan-t card item from the NPC";
-        name = "First Mission";
+        super(player, "First Mission",
+                "Go to the B building and get the bilcan-t card item from the NPC",
+                100, null, null);
     }
 
     //inherited methods
-    public String getQuestExplanation(){
-        return explanation;
-    }
-    public void Ifcompleted(){
+    public void ifCompleted(){
         GetExperience();
         player.getInventory().delete(idcard);
     }
-    public void setDifficulty(){
-        //no difficulty
-    }
-    public String getName() {return name;}
+
     public void GetExperience(){
         player.giveXP(100);
     }

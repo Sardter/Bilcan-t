@@ -1,4 +1,4 @@
-package com.badlogic.mygame.screens;
+package com.badlogic.mygame.views.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
@@ -21,17 +21,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.controllers.Controller;
-import com.badlogic.mygame.models.DialogItem;
-import com.badlogic.mygame.models.DialogOption;
+import com.badlogic.mygame.models.npc.DialogItem;
+import com.badlogic.mygame.models.npc.DialogOption;
 import com.badlogic.mygame.models.GameMap;
 import com.badlogic.mygame.models.GameObject;
-import com.badlogic.mygame.models.NPCDialog;
-import com.badlogic.mygame.models.NPCRoute;
-import com.badlogic.mygame.models.NPCRouter;
-import com.badlogic.mygame.models.NonPlayerCharacter;
-import com.badlogic.mygame.models.Player;
-import com.badlogic.mygame.windows.InteractWindow;
-import com.badlogic.mygame.windows.NPCInteractWindow;
+import com.badlogic.mygame.models.npc.NPCDialog;
+import com.badlogic.mygame.models.npc.NPCRoute;
+import com.badlogic.mygame.models.npc.NPCRouter;
+import com.badlogic.mygame.models.npc.NonPlayerCharacter;
+import com.badlogic.mygame.models.player.Player;
+import com.badlogic.mygame.views.windows.InteractWindow;
+import com.badlogic.mygame.views.windows.NPCInteractWindow;
 
 import java.util.ArrayList;
 import java.util.Arrays;
