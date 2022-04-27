@@ -118,9 +118,6 @@ public class MissionScreen implements Screen {
         }
     }
 
-    private void selectMission(int selectedMission, int length, CheckBox checkBox) {
-
-    }
 
     @Override
     public void render(float delta) {

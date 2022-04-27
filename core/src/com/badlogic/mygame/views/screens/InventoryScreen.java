@@ -96,11 +96,19 @@ public class InventoryScreen implements Screen {
         ProgressBar GPA = new ProgressBar(0.0f,4.0f,0.5f, false, skin1);
         ProgressBar popularity = new ProgressBar(0f,1f,1f, false, skin1);
         ProgressBar energy = new ProgressBar(0f,1f,0.01f, false, skin1);
+        ProgressBar xp = new ProgressBar(0f,1f,0.01f, false, skin1);
 
         GPA.setValue(game.getPlayer().getGPA());
         energy.setValue(game.getPlayer().getEnergy());
         popularity.setValue(game.getPlayer().getPopularity());
+        xp.setValue(game.getPlayer().getXPForCurrentLevel());
 
+        playerStats.add(new Label("Level: ", skin2));
+        playerStats.add(new Label(game.getPlayer().getLevel() + "", skin2));
+        playerStats.row();
+        playerStats.add(new Label("XP: ", skin2));
+        playerStats.add(xp);
+        playerStats.row();
         playerStats.add(new Label("GPA: ", skin2));
         playerStats.add(GPA);
         playerStats.row();

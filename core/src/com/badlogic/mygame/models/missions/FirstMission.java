@@ -23,7 +23,7 @@ public class FirstMission extends Mission {
     }
 
     public void GetExperience(){
-        player.giveXP(100);
+        player.addXP(100);
     }
     // other missions
 }
