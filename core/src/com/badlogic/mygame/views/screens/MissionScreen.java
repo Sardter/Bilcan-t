@@ -114,13 +114,9 @@ public class MissionScreen implements Screen {
             missionsContainer.add(description).pad(10);
             missionsContainer.row();
             missionsContainer.row();
-
         }
     }
 
-    private void selectMission(int selectedMission, int length, CheckBox checkBox) {
-
-    }
 
     @Override
     public void render(float delta) {

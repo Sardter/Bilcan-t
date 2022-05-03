@@ -13,6 +13,14 @@ public class Player extends Rectangle {
     private float Popularity; //0-1
     private Inventory inventory;
     private long experience;
+    private int level;
+    private int[] levelCaps = {
+            1000,
+            2000,
+            3000,
+            4000,
+            5000,
+    };
 
     public Player(String textureUrl, int width, int height, int x, int y) {
         super();
@@ -20,10 +28,12 @@ public class Player extends Rectangle {
         super.height = height;
         super.x = x;
         super.y = y;
-        setEnergy(1f);
+        setEnergy(0f);
         setGPA(2f);
-        setPopularity(1f);
+        setPopularity(0f);
         setExperience(0);
+
+        level = 0;
 
         System.out.println(textureUrl);
         texture = new Texture(textureUrl);
@@ -45,6 +55,14 @@ public class Player extends Rectangle {
     public float getGPA() {return this.GPA;}
     public float getEnergy() {return this.Energy;}
     public float getPopularity() {return this.Popularity;}
+    public float getXPForCurrentLevel() {
+        if (level == 0) return  experience;
+        return levelCaps[level] * level - experience;
+    }
+
+    public long getExperience() {
+        return experience;
+    }
 
     //JSon for inventory
     public void openJsonInventory(){
@@ -71,7 +89,19 @@ public class Player extends Rectangle {
     public void restoreEnergy(){
         setEnergy(Energy + 10);
     }
-    public void giveXP(int xp){
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void addXP(int xp){
         experience += xp;
+        if (xp > levelCaps[level]) {
+            level++;
+        }
     }
 }
