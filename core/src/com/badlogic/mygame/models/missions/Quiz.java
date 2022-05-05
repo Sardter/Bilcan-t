@@ -1,14 +1,15 @@
 package com.badlogic.mygame.models.missions;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.QuizScreen;
 
 /* This class contains the questions, true answers and needs a UI to be displayed properly
  * */
-//TODO take a screen as a parameter and update the screen accordinly
 public class Quiz {
     private String Quizexplanation;
     private Question[] questions;
+    private Player player;
 
     private String[] choices1 = {"Bees","Lunch queue","FZ","all of above"};
     private String[] choices2 = {"B building","G building","EE building's toilet","SA Building"};
@@ -22,8 +23,9 @@ public class Quiz {
             1);
 
 
-    public Quiz(String aQuizExplanation){
+    public Quiz(String aQuizExplanation, Player player){
         this.Quizexplanation = aQuizExplanation;
+        this.player = player;
         questions = new Question[3];
         questions[0] = question1;
         questions[1] = question2;
@@ -80,5 +82,11 @@ public class Quiz {
     }
 
      */
+    public void onWin(){
+        player.addXP(100);
+    }
+    public void onLose(){
+        player.addXP(-10);
+    }
 }
 
