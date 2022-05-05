@@ -90,7 +90,7 @@ public class QuizScreen implements Screen {
         selectedChoice = str;
     }
 
-    private void showChoices(byte index, final Table table, Stage stage){
+    private void showChoices(byte index, final Table table, final Stage stage){
         final Skin skin1 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
         final Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
@@ -99,12 +99,44 @@ public class QuizScreen implements Screen {
         first.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                setSelected((String) first.getText());
+                setSelected(first.getText().toString());
                 if(quiz.getTheTrueChoice(indexGen).equals(selectedChoice)){
+                    if(indexGen >= quiz.getQuestionsLenght() - 1){
+                        table.reset();
+                        final Skin skin1 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+                        final Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
+                        Table end = new Table();
+                        end.setFillParent(true);
+
+                        Label endLab = new Label("" + score, skin1);
+
+                        final TextButton exit = new TextButton("Cancel", skin2);
+                        exit.addListener(new ChangeListener() {
+                            @Override
+                            public void changed(ChangeEvent event, Actor actor) {
+                                game.changeScreen(BilcantGame.LOADGAME);
+                            }
+                        });
+
+                        end.addActor(exit);
+                        end.addActor(endLab);
+                        table.addActor(end);
+                    }
+                    else {
+                        table.reset();
+                        score--;
+                        indexGen++;
+                        show();
+                    }
+                }
+                else{
                     if(indexGen > quiz.getQuestionsLenght()){
                         endScreen(table);
                     }
                     else {
+                        score++;
+                        table.reset();
+                        indexGen++;
                         show();
                     }
                 }
@@ -149,24 +181,7 @@ public class QuizScreen implements Screen {
         table.row();
     }
     private void endScreen(Table table){
-        final Skin skin1 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
-        final Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
-        Table end = new Table();
-        end.setFillParent(true);
 
-        Label endLab = new Label("" + score, skin1);
-
-        final TextButton exit = new TextButton("Cancel", skin2);
-        exit.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(BilcantGame.LOADGAME);
-            }
-        });
-
-        end.addActor(exit);
-        end.addActor(endLab);
-        table.addActor(end);
     }
 
     @Override
