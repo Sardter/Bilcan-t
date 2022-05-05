@@ -1,6 +1,9 @@
 package com.badlogic.mygame;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.mygame.models.missions.FirstMission;
+import com.badlogic.mygame.models.missions.Mission;
+import com.badlogic.mygame.models.missions.MissionRouter;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.EndScreen;
 import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
@@ -27,7 +30,7 @@ public class BilcantGame extends Game {
     private InfoScreen infoScreen;
     private EscapeTheBeesMinigameScreen escapeTheBeesMinigameScreen;
     private Player player;
-    private int selectedMission = 0;
+    private MissionRouter missionRouter;
 
 
     public BilcantGame() {
@@ -38,8 +41,18 @@ public class BilcantGame extends Game {
     public AppPreferences getPreferences() {return this.preferences;}
     public Player getPlayer() {return  this.player;}
     public void setPlayer(Player player) {this.player = player;}
-    public int getSelectedMission() {return this.selectedMission;}
-    public void setSelectedMission(int mission) {this.selectedMission = mission;}
+    public int getSelectedMission() {return missionRouter.getIndex();}
+    public void setSelectedMission(int mission) {missionRouter.setIndex(mission);}
+
+    public MissionRouter getMissionRouter() {
+        return missionRouter;
+    }
+
+    public void initializeMissions() {
+        missionRouter = new MissionRouter(new Mission[]{
+                new FirstMission(player)
+        });
+    }
 
     public final static int MENU = 0;
     public final static int PREFERENCES = 1;

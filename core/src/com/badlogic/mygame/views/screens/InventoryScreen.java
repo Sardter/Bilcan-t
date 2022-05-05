@@ -71,7 +71,7 @@ public class InventoryScreen implements Screen {
                         new Texture(Gdx.files.internal("back2.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
-        //this.inventory.addTo(new Food("asasd", "sadasd","bucket.png"));
+        this.inventory.addItem(new Food("asasd", "sadasd","bucket.png"));
         final ItemWindow itemWindow = new ItemWindow("item", new Window.WindowStyle(
                 new BitmapFont(),
                 new Color(),
@@ -79,7 +79,6 @@ public class InventoryScreen implements Screen {
                         new TextureRegion(
                                 new Texture("itemWindowBackground.png")))
         ), game.getPlayer(), this);
-        stage.addActor(itemWindow);
         itemWindow.setSize(200, 250);
         itemWindow.setPosition(380,175);
 
@@ -89,6 +88,7 @@ public class InventoryScreen implements Screen {
         itemWindow.setModal(true);
 
         drawStats(skin1,skin2);
+        stage.addActor(itemWindow);
     }
 
     private void drawStats(Skin skin1, Skin skin2) {

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -22,20 +23,15 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.controllers.Controller;
 import com.badlogic.mygame.models.maps.MapRouter;
-import com.badlogic.mygame.models.npc.DialogItem;
-import com.badlogic.mygame.models.npc.DialogOption;
+import com.badlogic.mygame.models.missions.MissionRouter;
 import com.badlogic.mygame.models.maps.GameMap;
 import com.badlogic.mygame.models.GameObject;
-import com.badlogic.mygame.models.npc.NPCDialog;
-import com.badlogic.mygame.models.npc.NPCRoute;
-import com.badlogic.mygame.models.npc.NPCRouter;
 import com.badlogic.mygame.models.npc.NonPlayerCharacter;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.windows.InteractWindow;
 import com.badlogic.mygame.views.windows.NPCInteractWindow;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainScreen implements Screen {
     private BilcantGame game;
@@ -48,11 +44,12 @@ public class MainScreen implements Screen {
     private InteractWindow interactWindow;
     private NPCInteractWindow npcInteractWindow;
     private Stage stage;
-    private Table table1, table2;
+    private Table interactContainer, menuContainer;
     private TextButton interactButton;
     private boolean moveOnMouse, isIneteracting;
     private boolean willBeLoaded;
     private Touchpad touchpad;
+    private MissionRouter missionRouter;
 
     final static int BOUNDRY_X = 800, BOUNDRY_Y = 480;
     final static int STARTING_POSITION_X = BOUNDRY_X / 2, STARTING_POSITION_Y = BOUNDRY_Y / 2;
@@ -119,6 +116,7 @@ public class MainScreen implements Screen {
         character = new Player("rectext.png", 32, 32,
                 STARTING_POSITION_X, STARTING_POSITION_Y);
         game.setPlayer(character);
+        game.initializeMissions();
         mapRouter = new MapRouter(this, game);
         //System.out.println(game.getPlayer());
         if (willBeLoaded) {
@@ -127,9 +125,9 @@ public class MainScreen implements Screen {
         map = mapRouter.getMap();
         this.objects = map.getObjects().getObjects();
 
-        table1 = new Table();
-        table1.setFillParent(true);
-        stage.addActor(table1);
+        interactContainer = new Table();
+        interactContainer.setFillParent(true);
+        stage.addActor(interactContainer);
 
         Skin skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
         Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
@@ -142,20 +140,20 @@ public class MainScreen implements Screen {
             }
         });
         interactButton.setVisible(false);
-        table1.add(interactButton).expandY();
-        table1.row();
+        interactContainer.add(interactButton).expandY();
+        interactContainer.row();
 
         interactButton.setPosition(0,0);
-        table1.setDebug(false);
+        interactContainer.setDebug(false);
 
-        table2 = new Table();
-        stage.addActor(table2);
-        table2.setFillParent(true);
+        menuContainer = new Table();
+        stage.addActor(menuContainer);
+        menuContainer.setFillParent(true);
         TextButton menuButton = new TextButton("Menu", skin1);
         
-        table2.top().left();
+        menuContainer.top().left();
 
-        table2.add(menuButton).pad(10);
+        menuContainer.add(menuButton).pad(10);
         menuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -164,17 +162,31 @@ public class MainScreen implements Screen {
             }
         });
 
-        Table table3 = new Table();
-        table3.setFillParent(true);
-        stage.addActor(table3);
+        Table touchContainer = new Table();
+        touchContainer.setFillParent(true);
+        stage.addActor(touchContainer);
 
         touchpad = new Touchpad(10, skin1);
-        table3.add(touchpad).pad(20);
-        table3.bottom().right();
+        touchContainer.add(touchpad).pad(20);
+        touchContainer.bottom().right();
+
+        missionRouter = game.getMissionRouter();
+
+        Table activeMissionContainer = new Table();
+        activeMissionContainer.setFillParent(true);
+        stage.addActor(activeMissionContainer);
+        activeMissionContainer.top().right().pad(10);
+        Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
+        Label currentTask = new Label(missionRouter.getCurrentMission()
+                .getCurrentTask().getDescription(), skin2);
+        activeMissionContainer.add(missionTitle);
+        activeMissionContainer.row();
+        activeMissionContainer.add(currentTask);
 
         interactWindow.setVisible(false);
         interactWindow.setPosition(380, 220);
         stage.addActor(interactWindow);
+
 
         npcInteractWindow.setVisible(false);
         npcInteractWindow.setPosition(300, 150);

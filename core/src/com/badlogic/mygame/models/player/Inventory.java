@@ -56,7 +56,7 @@ public class Inventory{
     }
 
     public String toJson() {
-        items.add(new Food("asd","sad", "rectext.png"));
+        //items.add(new Food("asd","sad", "rectext.png"));
         ArrayList<HashMap<String,String>> maps = new ArrayList<>();
         for (Item item : items) {
             HashMap<String, String> map = new HashMap<>();
@@ -73,6 +73,7 @@ public class Inventory{
         ArrayList<JsonValue> maps = json.fromJson(ArrayList.class , jsonStr);
         ArrayList<Item> newList = new ArrayList<>(); // text: 0, name: 1, desc: 2, class: 3
         System.out.println(maps);
+        if (maps == null) return;
         for (JsonValue map : maps) {
             String type = map.get(3).getString(1), name = map.get(1).getString(1),
                     desc = map.get(2).getString(1), textureUrl = map.get(0).getString(1);
