@@ -21,9 +21,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.controllers.Controller;
+import com.badlogic.mygame.models.maps.MapRouter;
 import com.badlogic.mygame.models.npc.DialogItem;
 import com.badlogic.mygame.models.npc.DialogOption;
-import com.badlogic.mygame.models.GameMap;
+import com.badlogic.mygame.models.maps.GameMap;
 import com.badlogic.mygame.models.GameObject;
 import com.badlogic.mygame.models.npc.NPCDialog;
 import com.badlogic.mygame.models.npc.NPCRoute;
@@ -41,13 +42,13 @@ public class MainScreen implements Screen {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Player character;
+    private MapRouter mapRouter;
     private GameMap map;
     private ArrayList<GameObject> objects;
     private InteractWindow interactWindow;
     private NPCInteractWindow npcInteractWindow;
     private Stage stage;
     private Table table1, table2;
-    private BitmapFont font;
     private TextButton interactButton;
     private boolean moveOnMouse, isIneteracting;
     private boolean willBeLoaded;
@@ -76,6 +77,18 @@ public class MainScreen implements Screen {
     public InteractWindow getInteractWindow() {return interactWindow;}
     public boolean getMoveOnMouse() {return moveOnMouse;}
     public boolean getIsIneteracting() {return isIneteracting;}
+
+    public BilcantGame getGame() {
+        return game;
+    }
+
+    public void setObjects(ArrayList<GameObject> objects) {
+        this.objects = objects;
+    }
+
+    public void setMap(GameMap map) {
+        this.map = map;
+    }
 
     @Override
     public void show() {
@@ -106,12 +119,13 @@ public class MainScreen implements Screen {
         character = new Player("rectext.png", 32, 32,
                 STARTING_POSITION_X, STARTING_POSITION_Y);
         game.setPlayer(character);
+        mapRouter = new MapRouter(this, game);
         //System.out.println(game.getPlayer());
         if (willBeLoaded) {
             loadGame();
         }
-        map = new GameMap("map.png", 800, 480, - BOUNDRY_X,  -BOUNDRY_Y);
-        createObjects();
+        map = mapRouter.getMap();
+        this.objects = map.getObjects().getObjects();
 
         table1 = new Table();
         table1.setFillParent(true);
@@ -169,49 +183,6 @@ public class MainScreen implements Screen {
     }
 
 
-    public void createObjects() {
-        GameObject[] gameObjects = {
-                new GameObject("rectext.png", "Obj1", "desc1",
-                        64,64, 200, 200),
-                new GameObject("rectext.png", "Obj2", "desc2",
-                        64, 64, 360, 360),
-        };
-
-        DialogOption[] options = {
-                new DialogOption("good, you?", 1, true),
-                new DialogOption("shut up, beach", -1, false)
-        };
-
-        DialogItem[] dialogItems = {
-                new DialogItem("hey man, how are you?", options),
-                new DialogItem("uga uga", null)
-        };
-
-        NonPlayerCharacter[] nonPlayerCharacters = {
-                new NonPlayerCharacter("bucket.png", "important", "npc desc",
-                        true, 100, 200, new NPCDialog(dialogItems)),
-                new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
-                true, 100, 100, new NPCDialog(null)),
-                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
-                        100, 300)*/
-                new NonPlayerCharacter("bucket.png", "npc", "npc desc",
-                        false, 200, 100, new NPCDialog(null))
-        };
-
-        for (NonPlayerCharacter npc : nonPlayerCharacters) {
-            NPCRoute[] routes = {
-                    new NPCRoute(300, 300),
-                    new NPCRoute(350, 300),
-                    new NPCRoute(400, 400)
-            };
-            NPCRouter router = new NPCRouter(npc, routes);
-            npc.setRouter(router);
-        }
-
-        this.objects.addAll(Arrays.asList(gameObjects));
-        this.objects.addAll(Arrays.asList(nonPlayerCharacters));
-    }
-
     public void interactOnVicinity() {
         for ( GameObject object : objects) {
             if (object instanceof  NonPlayerCharacter) {
@@ -233,6 +204,8 @@ public class MainScreen implements Screen {
         Preferences preferences = Gdx.app.getPreferences("myprefs");
         preferences.putFloat("x", character.x);
         preferences.putFloat("y", character.y);
+        preferences.putInteger("mapIndex", mapRouter.getIndex());
+        preferences.putString("inventory", character.getInventory().toJson());
         //preferences.flush();
     }
 
@@ -242,7 +215,8 @@ public class MainScreen implements Screen {
         character.y = preferences.getFloat("y");
         camera.position.x = preferences.getFloat("x");
         camera.position.y = preferences.getFloat("y");
-        System.out.println("here");
+        mapRouter.setIndex(preferences.getInteger("mapIndex"));
+        character.getInventory().fromJson(preferences.getString("inventory"));
     }
 
     @Override

@@ -71,7 +71,7 @@ public class InventoryScreen implements Screen {
                         new Texture(Gdx.files.internal("back2.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
-        this.inventory.addTo(new Food("asasd", "sadasd","bucket.png"));
+        //this.inventory.addTo(new Food("asasd", "sadasd","bucket.png"));
         final ItemWindow itemWindow = new ItemWindow("item", new Window.WindowStyle(
                 new BitmapFont(),
                 new Color(),
