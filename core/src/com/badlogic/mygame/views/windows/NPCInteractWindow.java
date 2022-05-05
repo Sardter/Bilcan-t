@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.mygame.models.missions.QuizGame;
 import com.badlogic.mygame.models.npc.DialogOption;
 import com.badlogic.mygame.models.npc.NonPlayerCharacter;
 
@@ -47,16 +46,8 @@ public class NPCInteractWindow extends InteractiveWindow {
                 button.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
-                        
-                        QuizGame quiz = new QuizGame();
-                        quiz.play();
-
-
-                        
                         npc.getDialog().setIndex(option.getResponse());
                         setObject(npc);
-
-
                     }
                 });
                 responsesContainer.addActor(new Label(" ", skin2));

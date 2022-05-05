@@ -21,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.controllers.Controller;
-import com.badlogic.mygame.models.missions.QuizGame;
 import com.badlogic.mygame.models.npc.DialogItem;
 import com.badlogic.mygame.models.npc.DialogOption;
 import com.badlogic.mygame.models.GameMap;
@@ -125,6 +124,7 @@ public class MainScreen implements Screen {
         interactButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 interactOnVicinity();
+
             }
         });
         interactButton.setVisible(false);

@@ -114,6 +114,7 @@ public class MissionScreen implements Screen {
             missionsContainer.add(description).pad(10);
             missionsContainer.row();
             missionsContainer.row();
+
         }
     }
 

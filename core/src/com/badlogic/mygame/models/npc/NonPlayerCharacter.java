@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.mygame.models.GameObject;
-import com.badlogic.mygame.models.missions.QuizGame;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
 import com.badlogic.mygame.views.windows.NPCInteractWindow;
 
@@ -57,17 +56,9 @@ public class NonPlayerCharacter extends GameObject {
     @Override
     public void interact(InteractiveWindow interactWindow) {
         if (!(interactWindow instanceof NPCInteractWindow)) return;
-
-        else if(this.getDescription().equals("important 2")){
-
-        }
-
-
-        else {
-            System.out.println(this);
-            interactWindow.setObject(this);
-            interactWindow.setVisible(true);
-        }
+        System.out.println(this);
+        interactWindow.setObject(this);
+        interactWindow.setVisible(true);
     }
 
 
