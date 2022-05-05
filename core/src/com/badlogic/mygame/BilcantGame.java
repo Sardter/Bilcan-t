@@ -1,6 +1,7 @@
 package com.badlogic.mygame;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.mygame.models.missions.QuizGame;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.EndScreen;
 import com.badlogic.mygame.views.screens.InfoScreen;

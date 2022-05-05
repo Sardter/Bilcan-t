@@ -19,11 +19,12 @@ public class QuizGame extends Minigame implements Screen {
     private static Question[] questions;
     private Question currQues;
     private Stage stage;
-    private Table table1, question, answers;
+    private Table table1, question, answers, end;
     private BilcantGame game;
     private String currAns;
     private byte score;
     private byte currQuesNum;
+
     public QuizGame(){
         initialize();
     }
@@ -34,46 +35,19 @@ public class QuizGame extends Minigame implements Screen {
 
     @Override
     public void loadScreen() {
-        table1 = new Table();
-        question = new Table();
-        answers = new Table();
-        table1.setFillParent(true);
-        stage.addActor(table1);
-        stage.addActor(question);
-        Skin skin1 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
-        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
-        final TextButton cancel = new TextButton("Cancel", skin1);
-        cancel.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(BilcantGame.DETAIL);
-            }
-        });
-        table1.add(cancel).pad(10);
-        table1.bottom();
-
-        Label questionDesc = new Label(currQues.getQuestion(), skin2);
-        question.add(questionDesc).size(800, 500);
-
-        for (byte a = 0; a < currQues.getChoices().length; a++){
-            final TextButton choice = new TextButton(currQues.getChoices()[a], skin2);
-            choice.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    if(currQues.getAnswer().equals(choice.getText())){
-                        score++;
-                    }
-                    else{
-                        score--;
-                    }
-                    currQuesNum++;
-                }
-            });
-        }
     }
     private void initialize(){
         stage = new Stage(new ScreenViewport());
+        Gdx.input.setInputProcessor(stage);
+        table1 = new Table();
+        question = new Table();
+        answers = new Table();
+        end = new Table();
+        Skin skin3 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+        Label endLab = new Label("" + score, skin3);
+        end.add(endLab).pad(100);
+
         questions = new Question[6];
         Question no1 = new Question(1, " What's Turkey's surface area?", "783,356km2", new String[] {"100000km2", "200000km2", "3000000km2", "783,356km2"});
         Question no2 = new Question(2, " How much is the tabldote menu in Bilcan't", "11tl", new String[] {"10tl", "9tl", "12tl", "13tl"});
@@ -91,11 +65,67 @@ public class QuizGame extends Minigame implements Screen {
         score = 0;
         currQuesNum = 0;
         currQues = questions[currQuesNum];
+        stage.addActor(end);
+        end.setVisible(false);
+    }
+    private boolean isGameOver(){
+        if(this.currQuesNum <= questions.length){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public void show() {
+        /*
         loadScreen();
+        if(isGameOver())
+            if(score >= questions.length){
+                //TODO must update GPA accordingly
+            }
+            end.setFillParent(true);
+            table1.setFillParent(false);
+
+         */
+        table1.setFillParent(true);
+        stage.addActor(table1);
+        stage.addActor(question);
+        Skin skin1 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
+
+        final TextButton cancel = new TextButton("Cancel", skin1);
+        cancel.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.changeScreen(BilcantGame.DETAIL);
+            }
+        });
+        table1.add(cancel).pad(10);
+        table1.bottom();
+
+        Label questionDesc = new Label(currQues.getQuestion(), skin2);
+        Label scoreLab = new Label("" + this.score, skin1);
+        question.add(questionDesc).size(800, 500);
+        question.add(scoreLab);
+
+        for (byte a = 0; a < currQues.getChoices().length; a++){
+            final TextButton choice = new TextButton(currQues.getChoices()[a], skin2);
+            choice.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    if(currQues.getAnswer().equals(choice.getText())){
+                        score++;
+                    }
+                    else{
+                        score--;
+                    }
+                    currQuesNum++;
+                }
+            });
+        }
+        table1.setVisible(true);
+        question.setVisible(true);
+        answers.setVisible(true);
     }
 
     @Override
@@ -108,7 +138,7 @@ public class QuizGame extends Minigame implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        stage.getViewport().update(width, height, true);
     }
 
     @Override
@@ -128,7 +158,7 @@ public class QuizGame extends Minigame implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 
     public class Question {

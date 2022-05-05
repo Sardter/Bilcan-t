@@ -125,7 +125,6 @@ public class MainScreen implements Screen {
         interactButton.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
                 interactOnVicinity();
-
             }
         });
         interactButton.setVisible(false);

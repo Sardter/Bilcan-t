@@ -57,10 +57,12 @@ public class NonPlayerCharacter extends GameObject {
     @Override
     public void interact(InteractiveWindow interactWindow) {
         if (!(interactWindow instanceof NPCInteractWindow)) return;
-        else if(this.description.equals("important 2")){
-            QuizGame quiz = new QuizGame();
-            quiz.play();
+
+        else if(this.getDescription().equals("important 2")){
+
         }
+
+
         else {
             System.out.println(this);
             interactWindow.setObject(this);
