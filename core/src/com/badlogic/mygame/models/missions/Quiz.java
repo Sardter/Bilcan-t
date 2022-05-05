@@ -65,5 +65,8 @@ public class Quiz {
     public Question constructQuestion(String aQuestionExplanation, String[] theChoices, int theTruechoice){
         return new Question(aQuestionExplanation, theChoices, theTruechoice);
     }
+    public int getQuestionsLenght(){
+        return questions.length;
+    }
 }
 
