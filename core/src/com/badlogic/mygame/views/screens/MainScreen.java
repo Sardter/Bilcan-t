@@ -175,6 +175,12 @@ public class MainScreen implements Screen {
                         64,64, 200, 200),
                 new GameObject("rectext.png", "Obj2", "desc2",
                         64, 64, 360, 360),
+                new GameObject("rectext.png", "SA building", "important quiz",
+                        64, 64, 600, 300),
+                new GameObject("rectext.png", "B building", "Math lessons",
+                        64, 64, 600, 200),
+                new GameObject("rectext.png", "G building", "ENG lessons",
+                        64, 64, 600, 90),
         };
 
         DialogOption[] options = {
@@ -186,6 +192,19 @@ public class MainScreen implements Screen {
                 new DialogItem("hey man, how are you?", options),
                 new DialogItem("uga uga", null)
         };
+        DialogItem[] missionDialogItems = {
+                new DialogItem("uga buga take a quiz at SA building", null)
+        };
+
+        /*
+        NonPlayerCharacter[] missionNPCs = {
+                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc desc",
+                    true, 200, 200, new NPCDialog(missionDialogItems)),
+        };
+        */
+
+
+
 
         NonPlayerCharacter[] nonPlayerCharacters = {
                 new NonPlayerCharacter("bucket.png", "important", "npc desc",
@@ -195,14 +214,18 @@ public class MainScreen implements Screen {
                 /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
                         100, 300)*/
                 new NonPlayerCharacter("bucket.png", "npc", "npc desc",
-                        false, 200, 100, new NPCDialog(null))
+                        false, 200, 100, new NPCDialog(null)),
+
+                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc that gives quiz quest",
+                        true, 500, 500, new NPCDialog(missionDialogItems)),
         };
 
         for (NonPlayerCharacter npc : nonPlayerCharacters) {
             NPCRoute[] routes = {
                     new NPCRoute(300, 300),
                     new NPCRoute(350, 300),
-                    new NPCRoute(400, 400)
+                    new NPCRoute(400, 400),
+
             };
             NPCRouter router = new NPCRouter(npc, routes);
             npc.setRouter(router);

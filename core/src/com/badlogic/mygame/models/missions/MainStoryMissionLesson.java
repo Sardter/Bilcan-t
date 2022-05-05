@@ -6,12 +6,14 @@ import com.badlogic.mygame.models.player.Player;
 //has chained missions related to the lessons in Collage
 public class MainStoryMissionLesson extends Mission{
 
-    String Task1Description = "interact with specific NPC to learn about the existance of a quiz";
-    String Task2Description = "now take a quiz at the SA building";
-    String Task3Description = "attend 2 lessons by going to the buildings B and G";
-    boolean[] enteredBuiildings = {false, false};
+    private String Task1Description = "interact with specific NPC to learn about the existance of a quiz";
+    private String Task2Description = "now take a quiz at the SA building";
+    private String Task3Description = "attend 2 lessons by going to the buildings B and G";
 
-    boolean Task1InteractionOccured = false;
+    private boolean[] enteredBuiildings = {false, false};
+
+    String aQuizexplanation = "this is a Bilcan-t academic quiz to upset you and see how miserable you are";
+    private Quiz quizTask = new Quiz( aQuizexplanation);
 
     Task task1 = new Task(Task1Description) {
         @Override
@@ -46,24 +48,33 @@ public class MainStoryMissionLesson extends Mission{
     }
     @Override
     public void ifCompleted() {
+        if(checkIfTasksCompleted() == false) {return;}
         player.setGPA(4);
         player.addExperience(1500);
     }
+    public boolean checkIfTasksCompleted(){
+        for (int i = 0; i < tasks.length; i++) {
+            if(!tasks[i].isCompleted()){
+                return false;
+            }
+        }
+        return true;
+    }
 
-    //must construct in the main class a stationary NPC which says that there is a quiz in the SA building
+    //must construct in the main class a stationary NPC which says that there is a quiz in the SA building (done)
     public void DidinteractWithNPC(){
         task1.isCompleted();
     }
 
     //must write a pop quiz which has 2 random question and must pop when entering the SA building
-    //must construct a SA building
+    //must construct a SA building (done)
     // after entering the building this will ve completed but it must display the pop quiz
     public void DidEnterSAbuilding(){
         task2.isCompleted();
     }
 
     //must be called after entering the B building
-    //must make B building in main game
+    //must make B building in main game (done)
     //must add this method to the interaction of B building
     public void DidEnterBbuilding(){
         enteredBuiildings[0] = true;
@@ -73,7 +84,7 @@ public class MainStoryMissionLesson extends Mission{
     }
 
     //must be called after entering the G building
-    //must make G building in main game
+    //must make G building in main game (done)
     //must add this method to the interaction of G building
     public void DidEnterGbuilding(){
         enteredBuiildings[1] = true;
