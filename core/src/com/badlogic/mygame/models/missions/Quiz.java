@@ -1,7 +1,11 @@
 package com.badlogic.mygame.models.missions;
 
+import com.badlogic.gdx.Screen;
+import com.badlogic.mygame.views.screens.QuizScreen;
+
 /* This class contains the questions, true answers and needs a UI to be displayed properly
  * */
+//TODO take a screen as a parameter and update the screen accordinly
 public class Quiz {
     private String Quizexplanation;
     private Question[] questions;
@@ -39,7 +43,7 @@ public class Quiz {
         }
 
         private String getTheAnswer(){
-            return choices[trueChoice];
+            return choices[trueChoice - 1];
         }
     }
 
@@ -68,5 +72,13 @@ public class Quiz {
     public int getQuestionsLenght(){
         return questions.length;
     }
+    /*
+    public String getProperQuestion(QuizScreen screen){
+        if(screen.getQuiz().getTheTrueChoice(screen.getCurrentQuestion()).equals(screen.getSelected())){
+
+        }
+    }
+
+     */
 }
 
