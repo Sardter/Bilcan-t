@@ -66,7 +66,7 @@ public class QuizScreen implements Screen {
 
         TextureRegionDrawable textureRegionDrawableBg =
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture(Gdx.files.internal("back2.jpeg"))));
+                        new Texture(Gdx.files.internal("kmoi.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
         quiz = new Quiz("Shiny shiny", game.getPlayer());
