@@ -1,8 +1,10 @@
 package com.badlogic.mygame.models.npc;
 
+import java.util.Arrays;
+
 public class NPCRouter {
     private final NonPlayerCharacter npc;
-    private final NPCRoute[] routes;
+    private NPCRoute[] routes;
     private final float initX, initY;
     private int index;
 
@@ -22,15 +24,24 @@ public class NPCRouter {
         return index >= routes.length;
     }
 
+    public void reverseRoutes() {
+        NPCRoute[] reversed = new NPCRoute[routes.length];
+        for (int i = 0; i < routes.length; i++) {
+            reversed[i] = routes[routes.length - 1 - i];
+        }
+        routes = reversed;
+        index = 0;
+    }
+
     public void traverse(int speed) {
         if (npc.getISImportant() || npc.isInCollision()) return;
         if (isDone()) {
-            npc.x = initX;
-            npc.y = initY;
-            index = 0; // TODO inverse instead of reset
+            reverseRoutes();
+            //System.out.println("reversed");
         }
         NPCRoute currentRoute = routes[index];
         if (currentRoute.isDone(npc.x, npc.y)) {
+            //System.out.println("done: " + index);
             index++;
             if (isDone()) return;
             currentRoute = routes[index];

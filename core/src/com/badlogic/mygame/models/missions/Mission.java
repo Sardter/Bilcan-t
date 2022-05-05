@@ -10,6 +10,7 @@ public abstract class Mission {
     protected final int xp;
     protected final Item reward;
     protected final Task[] tasks;
+    protected int taskIndex;
 
 
     public Mission(Player player, String name, String description, int xp, Item reward, Task[] tasks) {
@@ -19,11 +20,16 @@ public abstract class Mission {
         this.xp = xp;
         this.reward = reward;
         this.tasks = tasks;
+        this.taskIndex = 0;
     }
 
-    public abstract void ifCompleted();
+    public abstract void onCompleted();
 
-    public int GetXP() {
+    public Task getCurrentTask() {
+        return tasks[taskIndex];
+    }
+
+    public int getXPReward() {
         return xp;
     }
 

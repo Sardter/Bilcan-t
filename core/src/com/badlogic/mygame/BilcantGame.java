@@ -1,8 +1,14 @@
 package com.badlogic.mygame;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.mygame.models.missions.FirstMission;
+import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
+import com.badlogic.mygame.models.missions.Mission;
+import com.badlogic.mygame.models.missions.MissionRouter;
+import com.badlogic.mygame.models.missions.Task;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.EndScreen;
+import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
 import com.badlogic.mygame.views.screens.InfoScreen;
 import com.badlogic.mygame.views.screens.InventoryScreen;
 import com.badlogic.mygame.views.screens.LoadingScreen;
@@ -24,8 +30,10 @@ public class BilcantGame extends Game {
     private PlayerDetailScreen playerDetailScreen;
     private InventoryScreen inventoryScreen;
     private InfoScreen infoScreen;
+    private EscapeTheBeesMinigameScreen escapeTheBeesMinigameScreen;
     private Player player;
-    private int selectedMission = 0;
+    private MissionRouter missionRouter;
+    private MainStoryMissionLesson mainStory;
 
 
     public BilcantGame() {
@@ -36,8 +44,19 @@ public class BilcantGame extends Game {
     public AppPreferences getPreferences() {return this.preferences;}
     public Player getPlayer() {return  this.player;}
     public void setPlayer(Player player) {this.player = player;}
-    public int getSelectedMission() {return this.selectedMission;}
-    public void setSelectedMission(int mission) {this.selectedMission = mission;}
+    public int getSelectedMission() {return missionRouter.getIndex();}
+    public void setSelectedMission(int mission) {missionRouter.setIndex(mission);}
+
+    public MissionRouter getMissionRouter() {
+        return missionRouter;
+    }
+
+    public void initializeMissions() {
+        missionRouter = new MissionRouter(new Mission[]{
+                new FirstMission(player)
+                new MainStoryMissionLesson(player,  "main mission","it is main mission related to the lessons", "1200",  reward, tasks);
+        });
+    }
 
     public final static int MENU = 0;
     public final static int PREFERENCES = 1;
@@ -48,6 +67,7 @@ public class BilcantGame extends Game {
     public final static int DETAIL = 5;
     public final static int INVENTORY = 7;
     public final static int INFO = 8;
+    public final static int ESCAPE_THE_BEES = 9;
 
     public void changeScreen(int screen){
         switch(screen){
@@ -86,6 +106,10 @@ public class BilcantGame extends Game {
             case INFO:
                 infoScreen = new InfoScreen(this);
                 this.setScreen(infoScreen);
+                break;
+            case ESCAPE_THE_BEES:
+                escapeTheBeesMinigameScreen = new EscapeTheBeesMinigameScreen(this);
+                this.setScreen(escapeTheBeesMinigameScreen);
                 break;
         }
     }

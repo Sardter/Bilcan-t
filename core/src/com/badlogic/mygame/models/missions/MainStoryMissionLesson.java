@@ -40,14 +40,16 @@ public class MainStoryMissionLesson extends Mission{
         }
     };
 
-    public MainStoryMissionLesson(Player player, String name, String description, int xp, Item reward, Task[] tasks){
-        super(player,  name, description,  xp, reward, tasks);
+    public MainStoryMissionLesson(Player player){
+        super(player,"main mission", "it is a main mission related lessons", 1200, null, new Task[]{
+                task1 , task2, task3
+        });
         tasks[0] = task1;
         tasks[1] = task2;
         tasks[2] = task3;
     }
     @Override
-    public void ifCompleted() {
+    public void onCompleted() {
         if(checkIfTasksCompleted() == false) {return;}
         player.setGPA(4);
         player.addExperience(1500);

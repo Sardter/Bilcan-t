@@ -59,11 +59,12 @@ public class ItemWindow extends InteractiveWindow {
             useButton.pad(10f);
             verticalGroup.addActor(useButton);
             verticalGroup.addActor(new Label(" ", skin));
+            final ItemWindow window = this;
             useButton.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     item.use(player);
-                    inventoryScreen.drawItems(new ItemWindow("Item", getStyle(), player, inventoryScreen));
+                    inventoryScreen.drawItems(window);
                     verticalGroup = new VerticalGroup();
                     setVisible(false);
                 }
