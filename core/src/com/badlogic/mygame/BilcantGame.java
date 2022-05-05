@@ -53,8 +53,8 @@ public class BilcantGame extends Game {
 
     public void initializeMissions() {
         missionRouter = new MissionRouter(new Mission[]{
-                new FirstMission(player)
-                new MainStoryMissionLesson(player,  "main mission","it is main mission related to the lessons", "1200",  reward, tasks);
+                new FirstMission(player),
+                new MainStoryMissionLesson(player)
         });
     }
 
