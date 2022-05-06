@@ -258,8 +258,9 @@ public class EscapeTheBeesMinigame extends Minigame {
         }
 
         String[] windowItems = {title, desc};
-        screen.getCompletionWindow().setObject(windowItems);
-        screen.getCompletionWindow().setVisible(true);
+
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
     }
 
     @Override
@@ -267,8 +268,8 @@ public class EscapeTheBeesMinigame extends Minigame {
         player.setEnergy(player.getEnergy()-0.1f);
         player.setPopularity(player.getPopularity()-0.05f);
         String[] windowItems = {"Lost!", "Bee got you first!"};
-        screen.getCompletionWindow().setObject(windowItems);
-        screen.getCompletionWindow().setVisible(true);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
     }
 
     private boolean validMove(int x, int y) {

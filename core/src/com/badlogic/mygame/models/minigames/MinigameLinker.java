@@ -17,6 +17,7 @@ public class MinigameLinker extends GameObject {
 
     @Override
     public void interact(InteractiveWindow interactWindow) {
+        game.getMainScreen().saveGame();
         game.changeScreen(miniGame);
     }
 }

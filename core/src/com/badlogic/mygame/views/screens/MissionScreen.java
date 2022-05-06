@@ -62,24 +62,8 @@ public class MissionScreen implements Screen {
         ScrollPane scrollPane = new ScrollPane(missionsContainer);
         table2.add(scrollPane).size(800, 500);
 
-
-        final Mission[] missions = {
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-        };
-
+        final Mission[] missions = game.getMissionRouter().getMissions();
         final CheckBox[] checkBoxes = new CheckBox[missions.length];
-
 
         for (int i = 0; i < missions.length; i++) {
             Mission mission = missions[i];

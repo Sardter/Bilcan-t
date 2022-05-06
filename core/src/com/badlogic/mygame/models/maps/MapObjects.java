@@ -51,7 +51,10 @@ public class MapObjects {
                         64, 64, 260, 260, mapRouter, MapRouter.DEVELOPMENT),
                 new MinigameLinker("rectext.png", "Obj2", "desc2",
                         64, 64, 350, 300,
-                        mapRouter.getGame(), BilcantGame.ESCAPE_THE_BEES)
+                        mapRouter.getGame(), BilcantGame.ESCAPE_THE_BEES),
+                new MinigameLinker("rectext.png", "Obj2", "desc2",
+                    64, 64, 300, 100,
+                    mapRouter.getGame(), BilcantGame.FIND_THE_TABLE),
         };
 
         this.objects.addAll(Arrays.asList(gameObjects));
