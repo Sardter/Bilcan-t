@@ -59,6 +59,9 @@ public class NonPlayerCharacter extends GameObject {
         System.out.println(this);
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
+        if(this.name.equals("take a quiz NPC")){
+            //calls did interacted with npc method which is inside the mainStoryMissionLesson class
+        }
     }
 
 

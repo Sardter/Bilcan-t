@@ -34,6 +34,15 @@ public abstract class Mission {
     }
 
     public String getQuestExplanation() {
+
+        if(this instanceof MainStoryMissionLesson) {
+            int i = 0;
+            for (int j = 0; j < tasks.length; j++) {
+                if (!tasks[j].isCompleted()) {
+                    return tasks[j].getDescription();
+                }
+            }
+        }
         return description;
     }
     public String getName() {

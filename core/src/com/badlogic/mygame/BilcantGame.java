@@ -2,8 +2,10 @@ package com.badlogic.mygame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.mygame.models.missions.FirstMission;
+import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.models.missions.Mission;
 import com.badlogic.mygame.models.missions.MissionRouter;
+import com.badlogic.mygame.models.missions.Task;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.EndScreen;
 import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
@@ -33,6 +35,7 @@ public class BilcantGame extends Game {
     private FindTheTableScreen findTheTableScreen;
     private Player player;
     private MissionRouter missionRouter;
+    private MainStoryMissionLesson mainStory;
 
 
     public BilcantGame() {
@@ -52,7 +55,8 @@ public class BilcantGame extends Game {
 
     public void initializeMissions() {
         missionRouter = new MissionRouter(new Mission[]{
-                new FirstMission(player)
+                new FirstMission(player),
+                new MainStoryMissionLesson(player)
         });
     }
 

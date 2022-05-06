@@ -26,12 +26,18 @@ import com.badlogic.mygame.models.maps.MapRouter;
 import com.badlogic.mygame.models.missions.MissionRouter;
 import com.badlogic.mygame.models.maps.GameMap;
 import com.badlogic.mygame.models.GameObject;
+import com.badlogic.mygame.models.npc.DialogItem;
+import com.badlogic.mygame.models.npc.DialogOption;
+import com.badlogic.mygame.models.npc.NPCDialog;
+import com.badlogic.mygame.models.npc.NPCRoute;
+import com.badlogic.mygame.models.npc.NPCRouter;
 import com.badlogic.mygame.models.npc.NonPlayerCharacter;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.windows.InteractWindow;
 import com.badlogic.mygame.views.windows.NPCInteractWindow;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainScreen implements Screen {
     private BilcantGame game;
@@ -194,6 +200,72 @@ public class MainScreen implements Screen {
         stage.addActor(npcInteractWindow);
     }
 
+
+    public void createObjects() {
+        GameObject[] gameObjects = {
+                new GameObject("rectext.png", "Obj1", "desc1",
+                        64,64, 200, 200),
+                new GameObject("rectext.png", "Obj2", "desc2",
+                        64, 64, 360, 360),
+                new GameObject("rectext.png", "SA building", "important quiz",
+                        64, 64, 600, 300),
+                new GameObject("rectext.png", "B building", "Math lessons",
+                        64, 64, 600, 200),
+                new GameObject("rectext.png", "G building", "ENG lessons",
+                        64, 64, 600, 90),
+        };
+
+        DialogOption[] options = {
+                new DialogOption("good, you?", 1, true),
+                new DialogOption("shut up, beach", -1, false)
+        };
+
+        DialogItem[] dialogItems = {
+                new DialogItem("hey man, how are you?", options),
+                new DialogItem("uga uga", null)
+        };
+        DialogItem[] missionDialogItems = {
+                new DialogItem("uga buga take a quiz at SA building", null)
+        };
+
+        /*
+        NonPlayerCharacter[] missionNPCs = {
+                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc desc",
+                    true, 200, 200, new NPCDialog(missionDialogItems)),
+        };
+        */
+
+
+
+
+        NonPlayerCharacter[] nonPlayerCharacters = {
+                new NonPlayerCharacter("bucket.png", "important", "npc desc",
+                        true, 100, 200, new NPCDialog(dialogItems)),
+                new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
+                true, 100, 100, new NPCDialog(null)),
+                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
+                        100, 300)*/
+                new NonPlayerCharacter("bucket.png", "npc", "npc desc",
+                        false, 200, 100, new NPCDialog(null)),
+
+                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc that gives quiz quest",
+                        true, 500, 500, new NPCDialog(missionDialogItems)),
+        };
+
+        for (NonPlayerCharacter npc : nonPlayerCharacters) {
+            NPCRoute[] routes = {
+                    new NPCRoute(300, 300),
+                    new NPCRoute(350, 300),
+                    new NPCRoute(400, 400),
+
+            };
+            NPCRouter router = new NPCRouter(npc, routes);
+            npc.setRouter(router);
+        }
+
+        this.objects.addAll(Arrays.asList(gameObjects));
+        this.objects.addAll(Arrays.asList(nonPlayerCharacters));
+    }
 
     public void interactOnVicinity() {
         for ( GameObject object : objects) {

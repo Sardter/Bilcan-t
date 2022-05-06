@@ -63,5 +63,15 @@ public class GameObject extends Rectangle {
         //System.out.println("smt"+ id);
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
+        if(this.name.equals("SA building")){
+            //instanciate the quiz mechanism
+        }
+        if(this.name.equals("B building")){
+            //call the DidEnterBbuilding() from the MainStoryMissionLesson
+        }
+        if(this.name.equals("G building")){
+            //call the DidEnterGbuilding() from the MainStoryMissionLesson
+            game
+        }
     }
 }

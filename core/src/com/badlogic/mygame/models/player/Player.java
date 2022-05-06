@@ -51,7 +51,8 @@ public class Player extends Rectangle {
         this.inventory = new Inventory();
     }
     public void setExperience(int xp){ experience = xp;}
-
+    //I added give experience to add a certain amount of xp without setting it from stratch
+    public void addExperience(int xp){ experience += xp;}
     public float getGPA() {return this.GPA;}
     public float getEnergy() {return this.Energy;}
     public float getPopularity() {return this.Popularity;}
