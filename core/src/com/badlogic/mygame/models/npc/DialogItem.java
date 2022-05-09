@@ -1,5 +1,10 @@
 package com.badlogic.mygame.models.npc;
+/**
 
+        Dialogs are constructed as chains of DialogItems, like linkedLists.
+        Each DialogItem has several DialogOptions where the Player objects interacts with and chooses the specific dialogues.
+
+ */
 public class DialogItem {
     private static int ID = 0;
     private DialogItem next;

@@ -1,5 +1,11 @@
 package com.badlogic.mygame.models.missions;
+/**
 
+
+
+
+
+ */
 public abstract class Task {
     private final String description;
 

@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.info.Information;
-/*
+/**
         Screen where information about Bilkent University is presented to the user to read.
  */
 public class InfoScreen implements Screen {
@@ -63,11 +63,21 @@ public class InfoScreen implements Screen {
         table2.add(scrollPane).size(800, 500);
 
         Information[] infoList = {
-                new Information("info 1", "asfaegagsaf", 0, Information.TUTORIAL),
-                new Information("info 2", "asfaegagsaf", 0, Information.TUTORIAL),
-                new Information("info 3", "asfaegagsaf", 0, Information.TUTORIAL),
-                new Information("info 4", "asfaegagsaf", 0, Information.TUTORIAL),
-                new Information("info 5", "asfaegagsaf", 0, Information.TUTORIAL),
+                new Information("Bilkent Info-1",
+                        "Bilkent is widely selected all over the world because of the oppurtunities they offer."
+                        , 0, Information.TUTORIAL),
+                new Information("Bilkent Info-2",
+                        "The university has a very good adaptation-to-university program, and has many courses for your interests",
+                        0, Information.TUTORIAL),
+                new Information("Game Tip-1",
+                        "In the find-the-table mini-game you should choose the table which has the longest time remaining as quickly as possible",
+                        0, Information.TUTORIAL),
+                new Information("Game Tip-2",
+                        "In quiz-game the odds are highly in favour of you. You can win a lot of xp but cannot lose as much xp",
+                        50, Information.TUTORIAL),
+                new Information("Game Tip-3",
+                        "Use your inventory wisely and do not give up the objects needed for the main missions",
+                        100, Information.TUTORIAL),
         };
 
         for (Information information : infoList) {

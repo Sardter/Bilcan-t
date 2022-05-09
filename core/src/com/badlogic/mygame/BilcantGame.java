@@ -20,7 +20,7 @@ import com.badlogic.mygame.views.screens.PlayerDetailScreen;
 import com.badlogic.mygame.views.screens.PreferencesScreen;
 import com.badlogic.mygame.views.screens.QuizScreen;
 
-/*
+/**
         The main class where ability to switch between screens takes place with changeScreen(int screen) method.
         Also, we have getters for; Preferences, Player, selectedMission, MissionRouter
         Method for initializing the missions, that is, initializeMissions() .
