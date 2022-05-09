@@ -2,7 +2,7 @@ package com.badlogic.mygame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-/*
+/**
         Setting and getting the values of music volume or sound volume of the game.
  */
 public class AppPreferences {

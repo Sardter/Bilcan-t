@@ -11,7 +11,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.mygame.models.GameObject;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
 import com.badlogic.mygame.views.windows.NPCInteractWindow;
-/*
+/**
         Class of the NPCs.
         Field variables:
         boolean isImportant => true if this NPC is intractable, else false.
@@ -19,6 +19,7 @@ import com.badlogic.mygame.views.windows.NPCInteractWindow;
         int speed => speed for how the NPC traverses the NPCRoute.
         NPCRouter router => designates the route and how the NPC will operate within the route.
 
+        interact(InteractiveWindow interactWindow) method => allows the NPC object to interact with other objects.
  */
 
 public class NonPlayerCharacter extends GameObject {

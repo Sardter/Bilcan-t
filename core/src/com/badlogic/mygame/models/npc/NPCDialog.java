@@ -1,7 +1,7 @@
 package com.badlogic.mygame.models.npc;
 
 import java.util.Random;
-/*
+/**
 
         When the Player objects come into the vicinity of a NPC object and decides to interact with it,
         this class allows for the NPC object to respond by opening a window as an answer to the Player object.
