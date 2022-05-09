@@ -59,7 +59,7 @@ public class FindTheTableScreen implements Screen {
 
         TextureRegionDrawable textureRegionDrawableBg =
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture(Gdx.files.internal("back2.jpeg"))));
+                        new Texture(Gdx.files.internal("find_the_table_back.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
         miniGame = new FindATableMinigame(game.getPlayer(), this, 3);
@@ -110,9 +110,11 @@ public class FindTheTableScreen implements Screen {
                     button = new ImageButton(itemTexture);
                 } else {
                     if (dinningTable.isFull) {
-                        button = new TextButton("Full", skin1);
+                        button = new ImageButton(new TextureRegionDrawable(
+                                new TextureRegion(new Texture("item_skins/full_table.png"))));
                     } else {
-                        button = new TextButton(miniGame.getSuccessPercentage(i,j) + "", skin1);
+                        button = new ImageButton(new TextureRegionDrawable(
+                                new TextureRegion(new Texture("item_skins/table.png"))));
                     }
                 }
                 button.addListener(new ChangeListener() {
