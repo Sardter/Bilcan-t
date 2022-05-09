@@ -5,7 +5,11 @@ import  com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Json;
 
 import java.util.HashMap;
-
+/*
+        The Player class whose object is the main object which the game is played.
+        Has attributes like energy, gpa, popularity which are adjusted after each specific interaction.
+        For example: If the player object interacts with a book object, player.gpa is incremented.
+*/
 public class Player extends Rectangle {
     private Texture texture;
     private float energy; //0-1

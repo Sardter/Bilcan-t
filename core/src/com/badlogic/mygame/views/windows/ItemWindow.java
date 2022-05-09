@@ -11,7 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.InventoryScreen;
-
+/*
+            This window opens opens up when you press the Item object within the Inventory screen.
+            You can interact with the Item object that is present within the inventory.
+ */
 public class ItemWindow extends InteractiveWindow {
     private Player player;
     private Item item;
