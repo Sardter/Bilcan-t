@@ -179,8 +179,6 @@ public class EscapeTheBeesMinigame extends Minigame {
 
     public void playerTraverse(MainCharacter object, int x, int y) {
         if (positions[x][y] == null) {
-            System.out.println(object.y);
-            System.out.println(y);
             positions[x][y] = object;
             positions[object.x][object.y] = null;
             object.x = x;
@@ -261,6 +259,7 @@ public class EscapeTheBeesMinigame extends Minigame {
 
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
+        ((EscapeTheBeesMinigameScreen) screen).getGame().getMainScreen().saveGame();
     }
 
     @Override

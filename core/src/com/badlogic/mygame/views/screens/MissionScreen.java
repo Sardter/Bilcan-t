@@ -48,6 +48,7 @@ public class MissionScreen implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                game.getMainScreen().saveGame();
                 game.changeScreen(BilcantGame.DETAIL);
             }
         });

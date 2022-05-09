@@ -125,6 +125,7 @@ public class MainScreen implements Screen {
         game.initializeMissions();
         mapRouter = new MapRouter(this, game);
         //System.out.println(game.getPlayer());
+        missionRouter = game.getMissionRouter();
         if (willBeLoaded) {
             loadGame();
         }
@@ -176,7 +177,6 @@ public class MainScreen implements Screen {
         touchContainer.add(touchpad).pad(20);
         touchContainer.bottom().right();
 
-        missionRouter = game.getMissionRouter();
 
         Table activeMissionContainer = new Table();
         activeMissionContainer.setFillParent(true);
@@ -201,72 +201,6 @@ public class MainScreen implements Screen {
     }
 
 
-    public void createObjects() {
-        GameObject[] gameObjects = {
-                new GameObject("rectext.png", "Obj1", "desc1",
-                        64,64, 200, 200),
-                new GameObject("rectext.png", "Obj2", "desc2",
-                        64, 64, 360, 360),
-                new GameObject("rectext.png", "SA building", "important quiz",
-                        64, 64, 600, 300),
-                new GameObject("rectext.png", "B building", "Math lessons",
-                        64, 64, 600, 200),
-                new GameObject("rectext.png", "G building", "ENG lessons",
-                        64, 64, 600, 90),
-        };
-
-        DialogOption[] options = {
-                new DialogOption("good, you?", 1, true),
-                new DialogOption("shut up, beach", -1, false)
-        };
-
-        DialogItem[] dialogItems = {
-                new DialogItem("hey man, how are you?", options),
-                new DialogItem("uga uga", null)
-        };
-        DialogItem[] missionDialogItems = {
-                new DialogItem("uga buga take a quiz at SA building", null)
-        };
-
-        /*
-        NonPlayerCharacter[] missionNPCs = {
-                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc desc",
-                    true, 200, 200, new NPCDialog(missionDialogItems)),
-        };
-        */
-
-
-
-
-        NonPlayerCharacter[] nonPlayerCharacters = {
-                new NonPlayerCharacter("bucket.png", "important", "npc desc",
-                        true, 100, 200, new NPCDialog(dialogItems)),
-                new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
-                true, 100, 100, new NPCDialog(null)),
-                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
-                        100, 300)*/
-                new NonPlayerCharacter("bucket.png", "npc", "npc desc",
-                        false, 200, 100, new NPCDialog(null)),
-
-                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc that gives quiz quest",
-                        true, 500, 500, new NPCDialog(missionDialogItems)),
-        };
-
-        for (NonPlayerCharacter npc : nonPlayerCharacters) {
-            NPCRoute[] routes = {
-                    new NPCRoute(300, 300),
-                    new NPCRoute(350, 300),
-                    new NPCRoute(400, 400),
-
-            };
-            NPCRouter router = new NPCRouter(npc, routes);
-            npc.setRouter(router);
-        }
-
-        this.objects.addAll(Arrays.asList(gameObjects));
-        this.objects.addAll(Arrays.asList(nonPlayerCharacters));
-    }
-
     public void interactOnVicinity() {
         for ( GameObject object : objects) {
             if (object instanceof  NonPlayerCharacter) {
@@ -290,6 +224,9 @@ public class MainScreen implements Screen {
         preferences.putFloat("y", character.y);
         preferences.putInteger("mapIndex", mapRouter.getIndex());
         preferences.putString("inventory", character.getInventory().toJson());
+        preferences.putString("stats", character.getStatsInJson());
+        preferences.putInteger("mission", missionRouter.getIndex());
+        System.out.println(preferences.getInteger("mission"));
         //preferences.flush();
     }
 
@@ -301,6 +238,8 @@ public class MainScreen implements Screen {
         camera.position.y = preferences.getFloat("y");
         mapRouter.setIndex(preferences.getInteger("mapIndex"));
         character.getInventory().fromJson(preferences.getString("inventory"));
+        character.setStatsFromJson(preferences.getString("stats"));
+        missionRouter.setIndex(preferences.getInteger("mission"));
     }
 
     @Override
