@@ -1,6 +1,7 @@
 package com.badlogic.mygame.models.minigames;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.FindTheTableScreen;
 
@@ -69,7 +70,8 @@ public class FindATableMinigame extends Minigame {
     }
 
     public void initializeGame() {
-        character = new Character("character.png",-1,-1);
+        character = new Character(((FileTextureData)player.getTexture()
+                .getTextureData()).getFileHandle().path(),-1,-1);
         for (int i = 0; i < dinningTables.length; i++) {
             DinningTable[] column = dinningTables[i];
             for (int j = 0; j < column.length; j++) {

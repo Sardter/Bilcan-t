@@ -47,12 +47,12 @@ public class MapObjects {
 
     private void dev2() {
         GameObject[] gameObjects = {
-                new Door("drop.png", "Obj2", "desc2",
+                new Door("item_skins/door.png", "Obj2", "desc2",
                         64, 64, 260, 260, mapRouter, MapRouter.DEVELOPMENT),
-                new MinigameLinker("rectext.png", "Obj2", "desc2",
+                new MinigameLinker("item_skins/bee.png", "Obj2", "desc2",
                         64, 64, 350, 300,
                         mapRouter.getGame(), BilcantGame.ESCAPE_THE_BEES),
-                new MinigameLinker("rectext.png", "Obj2", "desc2",
+                new MinigameLinker("item_skins/table.png", "Obj2", "desc2",
                     64, 64, 300, 100,
                     mapRouter.getGame(), BilcantGame.FIND_THE_TABLE),
         };
@@ -62,11 +62,11 @@ public class MapObjects {
 
     private void development() {
         GameObject[] gameObjects = {
-                new GameObject("rectext.png", "Obj1", "desc1",
+                new GameObject("item_skins/laundry.png", "Obj1", "desc1",
                         64,64, 200, 200),
-                new GameObject("rectext.png", "Obj2", "desc2",
+                new GameObject("item_skins/pillow.png", "Obj2", "desc2",
                         64, 64, 360, 360),
-                new Door("drop.png", "Obj2", "desc2",
+                new Door("item_skins/door.png", "Obj2", "desc2",
                         64, 64, 260, 260, mapRouter, MapRouter.DEV_2),
         };
 
@@ -81,13 +81,13 @@ public class MapObjects {
         };
 
         NonPlayerCharacter[] nonPlayerCharacters = {
-                new NonPlayerCharacter("bucket.png", "important", "npc desc",
+                new NonPlayerCharacter("npc_skins/npc1.png", "important", "npc desc",
                         true, 100, 200, new NPCDialog(dialogItems)),
-                new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
+                new NonPlayerCharacter("npc_skins/npc3.png", "important 2", "npc desc",
                         true, 100, 100, new NPCDialog(null)),
                 /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
                         100, 300)*/
-                new NonPlayerCharacter("bucket.png", "npc", "npc desc",
+                new NonPlayerCharacter("npc_skins/npc4.png", "npc", "npc desc",
                         false, 200, 100, new NPCDialog(null))
         };
 

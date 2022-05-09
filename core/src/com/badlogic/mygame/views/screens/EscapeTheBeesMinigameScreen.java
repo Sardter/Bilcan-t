@@ -62,7 +62,7 @@ public class EscapeTheBeesMinigameScreen implements Screen {
 
         TextureRegionDrawable textureRegionDrawableBg =
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture(Gdx.files.internal("back2.jpeg"))));
+                        new Texture(Gdx.files.internal("escape_back.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
         miniGame = new EscapeTheBeesMinigame(game.getPlayer(), this, 4);
@@ -138,13 +138,15 @@ public class EscapeTheBeesMinigameScreen implements Screen {
             for (EscapeTheBeesMinigame.MinigameObject minigameObject : row) {
                 Button button;
                 if (minigameObject == null) {
-                    button = new TextButton("", skin1);
+                    button = new ImageButton(new TextureRegionDrawable(
+                            new TextureRegion(new Texture("item_skins/empty.png"))));
                 } else {
                     Drawable itemTexture =
                             new TextureRegionDrawable(
                                     new TextureRegion(minigameObject.getTexture()));
                     button = new ImageButton(itemTexture);
                 }
+                button.pad(5f);
                 items.add(button);
             }
             items.row();

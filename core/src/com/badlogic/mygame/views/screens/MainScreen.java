@@ -119,7 +119,7 @@ public class MainScreen implements Screen {
                                 new Texture("itemWindowBackground.png")))
         ));
 
-        character = new Player("rectext.png", 32, 32,
+        character = new Player("npc_skins/npc10.png", 25, 45,
                 STARTING_POSITION_X, STARTING_POSITION_Y);
         game.setPlayer(character);
         game.initializeMissions();
@@ -185,6 +185,7 @@ public class MainScreen implements Screen {
         Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
         Label currentTask = new Label(missionRouter.getCurrentMission()
                 .getCurrentTask().getDescription(), skin2);
+        currentTask.setFontScale(0.5f);
         activeMissionContainer.add(missionTitle);
         activeMissionContainer.row();
         activeMissionContainer.add(currentTask);
