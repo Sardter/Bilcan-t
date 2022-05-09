@@ -143,7 +143,7 @@ public class InventoryScreen implements Screen {
         itemsRow4.pad(5);
         itemsRow4.space(5);
 
-        itemsContainer.center().padTop(200f);
+        itemsContainer.center().padTop(180f);
 
         final ArrayList<Item> items = this.inventory.getItems();
 
@@ -163,10 +163,11 @@ public class InventoryScreen implements Screen {
                     }
                 });
             } else {
-                item = new TextButton("", skin1);
+                item = new ImageButton(new TextureRegionDrawable(
+                        new TextureRegion(new Texture("item_skins/empty.png"))));
             }
 
-            item.pad(10f);
+            item.pad(5f);
             item.setSize(10f, 10f);
             if (i % 4 == 0) itemsRow1.addActor(item);
             else if (i % 4 == 1) itemsRow2.addActor(item);
