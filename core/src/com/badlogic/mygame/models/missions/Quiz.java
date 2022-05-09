@@ -1,15 +1,10 @@
 package com.badlogic.mygame.models.missions;
 
-import com.badlogic.gdx.Screen;
-import com.badlogic.mygame.models.player.Player;
-import com.badlogic.mygame.views.screens.QuizScreen;
-
 /* This class contains the questions, true answers and needs a UI to be displayed properly
  * */
 public class Quiz {
     private String Quizexplanation;
     private Question[] questions;
-    private Player player;
 
     private String[] choices1 = {"Bees","Lunch queue","FZ","all of above"};
     private String[] choices2 = {"B building","G building","EE building's toilet","SA Building"};
@@ -23,9 +18,8 @@ public class Quiz {
             1);
 
 
-    public Quiz(String aQuizExplanation, Player player){
+    public Quiz(String aQuizExplanation){
         this.Quizexplanation = aQuizExplanation;
-        this.player = player;
         questions = new Question[3];
         questions[0] = question1;
         questions[1] = question2;
@@ -45,7 +39,7 @@ public class Quiz {
         }
 
         private String getTheAnswer(){
-            return choices[trueChoice - 1];
+            return choices[trueChoice];
         }
     }
 
@@ -70,23 +64,6 @@ public class Quiz {
 
     public Question constructQuestion(String aQuestionExplanation, String[] theChoices, int theTruechoice){
         return new Question(aQuestionExplanation, theChoices, theTruechoice);
-    }
-    public int getQuestionsLenght(){
-        return questions.length;
-    }
-    /*
-    public String getProperQuestion(QuizScreen screen){
-        if(screen.getQuiz().getTheTrueChoice(screen.getCurrentQuestion()).equals(screen.getSelected())){
-
-        }
-    }
-
-     */
-    public void onWin(){
-        player.addXP(100);
-    }
-    public void onLose(){
-        player.addXP(-10);
     }
 }
 

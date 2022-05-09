@@ -17,7 +17,6 @@ import com.badlogic.mygame.views.screens.MenuScreen;
 import com.badlogic.mygame.views.screens.MissionScreen;
 import com.badlogic.mygame.views.screens.PlayerDetailScreen;
 import com.badlogic.mygame.views.screens.PreferencesScreen;
-import com.badlogic.mygame.views.screens.QuizScreen;
 
 
 public class BilcantGame extends Game {
@@ -32,7 +31,6 @@ public class BilcantGame extends Game {
     private InventoryScreen inventoryScreen;
     private InfoScreen infoScreen;
     private EscapeTheBeesMinigameScreen escapeTheBeesMinigameScreen;
-    private QuizScreen quizScreen;
     private Player player;
     private MissionRouter missionRouter;
     private MainStoryMissionLesson mainStory;
@@ -70,7 +68,6 @@ public class BilcantGame extends Game {
     public final static int INVENTORY = 7;
     public final static int INFO = 8;
     public final static int ESCAPE_THE_BEES = 9;
-    public final static int QUIZ = 10;
 
     public void changeScreen(int screen){
         switch(screen){
@@ -113,10 +110,6 @@ public class BilcantGame extends Game {
             case ESCAPE_THE_BEES:
                 escapeTheBeesMinigameScreen = new EscapeTheBeesMinigameScreen(this);
                 this.setScreen(escapeTheBeesMinigameScreen);
-                break;
-            case QUIZ:
-                quizScreen = new QuizScreen(this);
-                this.setScreen(quizScreen);
                 break;
         }
     }

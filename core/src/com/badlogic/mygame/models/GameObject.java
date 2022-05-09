@@ -71,7 +71,7 @@ public class GameObject extends Rectangle {
         }
         if(this.name.equals("G building")){
             //call the DidEnterGbuilding() from the MainStoryMissionLesson
-            //game
+            game
         }
     }
 }

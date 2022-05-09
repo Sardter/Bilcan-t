@@ -81,7 +81,7 @@ public class QuizScreen implements Screen {
         table1.addActor(exit);
 
         showChoices((byte)indexGen, table1, stage);
-        }
+    }
 
     public String getSelected(){
         return selectedChoice;
@@ -185,7 +185,7 @@ public class QuizScreen implements Screen {
 
         Label endLab = new Label("" + this.score, skin2);
 
-        final TextButton exit = new TextButton("Cancel", skin2);
+        final TextButton exit = new TextButton("End", skin2);
         exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

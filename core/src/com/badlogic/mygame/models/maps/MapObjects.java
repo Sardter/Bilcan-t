@@ -65,8 +65,6 @@ public class MapObjects {
                         64, 64, 360, 360),
                 new Door("drop.png", "Obj2", "desc2",
                         64, 64, 260, 260, mapRouter, MapRouter.DEV_2),
-                new MinigameLinker("bucket.png", "Obj3", "miniGame", 64, 64,
-                        480, 200, mapRouter.getGame(), BilcantGame.QUIZ),
         };
 
         DialogOption[] options = {

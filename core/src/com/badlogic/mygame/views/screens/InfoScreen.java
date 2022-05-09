@@ -61,7 +61,7 @@ public class InfoScreen implements Screen {
         table2.add(scrollPane).size(800, 500);
 
         Information[] infoList = {
-                new Information("info 1", "Bilkent has a very wide range of oppurtunities e", 0, Information.TUTORIAL),
+                new Information("info 1", "asfaegagsaf", 0, Information.TUTORIAL),
                 new Information("info 2", "asfaegagsaf", 0, Information.TUTORIAL),
                 new Information("info 3", "asfaegagsaf", 0, Information.TUTORIAL),
                 new Information("info 4", "asfaegagsaf", 0, Information.TUTORIAL),

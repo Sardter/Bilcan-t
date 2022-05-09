@@ -13,7 +13,7 @@ public class MainStoryMissionLesson extends Mission{
     private boolean[] enteredBuiildings = {false, false};
 
     String aQuizexplanation = "this is a Bilcan-t academic quiz to upset you and see how miserable you are";
-    //private Quiz quizTask = new Quiz(aQuizexplanation);
+    private Quiz quizTask = new Quiz( aQuizexplanation);
 
     Task task1 = new Task(Task1Description) {
         @Override
