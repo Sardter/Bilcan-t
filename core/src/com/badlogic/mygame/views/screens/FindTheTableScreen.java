@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -20,20 +21,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.models.minigames.EscapeTheBeesMinigame;
+import com.badlogic.mygame.models.minigames.FindATableMinigame;
 import com.badlogic.mygame.models.player.Inventory;
 import com.badlogic.mygame.views.windows.MinigameCompletionWindow;
 
-
-public class EscapeTheBeesMinigameScreen implements Screen {
+public class FindTheTableScreen implements Screen {
     private final BilcantGame game;
     private final Stage stage;
     private final Inventory inventory;
-    private EscapeTheBeesMinigame miniGame;
-    private Table container, items;
+    private FindATableMinigame miniGame;
+    private Table container, container2, items, tryContainer;
     private MinigameCompletionWindow completionWindow;
 
-    public EscapeTheBeesMinigameScreen(BilcantGame game) {
+    public FindTheTableScreen(BilcantGame game) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
         this.inventory = game.getPlayer().getInventory();
@@ -52,69 +52,25 @@ public class EscapeTheBeesMinigameScreen implements Screen {
     public void show() {
         Table table1 = new Table();
         table1.setFillParent(true);
-        //table2.setFillParent(true);
         stage.addActor(table1);
-        //stage.addActor(table2);
-
-        Skin skin1 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
-        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
-
 
         TextureRegionDrawable textureRegionDrawableBg =
                 new TextureRegionDrawable(new TextureRegion(
                         new Texture(Gdx.files.internal("back2.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
-        miniGame = new EscapeTheBeesMinigame(game.getPlayer(), this, 4);
+        miniGame = new FindATableMinigame(game.getPlayer(), this, 3);
 
-        TextButton up = new TextButton("up", skin1);
-        up.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                miniGame.play(new int[]{-1,0});
-                container.removeActor(items);
-                drawItems();
-            }
-        });
-        final TextButton down = new TextButton("down", skin1);
-        down.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                miniGame.play(new int[]{1,0});
-                container.removeActor(items);
-                drawItems();
-            }
-        });
-        TextButton left = new TextButton("left", skin1);
-        left.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                miniGame.play(new int[]{0,-1});
-                container.removeActor(items);
-                drawItems();
-            }
-        });
-        TextButton right = new TextButton("right", skin1);
-        right.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                miniGame.play(new int[]{0,1});
-                container.removeActor(items);
-                drawItems();
-            }
-        });
-        Table touchContainer = new Table();
-        touchContainer.add(up).pad(10);
-        touchContainer.add(down).pad(10);
-        touchContainer.add(left).pad(10);
-        touchContainer.add(right).pad(10);
-        touchContainer.setFillParent(true);
-        touchContainer.bottom().right().pad(10);
-        stage.addActor(touchContainer);
         container = new Table();
         container.setFillParent(true);
         stage.addActor(container);
+
+        container2 = new Table();
+        container2.setFillParent(true);
+        container2.top().pad(10);
+        stage.addActor(container2);
         drawItems();
+
 
         completionWindow = new MinigameCompletionWindow("Complete", new Window.WindowStyle(
                 new BitmapFont(),
@@ -132,24 +88,56 @@ public class EscapeTheBeesMinigameScreen implements Screen {
 
     public void drawItems() {
         Skin skin1 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
+
+        FindATableMinigame.DinningTable[][] tables = miniGame.getTables();
+
 
         items = new Table();
-        for (EscapeTheBeesMinigame.MinigameObject[] row : miniGame.getPositions()) {
-            for (EscapeTheBeesMinigame.MinigameObject minigameObject : row) {
+        container.add(items);
+        for (int i = 0; i < tables.length; i++) {
+            FindATableMinigame.DinningTable[] column = tables[i];
+            for (int j = 0; j < column.length; j++) {
+                final FindATableMinigame.DinningTable dinningTable = column[j];
                 Button button;
-                if (minigameObject == null) {
-                    button = new TextButton("", skin1);
-                } else {
+                if (miniGame.getCharacter().x == i && miniGame.getCharacter().y == j) {
                     Drawable itemTexture =
                             new TextureRegionDrawable(
-                                    new TextureRegion(minigameObject.getTexture()));
+                                    new TextureRegion(miniGame.getCharacter().texture));
                     button = new ImageButton(itemTexture);
+                } else {
+                    if (dinningTable.isFull) {
+                        button = new TextButton("Full", skin1);
+                    } else {
+                        button = new TextButton(miniGame.getSuccessPercentage(i,j) + "", skin1);
+                    }
                 }
-                items.add(button);
+                button.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        miniGame.play(new int[]{dinningTable.x, dinningTable.y});
+                        container.removeActor(items);
+                        container2.removeActor(tryContainer);
+                        drawItems();
+                    }
+                });
+                items.add(button).pad(10);
             }
             items.row();
         }
-        container.add(items);
+        if (miniGame.getCharacter().x == -1 && miniGame.getCharacter().y == -1) {
+            items.add(new Label(" ", skin1));
+            Drawable itemTexture =
+                    new TextureRegionDrawable(
+                            new TextureRegion(miniGame.getCharacter().texture));
+            items.add(new ImageButton(itemTexture)).center();
+        }
+
+        tryContainer = new Table();
+        tryContainer.add(new Label("Tries: " + miniGame.getTurnCount() +
+                "/" + miniGame.getMaxTries(),skin2));
+        //tryContainer.setFillParent(true);
+        container2.add(tryContainer);
     }
 
     @Override

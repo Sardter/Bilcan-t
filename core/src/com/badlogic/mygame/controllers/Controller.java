@@ -22,18 +22,6 @@ public class Controller {
 
         float prevX = mainScreen.getCharacter().x, prevY = mainScreen.getCharacter().y;
 
-        //System.out.println(mainScreen.getIsIneteracting());
-        if(input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            mainScreen.getCamera().unproject(touchPos);
-            mainScreen.setMoveOnMouse(true);
-            newX = touchPos.x - 64 / 2;
-            newY = touchPos.y - 64 / 2;
-        }
-        //mainScreen.setisIneteracting(false);
-
-
         if (mainScreen.getTouchpad().isTouched()) {
             float newX = mainScreen.getTouchpad().getKnobPercentX();
             float newY = mainScreen.getTouchpad().getKnobPercentY();

@@ -179,8 +179,6 @@ public class EscapeTheBeesMinigame extends Minigame {
 
     public void playerTraverse(MainCharacter object, int x, int y) {
         if (positions[x][y] == null) {
-            System.out.println(object.y);
-            System.out.println(y);
             positions[x][y] = object;
             positions[object.x][object.y] = null;
             object.x = x;
@@ -258,8 +256,10 @@ public class EscapeTheBeesMinigame extends Minigame {
         }
 
         String[] windowItems = {title, desc};
-        screen.getCompletionWindow().setObject(windowItems);
-        screen.getCompletionWindow().setVisible(true);
+
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
+        ((EscapeTheBeesMinigameScreen) screen).getGame().getMainScreen().saveGame();
     }
 
     @Override
@@ -267,8 +267,8 @@ public class EscapeTheBeesMinigame extends Minigame {
         player.setEnergy(player.getEnergy()-0.1f);
         player.setPopularity(player.getPopularity()-0.05f);
         String[] windowItems = {"Lost!", "Bee got you first!"};
-        screen.getCompletionWindow().setObject(windowItems);
-        screen.getCompletionWindow().setVisible(true);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
     }
 
     private boolean validMove(int x, int y) {

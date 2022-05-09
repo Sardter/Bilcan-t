@@ -9,6 +9,7 @@ import com.badlogic.mygame.models.missions.Task;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.EndScreen;
 import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
+import com.badlogic.mygame.views.screens.FindTheTableScreen;
 import com.badlogic.mygame.views.screens.InfoScreen;
 import com.badlogic.mygame.views.screens.InventoryScreen;
 import com.badlogic.mygame.views.screens.LoadingScreen;
@@ -32,6 +33,7 @@ public class BilcantGame extends Game {
     private InventoryScreen inventoryScreen;
     private InfoScreen infoScreen;
     private EscapeTheBeesMinigameScreen escapeTheBeesMinigameScreen;
+    private FindTheTableScreen findTheTableScreen;
     private QuizScreen quizScreen;
     private Player player;
     private MissionRouter missionRouter;
@@ -70,8 +72,8 @@ public class BilcantGame extends Game {
     public final static int INVENTORY = 7;
     public final static int INFO = 8;
     public final static int ESCAPE_THE_BEES = 9;
-    public final static int QUIZ = 10;
-
+    public final static int FIND_THE_TABLE = 10;
+    public final static int QUIZ = 11;
 
     public void changeScreen(int screen){
         switch(screen){
@@ -115,11 +117,21 @@ public class BilcantGame extends Game {
                 escapeTheBeesMinigameScreen = new EscapeTheBeesMinigameScreen(this);
                 this.setScreen(escapeTheBeesMinigameScreen);
                 break;
+            case FIND_THE_TABLE:
+                findTheTableScreen = new FindTheTableScreen(this);
+                this.setScreen(findTheTableScreen);
+                break;
             case QUIZ:
                 quizScreen = new QuizScreen(this);
                 this.setScreen(quizScreen);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + screen);
         }
+    }
+
+    public MainScreen getMainScreen() {
+        return mainScreen;
     }
 
     @Override

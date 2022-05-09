@@ -22,17 +22,17 @@ public class Quiz {
             1);
 
 
-    public Quiz(String aQuizExplanation, Player player){
+    public Quiz(String aQuizExplanation){
         this.Quizexplanation = aQuizExplanation;
-        this.player = player;
+        this.player = null;
         questions = new Question[3];
         questions[0] = question1;
         questions[1] = question2;
         questions[2] = question3;
     }
-    public Quiz(String aQuizExplanation){
+    public Quiz(String aQuizExplanation, Player player){
         this.Quizexplanation = aQuizExplanation;
-        this.player = null;
+        this.player = player;
         questions = new Question[3];
         questions[0] = question1;
         questions[1] = question2;
