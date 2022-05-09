@@ -29,7 +29,10 @@ import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.views.windows.ItemWindow;
 
 import java.util.ArrayList;
-
+/*
+           Screen where contents of the Inventory class, which are separate Item objects, is showed to the user.
+           Is interactable.
+ */
 public class InventoryScreen implements Screen {
     private final BilcantGame game;
     private Stage stage;

@@ -7,7 +7,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
 
 import java.util.Random;
-
+/*
+          Main parent class for the objects within the game.
+          Sets their size and position within the specific screen.
+          Getters for, Id, texture, name and description of the object.
+          Has a boolean field called "onVicinity" which indicates if the current game object is around another game object
+          within the screen.
+ */
 
 public class GameObject extends Rectangle {
     private static int ID = 0;

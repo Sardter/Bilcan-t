@@ -7,7 +7,9 @@ import com.badlogic.mygame.models.items.Item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+/*
 
+ */
 public class Inventory{
     //constants
 

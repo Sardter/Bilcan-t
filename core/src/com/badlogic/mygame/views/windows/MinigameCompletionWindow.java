@@ -8,7 +8,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.mygame.BilcantGame;
-
+/*
+            Window where the status of the mini-game is shown within the current screen.
+ */
 public class MinigameCompletionWindow extends InteractiveWindow{
     private String[] items;
     private final BilcantGame game;

@@ -24,7 +24,10 @@ import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.minigames.FindATableMinigame;
 import com.badlogic.mygame.models.player.Inventory;
 import com.badlogic.mygame.views.windows.MinigameCompletionWindow;
-
+/*
+        Screen for the FindATableMiniGame class, opens when the player objects interacts with the game and
+        decides to play this mini-game, which is under the minigames package.
+ */
 public class FindTheTableScreen implements Screen {
     private final BilcantGame game;
     private final Stage stage;

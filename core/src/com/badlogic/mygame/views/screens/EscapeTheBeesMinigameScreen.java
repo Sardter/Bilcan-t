@@ -23,7 +23,11 @@ import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.minigames.EscapeTheBeesMinigame;
 import com.badlogic.mygame.models.player.Inventory;
 import com.badlogic.mygame.views.windows.MinigameCompletionWindow;
-
+/*
+        Screen for the EscapeTheBeesMinigame, triggered when the player object interacts with the specific object
+        within the MainScreen.
+        EscapeTheBeesMinigame is a minigame under the minigames package.
+*/
 
 public class EscapeTheBeesMinigameScreen implements Screen {
     private final BilcantGame game;

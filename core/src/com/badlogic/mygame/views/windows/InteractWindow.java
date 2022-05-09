@@ -5,7 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.mygame.models.GameObject;
-
+/*
+            Parent class for ItemWindow,MinigameCompletionWindow and NPCInteractWindow classes.
+ */
 public class InteractWindow extends InteractiveWindow {
     private GameObject gameObject;
 

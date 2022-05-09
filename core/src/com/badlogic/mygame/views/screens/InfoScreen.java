@@ -18,7 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.info.Information;
-
+/*
+        Screen where information about Bilkent University is presented to the user to read.
+ */
 public class InfoScreen implements Screen {
     private final BilcantGame game;
     private Stage stage;
