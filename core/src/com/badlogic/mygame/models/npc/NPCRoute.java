@@ -1,5 +1,8 @@
 package com.badlogic.mygame.models.npc;
-
+/*
+        Attributes of the NPC route.
+        isDone() return true, when route is full traversed.
+ */
 public class NPCRoute {
     private final float x;
     private final float y;

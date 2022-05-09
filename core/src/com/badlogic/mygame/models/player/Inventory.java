@@ -8,7 +8,9 @@ import com.badlogic.mygame.models.items.Item;
 import java.util.ArrayList;
 import java.util.HashMap;
 /*
-
+            Has a field that is an arraylist of Item objects, and essentially stores them.
+            Saves the current state of the Inventory via JSON.
+            Has a limit of maximum holding 16 objects.
  */
 public class Inventory{
     //constants
