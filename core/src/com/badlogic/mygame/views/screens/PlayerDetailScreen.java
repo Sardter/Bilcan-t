@@ -14,7 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-
+/*
+        Screen where the user is able to see its Player object's inventory information.
+*/
 public class PlayerDetailScreen implements Screen {
     private final BilcantGame game;
     private final Stage stage;

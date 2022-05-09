@@ -21,7 +21,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.missions.FirstMission;
 import com.badlogic.mygame.models.missions.Mission;
-
+/*
+        Screen where you see the possible missions for the player.
+        When the user chooses a certain mission via clicking, it is labeled as an active mission.
+ */
 public class MissionScreen implements Screen {
     private final BilcantGame game;
     private Stage stage;

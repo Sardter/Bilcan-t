@@ -10,7 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.mygame.models.npc.DialogOption;
 import com.badlogic.mygame.models.npc.NonPlayerCharacter;
-
+/*
+            Window where the Player object is able to see the possible interactions with the NPC.
+*/
 public class NPCInteractWindow extends InteractiveWindow {
     private NonPlayerCharacter npc;
     private Label dialog;

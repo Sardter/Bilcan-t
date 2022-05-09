@@ -15,7 +15,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-
+/*
+          This screen is the screen for the menu.
+          The user is able to switch to MissionScreen, InventoryScreen and InfoScreen, which are all separated classes.
+ */
 public class MenuScreen implements Screen {
     private BilcantGame game;
     private Stage stage;

@@ -38,7 +38,13 @@ import com.badlogic.mygame.views.windows.NPCInteractWindow;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+/*
+        Screen where the most of the gameplay takes place.
+        Player object is followed by an orthographic camera when it moves.
+        Interactable and collision detectable NPC objects, interactable and collision detectable building objects are placed within
+        this screen in order for the Player object to interact with.
 
+ */
 public class MainScreen implements Screen {
     private BilcantGame game;
     private OrthographicCamera camera;
