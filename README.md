@@ -30,7 +30,12 @@ INSTALLATION AND RUNNING
 ```git clone https://github.com/Sardter/Bilcan-t.git``` 
 [Our repository is here](https://github.com/Sardter/Bilcan-t.git)
 
-Checkout to our master branch by writing ```git checkout maste``` to the terminal.
+Checkout to our master branch by writing
+```
+git checkout master
+``` 
+
+to the terminal.
 
 After cloning the repository import it to your favorite development environment and run it!
 
