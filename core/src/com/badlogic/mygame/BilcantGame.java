@@ -18,6 +18,7 @@ import com.badlogic.mygame.views.screens.MenuScreen;
 import com.badlogic.mygame.views.screens.MissionScreen;
 import com.badlogic.mygame.views.screens.PlayerDetailScreen;
 import com.badlogic.mygame.views.screens.PreferencesScreen;
+import com.badlogic.mygame.views.screens.QuizScreen;
 
 
 public class BilcantGame extends Game {
@@ -33,6 +34,7 @@ public class BilcantGame extends Game {
     private InfoScreen infoScreen;
     private EscapeTheBeesMinigameScreen escapeTheBeesMinigameScreen;
     private FindTheTableScreen findTheTableScreen;
+    private QuizScreen quizScreen;
     private Player player;
     private MissionRouter missionRouter;
     private MainStoryMissionLesson mainStory;
@@ -71,6 +73,7 @@ public class BilcantGame extends Game {
     public final static int INFO = 8;
     public final static int ESCAPE_THE_BEES = 9;
     public final static int FIND_THE_TABLE = 10;
+    public final static int QUIZ = 11;
 
     public void changeScreen(int screen){
         switch(screen){
@@ -117,6 +120,10 @@ public class BilcantGame extends Game {
             case FIND_THE_TABLE:
                 findTheTableScreen = new FindTheTableScreen(this);
                 this.setScreen(findTheTableScreen);
+                break;
+            case QUIZ:
+                quizScreen = new QuizScreen(this);
+                this.setScreen(quizScreen);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + screen);
