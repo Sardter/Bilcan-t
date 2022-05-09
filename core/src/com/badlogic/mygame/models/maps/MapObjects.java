@@ -40,9 +40,97 @@ public class MapObjects {
             case MapRouter.DEV_2:
                 dev2();
                 break;
+            case MapRouter.MAIN_CAMPUS:
+                main_campus();
+                break;
+            case MapRouter.UPPER_CAMPUS:
+                upper_campus();
+                break;
             default:
                 throw new IllegalStateException("Unexpected value: " + type);
         }
+    }
+
+    private void main_campus() {
+        this.objects.addAll(Arrays.asList(
+                new Door("item_skins/door.png", "SB Building", "desc2",
+                64, 64, 350, 470, mapRouter, MapRouter.DEVELOPMENT),
+                new Door("item_skins/door.png", "SA Building", "desc2",
+                        64, 64, 370, 100, mapRouter, MapRouter.DEVELOPMENT),
+                new Door("item_skins/door.png", "B building", "desc2",
+                        64, 64, 200, 850, mapRouter, MapRouter.DEVELOPMENT),
+                new MinigameLinker("item_skins/bee.png", "Coffee Break", "desc2",
+                        64, 64, 900, 470, mapRouter.getGame(), BilcantGame.ESCAPE_THE_BEES),
+                new Door("item_skins/door.png", "G Building", "desc2",
+                        64, 64, 1070, 950, mapRouter, MapRouter.DEVELOPMENT),
+                new Door("item_skins/door.png", "Upper Campus", "desc2",
+                        64, 64, 600, 1000, mapRouter, MapRouter.UPPER_CAMPUS),
+                new Door("item_skins/door.png", "Dorms", "desc2",
+                        64, 64, 700, 0, mapRouter, MapRouter.DEVELOPMENT),
+                new Door("item_skins/door.png", "A Building", "desc2",
+                        64, 64, 1050, 100, mapRouter, MapRouter.DEVELOPMENT)
+                ));
+
+        this.objects.addAll(Arrays.asList(
+                new NonPlayerCharacter("npc_skins/npc4.png", "npc 1", "npc desc",
+                        false, 500, 100, new NPCDialog(null)) {{
+                            setRouter(new NPCRouter(this, new NPCRoute[]{
+                                    new NPCRoute(500,100),
+                                    new NPCRoute(600,200),
+                                    new NPCRoute(400,200),
+                                    new NPCRoute(400,400)
+                            }));
+                }},
+                new NonPlayerCharacter("npc_skins/npc6.png", "npc 3", "npc desc",
+                        false, 300, 830, new NPCDialog(null)) {{
+                    setRouter(new NPCRouter(this, new NPCRoute[]{
+                            new NPCRoute(300,830),
+                            new NPCRoute(600,820),
+                    }));
+                }},
+                new NonPlayerCharacter("npc_skins/npc9.png", "npc 4", "npc desc",
+                        false, 50, 900, new NPCDialog(null)) {{
+                    setRouter(new NPCRouter(this, new NPCRoute[]{
+                            new NPCRoute(50,900),
+                            new NPCRoute(20,400),
+                    }));
+                }},
+                new NonPlayerCharacter("npc_skins/npc11.png", "npc 5", "npc desc",
+                        true, 800, 400, new NPCDialog(null)) {{
+                    setRouter(new NPCRouter(this, new NPCRoute[]{}));
+                }},
+                new NonPlayerCharacter("npc_skins/npc12.png", "npc 6", "npc desc",
+                        true, 830, 370, new NPCDialog(null)) {{
+                    setRouter(new NPCRouter(this, new NPCRoute[]{}));
+                }},
+                new NonPlayerCharacter("npc_skins/npc15.png", "npc 7", "npc desc",
+                        true, 970, 200, new NPCDialog(null)) {{
+                    setRouter(new NPCRouter(this, new NPCRoute[]{}));
+                }},
+                new NonPlayerCharacter("npc_skins/npc5.png", "npc 2", "npc desc",
+                        false, 600, 700, new NPCDialog(null)) {{
+                    setRouter(new NPCRouter(this, new NPCRoute[]{
+                            new NPCRoute(600,700),
+                            new NPCRoute(800,700),
+                            new NPCRoute(750,800)
+                    }));
+                }}
+        ));
+    }
+
+    private void upper_campus() {
+        this.objects.addAll(Arrays.asList(
+                new Door("item_skins/door.png", "Main Campus", "desc2",
+                        64, 64, 500, -200, mapRouter, MapRouter.MAIN_CAMPUS),
+                new MinigameLinker("item_skins/table.png", "Restaurant", "desc2",
+                        64, 64, 870, 250, mapRouter.getGame(), BilcantGame.FIND_THE_TABLE),
+                new Door("item_skins/door.png", "EB Building", "desc2",
+                        64, 64, 640, 440, mapRouter, MapRouter.DEVELOPMENT),
+                new MinigameLinker("item_skins/table.png", "CafeInn", "desc2",
+                        64, 64, 880, -100, mapRouter.getGame(), BilcantGame.FIND_THE_TABLE),
+                new Door("item_skins/door.png", "Library", "desc2",
+                        64, 64, 500, 100, mapRouter, MapRouter.DEVELOPMENT)
+        ));
     }
 
     private void dev2() {

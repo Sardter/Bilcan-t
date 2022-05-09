@@ -29,7 +29,6 @@ public class PlayerDetailScreen implements Screen {
 
     @Override
     public void show() {
-        //game.changeScreen(BilcantGame.MENU);
         Table table1 = new Table(), table2 = new Table();
         table1.setFillParent(true);
         table2.setFillParent(true);

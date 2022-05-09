@@ -28,6 +28,7 @@ public class NPCRouter {
         NPCRoute[] reversed = new NPCRoute[routes.length];
         for (int i = 0; i < routes.length; i++) {
             reversed[i] = routes[routes.length - 1 - i];
+            System.out.println(reversed[i].getX());
         }
         routes = reversed;
         index = 0;
@@ -55,7 +56,7 @@ public class NPCRouter {
 
         if (npc.y < currentRoute.getY()) {
             npc.y += speed;
-        } else if (npc.x > currentRoute.getX()) {
+        } else if (npc.y > currentRoute.getY()) {
             npc.y -= speed;
         }
     }

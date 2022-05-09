@@ -136,6 +136,10 @@ public class MainScreen implements Screen {
             loadGame();
         }
         map = mapRouter.getMap();
+        character.x = map.getSpawnX();
+        character.y = map.getSpawnY();
+        camera.position.x = map.getSpawnX();
+        camera.position.y = map.getSpawnY();
         this.objects = map.getObjects().getObjects();
 
         interactContainer = new Table();

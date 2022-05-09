@@ -63,7 +63,7 @@ public class Controller {
         }
 
 
-        if(mainScreen.getCharacter().x < 0) {
+        /* if(mainScreen.getCharacter().x < 0) {
             mainScreen.getCharacter().x = 0;
             mainScreen.getCamera().position.x = 0;
             mainScreen.setMoveOnMouse(false);
@@ -83,7 +83,7 @@ public class Controller {
             mainScreen.getCamera().position.y = 400 + 16;
             mainScreen.getCharacter().y = 400 + 16;
             mainScreen.setMoveOnMouse(false);
-        }
+        } */
 
         boolean onAnyVicinity = false;
         for (GameObject object : mainScreen.objects()) {
