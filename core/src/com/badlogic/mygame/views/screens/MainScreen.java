@@ -138,8 +138,6 @@ public class MainScreen implements Screen {
 
         if (willBeLoaded) {
             loadGame();
-            //game.initializeMissions();
-            //missionRouter = game.getMissionRouter();
         } else {
             character.x = map.getSpawnX();
             character.y = map.getSpawnY();
@@ -170,15 +168,27 @@ public class MainScreen implements Screen {
         stage.addActor(menuContainer);
         menuContainer.setFillParent(true);
         TextButton menuButton = new TextButton("Menu", skin1);
+        TextButton resetPosition = new TextButton("Reset", skin1);
         
         menuContainer.top().left();
 
         menuContainer.add(menuButton).pad(10);
+        menuContainer.add(resetPosition);
         menuButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 saveGame();
                 game.changeScreen(BilcantGame.DETAIL);
+            }
+        });
+
+        resetPosition.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                character.x = map.getSpawnX();
+                character.y = map.getSpawnY();
+                camera.position.x = map.getSpawnX();
+                camera.position.y = map.getSpawnY();
             }
         });
 

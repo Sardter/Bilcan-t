@@ -67,9 +67,6 @@ public class NonPlayerCharacter extends GameObject {
             currentMission.setGame(game);
             currentMission.getTasks()[0].isCompleted();
             game.getMainScreen().drawTasks();
-            game.getMainScreen().saveGame();
-            game.getMainScreen().loadGame();
-
         }
     }
 
