@@ -201,14 +201,14 @@ public class MapObjects {
 
 
         DialogItem[] missionDialogItems = {
-                new DialogItem("uga buga take a quiz at SA building", null)
+                new DialogItem("Take a quiz at SA building", null)
         };
         DialogItem[] dialogItems2 = {
                 new DialogItem("Considering my humble opinion it is extremely possible for earth to be flat", new DialogOption[]{
                         new DialogOption("Oh so True..", 1, true),
                         new DialogOption("NEINN! Es ist nicht richtig", -1, false)
                 }),
-                new DialogItem("Feza gets FZ", null)
+                new DialogItem("Please please please", null)
         };
 
         NonPlayerCharacter[] nonPlayerCharacters = {
@@ -216,9 +216,9 @@ public class MapObjects {
                         true, 100, 200, new NPCDialog(new DialogItem[] {
                         new DialogItem("hey man, how are you?", new DialogOption[] {
                                 new DialogOption("good, you?", 1, true),
-                                new DialogOption("shut up, beach", -1, false)
+                                new DialogOption("I am dead inside", -1, false)
                         }),
-                        new DialogItem("uga uga", null)
+                        new DialogItem("AC/DC", null)
                 })),
                 new NonPlayerCharacter("npc_skins/npc3.png", "important 2", "npc desc",
                         true, 100, 100, new NPCDialog(null)),

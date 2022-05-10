@@ -44,7 +44,7 @@ public class MainStoryMissionLesson extends Mission{
                     player.addXP(10);
                     task1.setCompleted(true);
                     nextTask();
-                    System.out.println("task 1 ez");
+                    System.out.println("task 1 done");
                 }
             }
             return true;
@@ -59,7 +59,7 @@ public class MainStoryMissionLesson extends Mission{
                     player.addXP(100);
                     task2.setCompleted(true);
                     nextTask();
-                    System.out.println("task 2 ez");
+                    System.out.println("task 2 done");
                 }
             }
             return true;
@@ -78,7 +78,7 @@ public class MainStoryMissionLesson extends Mission{
                     nextTask();
                     game.changeScreen(BilcantGame.WIN_SCREEN);
 
-                    System.out.println("task 3 ez");
+                    System.out.println("task 3 done");
                 }
             }
 
