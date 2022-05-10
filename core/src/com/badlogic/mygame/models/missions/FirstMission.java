@@ -60,7 +60,6 @@ public class FirstMission extends Mission {
         player.getInventory().delete(idcard);
         missionCompleted = true;
     }
-
     public void GetExperience(){
         player.addXP(100);
     }

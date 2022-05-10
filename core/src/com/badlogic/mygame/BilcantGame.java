@@ -21,6 +21,7 @@ import com.badlogic.mygame.views.screens.MissionScreen;
 import com.badlogic.mygame.views.screens.PlayerDetailScreen;
 import com.badlogic.mygame.views.screens.PreferencesScreen;
 import com.badlogic.mygame.views.screens.QuizScreen;
+import com.badlogic.mygame.views.screens.WinScreen;
 
 /**
         The main class where ability to switch between screens takes place with changeScreen(int screen) method.
@@ -46,6 +47,7 @@ public class BilcantGame extends Game {
     private FindTheTableScreen findTheTableScreen;
     private QuizScreen quizScreen;
     private AvatarSelectionScreen avatarSelectionScreen;
+    private WinScreen winScreen;
     private Player player;
     private MissionRouter missionRouter;
 
@@ -86,6 +88,7 @@ public class BilcantGame extends Game {
     public final static int FIND_THE_TABLE = 10;
     public final static int QUIZ = 11;
     public final static int AVATAR_SELECTION = 12;
+    public final static int WIN_SCREEN = 13;
 
     public void changeScreen(int screen){
         switch(screen){
@@ -142,6 +145,10 @@ public class BilcantGame extends Game {
             case AVATAR_SELECTION:
                 avatarSelectionScreen = new AvatarSelectionScreen(this);
                 this.setScreen(avatarSelectionScreen);
+                break;
+            case WIN_SCREEN:
+                winScreen = new WinScreen(this);
+                this.setScreen(winScreen);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + screen);

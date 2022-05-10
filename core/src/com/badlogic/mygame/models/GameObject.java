@@ -89,17 +89,38 @@ public class GameObject extends Rectangle {
             game.getMainScreen().saveGame();
             game.changeScreen(BilcantGame.QUIZ);
 
+<<<<<<< HEAD
+=======
+            MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.setGame(game);
+            currentMission.getTasks()[1].isCompleted();
+            game.getMainScreen().saveGame();
+            game.getMainScreen().drawTasks();
+>>>>>>> 1f36b69ea68373b923d6f53301f860ba9333f49e
         }
         if(this.name.equals("B building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterBbuilding() from the MainStoryMissionLesson
             //game.getPlayer().getInventory().addItem();
+            game.getMainScreen().saveGame();
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.setGame(game);
+
             currentMission.DidEnterBbuilding(game);
+
+            game.getMainScreen().saveGame();
+            game.getMainScreen().drawTasks();
         }
         if(this.name.equals("G building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterGbuilding() from the MainStoryMissionLesson
+            game.getMainScreen().saveGame();
+
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.setGame(game);
+
             currentMission.DidEnterGbuilding(game);
+
+            game.getMainScreen().saveGame();
+            game.getMainScreen().drawTasks();
         }
 
         if(this.name.equals("A building") && game.getMissionRouter().getCurrentMission().getName().equals("First Mission")

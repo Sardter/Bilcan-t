@@ -14,6 +14,7 @@ public class MainStoryMissionLesson extends Mission{
     private String Task1Description = "interact with specific cat girl NPC to learn about the existance of a quiz";
     private String Task2Description = "now take a quiz at the SA building";
     private String Task3Description = "attend 2 lessons by going to the buildings B and G";
+    private String done = "Done !!!";
 
     private boolean[] enteredBuiildings = {false, false};
     private BilcantGame game;
@@ -70,6 +71,11 @@ public class MainStoryMissionLesson extends Mission{
                 if(task2.getBoolean()){
                     player.addXP(1000);
                     task3.setCompleted(true);
+<<<<<<< HEAD
+=======
+                    nextTask();
+                    game.changeScreen(BilcantGame.WIN_SCREEN);
+>>>>>>> 1f36b69ea68373b923d6f53301f860ba9333f49e
                     System.out.println("task 3 ez");
                 }
             }
@@ -77,12 +83,19 @@ public class MainStoryMissionLesson extends Mission{
             return true;
         }
     };
+    Task task4 = new Task(done) {
+        @Override
+        public boolean isCompleted() {
+            return false;
+        }
+    };
 
     public MainStoryMissionLesson(Player player){
-        super(player,"main mission", "it is a main mission related lessons", 1200, null, new Task[3]);
+        super(player,"main mission", "it is a main mission related lessons", 1200, null, new Task[4]);
         tasks[0] = task1;
         tasks[1] = task2;
         tasks[2] = task3;
+        tasks[3] = task4;
     }
 
     //must construct in the main class a stationary NPC which says that there is a quiz in the SA building (done)
