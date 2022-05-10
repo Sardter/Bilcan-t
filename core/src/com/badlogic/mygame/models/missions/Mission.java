@@ -1,8 +1,13 @@
 package com.badlogic.mygame.models.missions;
 
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.player.Player;
+
+import java.util.HashMap;
+import java.util.jar.JarEntry;
 
 public abstract class Mission {
     //variables
@@ -62,5 +67,27 @@ public abstract class Mission {
     }
     public String getName() {
         return this.name;
+    }
+
+    public String tasksToJson() {
+        final String[] tasksJson = new String[tasks.length];
+        for (int i = 0; i < tasks.length; i++) {
+            tasksJson[i] = tasks[i].toJson();
+        }
+        return new Json().toJson(new HashMap<String, Object>() {{
+            put("taskIndex", taskIndex);
+            put("tasks", tasksJson);
+        }});
+    }
+
+    public void updateMissionFromJson(String json) {
+        HashMap<String, Object> map = new Json().fromJson(HashMap.class, json);
+
+        Array<String> tasksJson = (Array<String>) map.get("tasks");
+        this.taskIndex = (Integer) map.get("taskIndex");
+        for (int i = 0; i < tasks.length; i++) {
+            HashMap<String, Object> taskJson = new Json().fromJson(HashMap.class, tasksJson.get(i));
+            tasks[i].setCompleted((Boolean) taskJson.get("completed"));
+        }
     }
 }

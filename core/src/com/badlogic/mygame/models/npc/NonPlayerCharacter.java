@@ -1,14 +1,5 @@
 package com.badlogic.mygame.models.npc;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.GameObject;
 import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
@@ -69,12 +60,16 @@ public class NonPlayerCharacter extends GameObject {
         System.out.println(this);
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
-        if(this.name.equals("take a quiz NPC") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
-
+        System.out.println(game);
+        if(this.name.equals("Cat Girl") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //calls did interacted with npc method which is inside the mainStoryMissionLesson class
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
             currentMission.setGame(game);
             currentMission.getTasks()[0].isCompleted();
+            game.getMainScreen().drawTasks();
+            game.getMainScreen().saveGame();
+            game.getMainScreen().loadGame();
+
         }
     }
 

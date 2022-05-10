@@ -56,7 +56,7 @@ public class MainScreen implements Screen {
     private InteractWindow interactWindow;
     private NPCInteractWindow npcInteractWindow;
     private Stage stage;
-    private Table interactContainer, menuContainer;
+    private Table interactContainer, menuContainer, activeMissionContainer, updatedContainer;
     private TextButton interactButton;
     private boolean moveOnMouse, isIneteracting;
     private boolean willBeLoaded;
@@ -66,6 +66,9 @@ public class MainScreen implements Screen {
     final static int BOUNDRY_X = 800, BOUNDRY_Y = 480;
     final static int STARTING_POSITION_X = BOUNDRY_X / 2, STARTING_POSITION_Y = BOUNDRY_Y / 2;
     //final NonPlayerCharacter n = new NonPlayerCharacter();
+
+    Skin skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+    Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
     public MainScreen(BilcantGame game) {
         this.game = game;
@@ -138,7 +141,6 @@ public class MainScreen implements Screen {
             game.initializeMissions();
             missionRouter = game.getMissionRouter();
         } else {
-            System.out.println(character);
             character.x = map.getSpawnX();
             character.y = map.getSpawnY();
             camera.position.x = map.getSpawnX();
@@ -149,9 +151,6 @@ public class MainScreen implements Screen {
         interactContainer = new Table();
         interactContainer.setFillParent(true);
         stage.addActor(interactContainer);
-
-        Skin skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
-        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
         interactButton = new TextButton("Interact", skin1);
         interactButton.addListener(new ChangeListener() {
@@ -191,18 +190,11 @@ public class MainScreen implements Screen {
         touchContainer.add(touchpad).pad(20);
         touchContainer.bottom().right();
 
-        Table activeMissionContainer = new Table();
+        activeMissionContainer = new Table();
         activeMissionContainer.setFillParent(true);
         stage.addActor(activeMissionContainer);
         activeMissionContainer.top().right().pad(10);
-        System.out.println(missionRouter);
-        Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
-        Label currentTask = new Label(missionRouter.getCurrentMission()
-                .getCurrentTask().getDescription(), skin2);
-        currentTask.setFontScale(0.5f);
-        activeMissionContainer.add(missionTitle);
-        activeMissionContainer.row();
-        activeMissionContainer.add(currentTask);
+        drawTasks();
 
         interactWindow.setVisible(false);
         interactWindow.setPosition(380, 220);
@@ -214,6 +206,7 @@ public class MainScreen implements Screen {
         npcInteractWindow.setSize(300,300);
         stage.addActor(npcInteractWindow);
     }
+
 
     public void interactOnVicinity() {
         for ( GameObject object : objects) {
@@ -241,10 +234,7 @@ public class MainScreen implements Screen {
         preferences.putString("inventory", character.getInventory().toJson());
         preferences.putString("stats", character.getStatsInJson());
         preferences.putInteger("mission", missionRouter.getIndex());
-        for (int i = 0; i < missionRouter.getCurrentMission().getTasks().length; i++) {
-            preferences.putBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean());
-        }
-        System.out.println(preferences.getInteger("mission"));
+        preferences.putString("missionData", missionRouter.missionsDataToJson());
     }
 
     public void loadGame() {
@@ -257,20 +247,20 @@ public class MainScreen implements Screen {
         character.getInventory().fromJson(preferences.getString("inventory"));
         character.setStatsFromJson(preferences.getString("stats"));
         missionRouter.setIndex(preferences.getInteger("mission"));
+        missionRouter.dataFromJson(preferences.getString("missionData"));
+    }
 
-        int tasknumber = 0;
-        for (int i = 0; i < missionRouter.getCurrentMission().getTasks().length; i++) {
-            if(preferences.getBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean())){
-                missionRouter.getCurrentMission().getTasks()[i].setCompleted(true);
-                if(tasknumber >= missionRouter.getCurrentMission().getTasks().length -1){
-                    missionRouter.getCurrentMission().onCompleted(game);
-            }
-                else{
-                    missionRouter.getCurrentMission().nextTask();
-                    tasknumber++;
-                }
-            }
-        }
+    public void drawTasks() {
+        activeMissionContainer.removeActor(updatedContainer);
+        updatedContainer = new Table();
+        activeMissionContainer.add(updatedContainer);
+        Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
+        Label currentTask = new Label(missionRouter.getCurrentMission()
+                .getCurrentTask().getDescription(), skin2);
+        currentTask.setFontScale(0.5f);
+        updatedContainer.add(missionTitle);
+        updatedContainer.row();
+        updatedContainer.add(currentTask);
     }
 
     @Override

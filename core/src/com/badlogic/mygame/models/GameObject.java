@@ -85,12 +85,10 @@ public class GameObject extends Rectangle {
             game.changeScreen(BilcantGame.QUIZ);
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
             currentMission.getCurrentTask().isCompleted();
-
-
-
         }
         if(this.name.equals("B building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterBbuilding() from the MainStoryMissionLesson
+            //game.getPlayer().getInventory().addItem();
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
             currentMission.DidEnterBbuilding(game);
         }
@@ -98,7 +96,6 @@ public class GameObject extends Rectangle {
             //call the DidEnterGbuilding() from the MainStoryMissionLesson
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
             currentMission.DidEnterGbuilding(game);
-
         }
         FirstMission currentMission = (FirstMission) game.getMissionRouter().getCurrentMission();
         if(this.name.equals("A building") && game.getMissionRouter().getCurrentMission().getName().equals("First Mission")
