@@ -76,7 +76,7 @@ public class MapObjects {
                 new GameObject("B_building - Copy.jpg", "B building", "Math lessons",
                 64, 64, 200, 200),
                 new GameObject("rectext.png", "G building", "ENG lessons",
-                        64, 64, 0, 200)
+                        64, 64, 600, 90)
                 ));
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).setGame(mapRouter.getGame());
