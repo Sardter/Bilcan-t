@@ -69,7 +69,7 @@ public class NonPlayerCharacter extends GameObject {
         System.out.println(this);
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
-        if(this.name.equals("take a quiz NPC") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
+        if(this.name.equals("npc5") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
 
             //calls did interacted with npc method which is inside the mainStoryMissionLesson class
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
