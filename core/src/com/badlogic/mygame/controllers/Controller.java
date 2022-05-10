@@ -22,18 +22,6 @@ public class Controller {
 
         float prevX = mainScreen.getCharacter().x, prevY = mainScreen.getCharacter().y;
 
-        //System.out.println(mainScreen.getIsIneteracting());
-        if(input.isTouched()) {
-            Vector3 touchPos = new Vector3();
-            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            mainScreen.getCamera().unproject(touchPos);
-            mainScreen.setMoveOnMouse(true);
-            newX = touchPos.x - 64 / 2;
-            newY = touchPos.y - 64 / 2;
-        }
-        //mainScreen.setisIneteracting(false);
-
-
         if (mainScreen.getTouchpad().isTouched()) {
             float newX = mainScreen.getTouchpad().getKnobPercentX();
             float newY = mainScreen.getTouchpad().getKnobPercentY();
@@ -75,7 +63,7 @@ public class Controller {
         }
 
 
-        if(mainScreen.getCharacter().x < 0) {
+        /* if(mainScreen.getCharacter().x < 0) {
             mainScreen.getCharacter().x = 0;
             mainScreen.getCamera().position.x = 0;
             mainScreen.setMoveOnMouse(false);
@@ -95,7 +83,7 @@ public class Controller {
             mainScreen.getCamera().position.y = 400 + 16;
             mainScreen.getCharacter().y = 400 + 16;
             mainScreen.setMoveOnMouse(false);
-        }
+        } */
 
         boolean onAnyVicinity = false;
         for (GameObject object : mainScreen.objects()) {

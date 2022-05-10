@@ -1,16 +1,17 @@
 package com.badlogic.mygame.models.minigames;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
 
 public abstract class Minigame {
     protected final Player player;
-    protected final EscapeTheBeesMinigameScreen screen;
+    protected final Screen screen;
     protected boolean won;
     protected boolean lost;
 
-    public Minigame(Player player,  EscapeTheBeesMinigameScreen screen) {
+    public Minigame(Player player,  Screen screen) {
         this.player = player;
         this.screen = screen;
         this.won = false;
@@ -22,7 +23,7 @@ public abstract class Minigame {
     }
 
 
-    public EscapeTheBeesMinigameScreen getScreen() {
+    public Screen getScreen() {
         return screen;
     }
 

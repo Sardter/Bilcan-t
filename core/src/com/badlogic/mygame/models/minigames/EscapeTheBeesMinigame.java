@@ -1,6 +1,7 @@
 package com.badlogic.mygame.models.minigames;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.items.Food;
 import com.badlogic.mygame.models.items.Item;
@@ -109,7 +110,7 @@ public class EscapeTheBeesMinigame extends Minigame {
             y = random.nextInt(positions.length-1);
         } while (positions[x][y] != null);
 
-        WinGate winGate = new WinGate("drop.png", x, y);
+        WinGate winGate = new WinGate("item_skins/door.png", x, y);
         positions[x][y] = winGate;
         winGate.x = x;
         winGate.y = y;
@@ -122,7 +123,8 @@ public class EscapeTheBeesMinigame extends Minigame {
             y = random.nextInt(positions.length-1);
         } while (positions[x][y] != null);
 
-        MainCharacter mainCharacter = new MainCharacter("character.png", x, y);
+        MainCharacter mainCharacter = new MainCharacter(((FileTextureData)player.getTexture()
+                .getTextureData()).getFileHandle().path(), x, y);
         this.mainCharacter = mainCharacter;
         positions[x][y] = mainCharacter;
         mainCharacter.x = x;
@@ -138,8 +140,8 @@ public class EscapeTheBeesMinigame extends Minigame {
                 y = random.nextInt(positions.length-1);
             } while (positions[x][y] != null);
 
-            Collectable collectable = new Collectable("bucket.png", x, y,
-                    new Food("Reward food" + i, "asdsd", "drop.png"));
+            Collectable collectable = new Collectable("item_skins/coffee.png", x, y,
+                    new Food("Reward food" + i, "asdsd", "item_skins/coffee.png"));
             positions[x][y] = collectable;
             collectable.x = x;
             collectable.y = y;
@@ -155,7 +157,7 @@ public class EscapeTheBeesMinigame extends Minigame {
                 y = random.nextInt(positions.length-1);
             } while (positions[x][y] != null);
 
-            Bee bee = new Bee("rectext.png", x, y);
+            Bee bee = new Bee("item_skins/bee.png", x, y);
             bees.add(bee);
             positions[x][y] = bee;
             bee.x = x;
@@ -179,8 +181,6 @@ public class EscapeTheBeesMinigame extends Minigame {
 
     public void playerTraverse(MainCharacter object, int x, int y) {
         if (positions[x][y] == null) {
-            System.out.println(object.y);
-            System.out.println(y);
             positions[x][y] = object;
             positions[object.x][object.y] = null;
             object.x = x;
@@ -258,8 +258,10 @@ public class EscapeTheBeesMinigame extends Minigame {
         }
 
         String[] windowItems = {title, desc};
-        screen.getCompletionWindow().setObject(windowItems);
-        screen.getCompletionWindow().setVisible(true);
+
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
+        ((EscapeTheBeesMinigameScreen) screen).getGame().getMainScreen().saveGame();
     }
 
     @Override
@@ -267,8 +269,8 @@ public class EscapeTheBeesMinigame extends Minigame {
         player.setEnergy(player.getEnergy()-0.1f);
         player.setPopularity(player.getPopularity()-0.05f);
         String[] windowItems = {"Lost!", "Bee got you first!"};
-        screen.getCompletionWindow().setObject(windowItems);
-        screen.getCompletionWindow().setVisible(true);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
+        ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
     }
 
     private boolean validMove(int x, int y) {

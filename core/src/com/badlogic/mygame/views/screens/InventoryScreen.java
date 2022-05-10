@@ -24,17 +24,20 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.models.items.Food;
 import com.badlogic.mygame.models.player.Inventory;
 import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.views.windows.ItemWindow;
 
 import java.util.ArrayList;
-
+/**
+           Screen where contents of the Inventory class, which are separate Item objects, is showed to the user.
+           Is interactable.
+ */
 public class InventoryScreen implements Screen {
     private final BilcantGame game;
     private Stage stage;
     private Inventory inventory;
+    private ProgressBar gpa, popularity, energy, xp;
 
 
     public InventoryScreen(BilcantGame game) {
@@ -71,7 +74,7 @@ public class InventoryScreen implements Screen {
                         new Texture(Gdx.files.internal("back2.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
-        this.inventory.addItem(new Food("asasd", "sadasd","bucket.png"));
+        //this.inventory.addItem(new Food("asasd", "sadasd","bucket.png"));
         final ItemWindow itemWindow = new ItemWindow("item", new Window.WindowStyle(
                 new BitmapFont(),
                 new Color(),
@@ -82,26 +85,21 @@ public class InventoryScreen implements Screen {
         itemWindow.setSize(200, 250);
         itemWindow.setPosition(380,175);
 
+        drawStats(skin1,skin2);
         drawItems(itemWindow);
 
         itemWindow.setVisible(false);
         itemWindow.setModal(true);
 
-        drawStats(skin1,skin2);
         stage.addActor(itemWindow);
     }
 
     private void drawStats(Skin skin1, Skin skin2) {
         Table playerStats = new Table();
-        ProgressBar GPA = new ProgressBar(0.0f,4.0f,0.5f, false, skin1);
-        ProgressBar popularity = new ProgressBar(0f,1f,1f, false, skin1);
-        ProgressBar energy = new ProgressBar(0f,1f,0.01f, false, skin1);
-        ProgressBar xp = new ProgressBar(0f,1f,0.01f, false, skin1);
-
-        GPA.setValue(game.getPlayer().getGPA());
-        energy.setValue(game.getPlayer().getEnergy());
-        popularity.setValue(game.getPlayer().getPopularity());
-        xp.setValue(game.getPlayer().getXPForCurrentLevel());
+        gpa = new ProgressBar(0.0f,4.0f,0.5f, false, skin1);
+        popularity = new ProgressBar(0f,1f,1f, false, skin1);
+        energy = new ProgressBar(0f,1f,0.01f, false, skin1);
+        xp = new ProgressBar(0f,1f,0.01f, false, skin1);
 
         playerStats.add(new Label("Level: ", skin2));
         playerStats.add(new Label(game.getPlayer().getLevel() + "", skin2));
@@ -110,7 +108,7 @@ public class InventoryScreen implements Screen {
         playerStats.add(xp);
         playerStats.row();
         playerStats.add(new Label("GPA: ", skin2));
-        playerStats.add(GPA);
+        playerStats.add(gpa);
         playerStats.row();
         playerStats.add(new Label("Popularity: ", skin2));
         playerStats.add(popularity);
@@ -145,7 +143,7 @@ public class InventoryScreen implements Screen {
         itemsRow4.pad(5);
         itemsRow4.space(5);
 
-        itemsContainer.center().padTop(200f);
+        itemsContainer.center().padTop(180f);
 
         final ArrayList<Item> items = this.inventory.getItems();
 
@@ -165,10 +163,11 @@ public class InventoryScreen implements Screen {
                     }
                 });
             } else {
-                item = new TextButton("", skin1);
+                item = new ImageButton(new TextureRegionDrawable(
+                        new TextureRegion(new Texture("item_skins/empty.png"))));
             }
 
-            item.pad(10f);
+            item.pad(5f);
             item.setSize(10f, 10f);
             if (i % 4 == 0) itemsRow1.addActor(item);
             else if (i % 4 == 1) itemsRow2.addActor(item);
@@ -182,6 +181,11 @@ public class InventoryScreen implements Screen {
             }
         }
         stage.addActor(itemsContainer);
+
+        gpa.setValue(game.getPlayer().getGpa());
+        energy.setValue(game.getPlayer().getEnergy());
+        popularity.setValue(game.getPlayer().getPopularity());
+        xp.setValue(game.getPlayer().getXPPercentage());
     }
 
     @Override

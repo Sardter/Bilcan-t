@@ -1,16 +1,20 @@
 package com.badlogic.mygame.models.player;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import  com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Json;
 
+import java.util.HashMap;
+/**
+        The Player class whose object is the main object which the game is played.
+        Has attributes like energy, gpa, popularity which are adjusted after each specific interaction.
+        For example: If the player object interacts with a book object, player.gpa is incremented.
+*/
 public class Player extends Rectangle {
     private Texture texture;
-    private float Energy; //0-1
-    private float GPA; //0-1
-    private float Popularity; //0-1
+    private float energy; //0-1
+    private float gpa; //0-1
+    private float popularity; //0-1
     private Inventory inventory;
     private long experience;
     private int level;
@@ -29,7 +33,7 @@ public class Player extends Rectangle {
         super.x = x;
         super.y = y;
         setEnergy(0f);
-        setGPA(2f);
+        setGpa(2f);
         setPopularity(0f);
         setExperience(0);
 
@@ -44,21 +48,23 @@ public class Player extends Rectangle {
     public Texture getTexture() {
         return texture;
     }
-    public void setEnergy(float energy){this.Energy = energy; }
-    public void setGPA(float GPA) { this.GPA = GPA; }
-    public void setPopularity(float popularity) { this.Popularity = popularity; }
+    public void setEnergy(float energy){this.energy = energy;}
+    public void setGpa(float gpa) { this.gpa = gpa; }
+    public void setPopularity(float popularity) { this.popularity = popularity; }
     private void setInventory(){
         this.inventory = new Inventory();
     }
     public void setExperience(int xp){ experience = xp;}
-    //I added give experience to add a certain amount of xp without setting it from stratch
-    public void addExperience(int xp){ experience += xp;}
-    public float getGPA() {return this.GPA;}
-    public float getEnergy() {return this.Energy;}
-    public float getPopularity() {return this.Popularity;}
+    public float getGpa() {return this.gpa;}
+    public float getEnergy() {return this.energy;}
+    public float getPopularity() {return this.popularity;}
     public float getXPForCurrentLevel() {
         if (level == 0) return  experience;
         return levelCaps[level] * level - experience;
+    }
+
+    public float getXPPercentage() {
+        return getXPForCurrentLevel() / (levelCaps[level] * (level + 1));
     }
 
     public long getExperience() {
@@ -66,17 +72,20 @@ public class Player extends Rectangle {
     }
 
     //JSon for inventory
-    public void openJsonInventory(){
-        Json json = new Json();
-        String str = json.toJson(inventory);
-        FileHandle file = Gdx.files.local("items.json");
-        file.writeString(str, true);
+    public String getStatsInJson(){
+        return new Json().toJson(new HashMap<String, Float>(){{
+            put("energy", getEnergy());
+            put("gpa", getGpa());
+            put("popularity", getPopularity());
+            put("xp", getExperience() + .0f);
+        }});
     }
-    public void getJsonInventory(){
-        Json json = new Json();
-        FileHandle file = Gdx.files.local("items.json");
-        String StrItems = file.readString();
-        inventory = json.fromJson(Inventory.class, StrItems);
+    public void setStatsFromJson(String json){
+        HashMap<String, Float> map = new Json().fromJson(HashMap.class, json);
+        setGpa(map.get("gpa"));
+        setEnergy(map.get("energy"));
+        setPopularity(map.get("popularity"));
+        setExperience(map.get("xp").intValue());
     }
 
 
@@ -88,7 +97,8 @@ public class Player extends Rectangle {
 
     //mission methods
     public void restoreEnergy(){
-        setEnergy(Energy + 10);
+        if (energy <= 0.9)
+            setEnergy(energy + 0.1f);
     }
 
     public int getLevel() {

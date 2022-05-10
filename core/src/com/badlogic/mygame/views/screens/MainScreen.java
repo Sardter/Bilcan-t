@@ -38,7 +38,13 @@ import com.badlogic.mygame.views.windows.NPCInteractWindow;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+/**
+        Screen where the most of the gameplay takes place.
+        Player object is followed by an orthographic camera when it moves.
+        Interactable and collision detectable NPC objects, interactable and collision detectable building objects are placed within
+        this screen in order for the Player object to interact with.
 
+ */
 public class MainScreen implements Screen {
     private BilcantGame game;
     private OrthographicCamera camera;
@@ -119,16 +125,21 @@ public class MainScreen implements Screen {
                                 new Texture("itemWindowBackground.png")))
         ));
 
-        character = new Player("rectext.png", 32, 32,
+        character = new Player("npc_skins/npc10.png", 25, 45,
                 STARTING_POSITION_X, STARTING_POSITION_Y);
         game.setPlayer(character);
         game.initializeMissions();
         mapRouter = new MapRouter(this, game);
         //System.out.println(game.getPlayer());
+        missionRouter = game.getMissionRouter();
         if (willBeLoaded) {
             loadGame();
         }
         map = mapRouter.getMap();
+        character.x = map.getSpawnX();
+        character.y = map.getSpawnY();
+        camera.position.x = map.getSpawnX();
+        camera.position.y = map.getSpawnY();
         this.objects = map.getObjects().getObjects();
 
         interactContainer = new Table();
@@ -176,7 +187,6 @@ public class MainScreen implements Screen {
         touchContainer.add(touchpad).pad(20);
         touchContainer.bottom().right();
 
-        missionRouter = game.getMissionRouter();
 
         Table activeMissionContainer = new Table();
         activeMissionContainer.setFillParent(true);
@@ -185,6 +195,7 @@ public class MainScreen implements Screen {
         Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
         Label currentTask = new Label(missionRouter.getCurrentMission()
                 .getCurrentTask().getDescription(), skin2);
+        currentTask.setFontScale(0.5f);
         activeMissionContainer.add(missionTitle);
         activeMissionContainer.row();
         activeMissionContainer.add(currentTask);
@@ -199,6 +210,7 @@ public class MainScreen implements Screen {
         npcInteractWindow.setSize(300,300);
         stage.addActor(npcInteractWindow);
     }
+
 
 
     public void createObjects() {
@@ -258,6 +270,7 @@ public class MainScreen implements Screen {
         this.objects.addAll(Arrays.asList(nonPlayerCharacters));
     }
 
+
     public void interactOnVicinity() {
         for ( GameObject object : objects) {
             if (object instanceof  NonPlayerCharacter) {
@@ -281,6 +294,12 @@ public class MainScreen implements Screen {
         preferences.putFloat("y", character.y);
         preferences.putInteger("mapIndex", mapRouter.getIndex());
         preferences.putString("inventory", character.getInventory().toJson());
+        preferences.putString("stats", character.getStatsInJson());
+        preferences.putInteger("mission", missionRouter.getIndex());
+        for (int i = 0; i < missionRouter.getCurrentMission().getTasks().length; i++) {
+            preferences.putBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean());
+        }
+        System.out.println(preferences.getInteger("mission"));
         //preferences.flush();
     }
 
@@ -292,6 +311,22 @@ public class MainScreen implements Screen {
         camera.position.y = preferences.getFloat("y");
         mapRouter.setIndex(preferences.getInteger("mapIndex"));
         character.getInventory().fromJson(preferences.getString("inventory"));
+        character.setStatsFromJson(preferences.getString("stats"));
+        missionRouter.setIndex(preferences.getInteger("mission"));
+
+        int tasknumber = 0;
+        for (int i = 0; i < missionRouter.getCurrentMission().getTasks().length; i++) {
+            if(preferences.getBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean())){
+                missionRouter.getCurrentMission().getTasks()[i].setCompleted(true);
+                if(tasknumber >= missionRouter.getCurrentMission().getTasks().length -1){
+                    missionRouter.getCurrentMission().onCompleted(game);
+            }
+                else{
+                    missionRouter.getCurrentMission().nextTask();
+                    tasknumber++;
+                }
+            }
+        }
     }
 
     @Override

@@ -13,7 +13,16 @@ import com.badlogic.mygame.models.GameObject;
 import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
 import com.badlogic.mygame.views.windows.NPCInteractWindow;
+/**
+        Class of the NPCs.
+        Field variables:
+        boolean isImportant => true if this NPC is intractable, else false.
+        boolean isInCollision => true if NPC is in collision with another object, else false.
+        int speed => speed for how the NPC traverses the NPCRoute.
+        NPCRouter router => designates the route and how the NPC will operate within the route.
 
+        interact(InteractiveWindow interactWindow) method => allows the NPC object to interact with other objects.
+ */
 
 public class NonPlayerCharacter extends GameObject {
     private boolean isImportant;
@@ -40,7 +49,7 @@ public class NonPlayerCharacter extends GameObject {
 
     public NonPlayerCharacter(String textureUrl, String name, String description,
                               boolean isImportant, int posX, int posY, NPCDialog dialog) {
-            super(textureUrl, name, description, 64, 64, posX, posY);
+            super(textureUrl, name, description, 50, 90, posX, posY);
             this.isImportant = isImportant;
             this.speed = 2;
             this.dialog = dialog;
@@ -64,7 +73,8 @@ public class NonPlayerCharacter extends GameObject {
 
             //calls did interacted with npc method which is inside the mainStoryMissionLesson class
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
-            currentMission.getCurrentTask().isCompleted();
+            currentMission.setGame(game);
+            currentMission.getTasks()[0].isCompleted();
         }
     }
 

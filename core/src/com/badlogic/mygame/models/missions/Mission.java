@@ -1,5 +1,6 @@
 package com.badlogic.mygame.models.missions;
 
+import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.player.Player;
 
@@ -23,7 +24,11 @@ public abstract class Mission {
         this.taskIndex = 0;
     }
 
-    public abstract void onCompleted();
+    public Task[] getTasks() {
+        return tasks;
+    }
+
+    public abstract void onCompleted(BilcantGame game);
 
     public Task getCurrentTask() {
         return tasks[taskIndex];
@@ -44,7 +49,7 @@ public abstract class Mission {
         if(this instanceof MainStoryMissionLesson) {
             int i = 0;
             for (int j = 0; j < tasks.length; j++) {
-                if (!tasks[j].isCompleted()) {
+                if (!tasks[j].getBoolean()) {
                     return tasks[j].getDescription();
                 }
             }

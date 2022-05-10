@@ -1,5 +1,6 @@
 package com.badlogic.mygame.models.missions;
 
+import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.player.Player;
 
@@ -22,7 +23,7 @@ public class FirstMission extends Mission {
     }
 
     //inherited methods
-    public void onCompleted(){
+    public void onCompleted(BilcantGame game){
         GetExperience();
         player.getInventory().delete(idcard);
     }

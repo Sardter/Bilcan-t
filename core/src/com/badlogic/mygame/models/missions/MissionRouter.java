@@ -21,6 +21,10 @@ public class MissionRouter {
         return index;
     }
 
+    public Mission[] getMissions() {
+        return missions;
+    }
+
     public void setIndex(int index) {
         this.index = index;
     }

@@ -9,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.SnapshotArray;
-
+/*
+    Outermost abstract parent class for all windows under the windows package.
+ */
 public abstract class InteractiveWindow extends Window {
     protected Label name, description;
     protected VerticalGroup verticalGroup;

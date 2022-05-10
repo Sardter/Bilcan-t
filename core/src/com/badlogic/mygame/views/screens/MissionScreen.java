@@ -21,12 +21,16 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.missions.FirstMission;
 import com.badlogic.mygame.models.missions.Mission;
-
+/**
+        Screen where you see the possible missions for the player.
+        When the user chooses a certain mission via clicking, it is labeled as an active mission.
+ */
 public class MissionScreen implements Screen {
     private final BilcantGame game;
     private Stage stage;
 
     public MissionScreen(BilcantGame game) {
+        game.getMainScreen().saveGame();
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -48,6 +52,7 @@ public class MissionScreen implements Screen {
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                game.getMainScreen().saveGame();
                 game.changeScreen(BilcantGame.DETAIL);
             }
         });
@@ -83,8 +88,10 @@ public class MissionScreen implements Screen {
 
         final Mission[] missions = game.getMissionRouter().getCurrentMissions();
 
-        final CheckBox[] checkBoxes = new CheckBox[missions.length];
 
+        //final Mission[] missions = game.getMissionRouter().getMissions();
+
+        final CheckBox[] checkBoxes = new CheckBox[missions.length];
 
         for (int i = 0; i < missions.length; i++) {
             Mission mission = missions[i];

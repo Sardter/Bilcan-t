@@ -10,31 +10,24 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
-import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.models.items.Food;
-import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.minigames.EscapeTheBeesMinigame;
 import com.badlogic.mygame.models.player.Inventory;
-import com.badlogic.mygame.views.windows.InteractWindow;
-import com.badlogic.mygame.views.windows.ItemWindow;
 import com.badlogic.mygame.views.windows.MinigameCompletionWindow;
-
-import java.util.ArrayList;
+/**
+        Screen for the EscapeTheBeesMinigame, triggered when the player object interacts with the specific object
+        within the MainScreen.
+        EscapeTheBeesMinigame is a minigame under the minigames package.
+*/
 
 public class EscapeTheBeesMinigameScreen implements Screen {
     private final BilcantGame game;
@@ -73,7 +66,7 @@ public class EscapeTheBeesMinigameScreen implements Screen {
 
         TextureRegionDrawable textureRegionDrawableBg =
                 new TextureRegionDrawable(new TextureRegion(
-                        new Texture(Gdx.files.internal("back2.jpeg"))));
+                        new Texture(Gdx.files.internal("escape_back.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
         miniGame = new EscapeTheBeesMinigame(game.getPlayer(), this, 4);
@@ -149,13 +142,15 @@ public class EscapeTheBeesMinigameScreen implements Screen {
             for (EscapeTheBeesMinigame.MinigameObject minigameObject : row) {
                 Button button;
                 if (minigameObject == null) {
-                    button = new TextButton("", skin1);
+                    button = new ImageButton(new TextureRegionDrawable(
+                            new TextureRegion(new Texture("item_skins/empty.png"))));
                 } else {
                     Drawable itemTexture =
                             new TextureRegionDrawable(
                                     new TextureRegion(minigameObject.getTexture()));
                     button = new ImageButton(itemTexture);
                 }
+                button.pad(5f);
                 items.add(button);
             }
             items.row();

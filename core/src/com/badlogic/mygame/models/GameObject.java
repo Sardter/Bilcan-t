@@ -11,7 +11,13 @@ import com.badlogic.mygame.views.windows.InteractiveWindow;
 import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
 import java.util.Random;
-
+/**
+          Main parent class for the objects within the game.
+          Sets their size and position within the specific screen.
+          Getters for, Id, texture, name and description of the object.
+          Has a boolean field called "onVicinity" which indicates if the current game object is around another game object
+          within the screen.
+ */
 
 public class GameObject extends Rectangle {
     private static int ID = 0;
@@ -73,7 +79,6 @@ public class GameObject extends Rectangle {
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
         if(this.name.equals("SA building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
-
             //instanciate the quiz mechanism
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
             currentMission.getCurrentTask().isCompleted();
@@ -81,12 +86,12 @@ public class GameObject extends Rectangle {
         if(this.name.equals("B building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterBbuilding() from the MainStoryMissionLesson
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
-            currentMission.DidEnterBbuilding();
+            currentMission.DidEnterBbuilding(game);
         }
         if(this.name.equals("G building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterGbuilding() from the MainStoryMissionLesson
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
-            currentMission.DidEnterGbuilding();
+            currentMission.DidEnterGbuilding(game);
 
         }
     }

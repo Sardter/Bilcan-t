@@ -9,9 +9,18 @@ public class GameMap extends Rectangle {
     private final Texture texture;
     private final MapObjects objects;
     private final MapRouter mapRouter;
+    private final float spawnX, spawnY;
+
+    public float getSpawnX() {
+        return spawnX;
+    }
+
+    public float getSpawnY() {
+        return spawnY;
+    }
 
     public GameMap(String textureUrl, int width, int height,
-                   int boundry_x, int boundry_y, int objectsType, MapRouter mapRouter) {
+                   int boundry_x, int boundry_y, float spawnX , float spawnY , int objectsType, MapRouter mapRouter) {
         super();
         super.width = width;
         super.height = height;
@@ -19,6 +28,8 @@ public class GameMap extends Rectangle {
         super.y = boundry_y / 2;
 
         this.mapRouter = mapRouter;
+        this.spawnX = spawnX;
+        this.spawnY = spawnY;
 
         texture = new Texture(Gdx.files.internal(textureUrl));
         objects = new MapObjects(objectsType, mapRouter);

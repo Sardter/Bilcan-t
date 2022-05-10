@@ -1,5 +1,11 @@
 package com.badlogic.mygame.models.npc;
 
+/**
+
+        Class of the options of each Dialogue item.
+        Player object can choose from different Dialogue options.
+
+ */
 public class DialogOption {
     private final String option;
     private final int response;

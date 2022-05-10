@@ -1,7 +1,10 @@
 package com.badlogic.mygame.models.npc;
 
 import java.util.Arrays;
-
+/**
+          Moves the NPC objects within the screen within a certain route.
+          When a route is fully traversed by a NPC object, it reverses the route so the NPC object doesn't go of the screen.
+ */
 public class NPCRouter {
     private final NonPlayerCharacter npc;
     private NPCRoute[] routes;
@@ -28,6 +31,7 @@ public class NPCRouter {
         NPCRoute[] reversed = new NPCRoute[routes.length];
         for (int i = 0; i < routes.length; i++) {
             reversed[i] = routes[routes.length - 1 - i];
+            System.out.println(reversed[i].getX());
         }
         routes = reversed;
         index = 0;
@@ -55,7 +59,7 @@ public class NPCRouter {
 
         if (npc.y < currentRoute.getY()) {
             npc.y += speed;
-        } else if (npc.x > currentRoute.getX()) {
+        } else if (npc.y > currentRoute.getY()) {
             npc.y -= speed;
         }
     }
