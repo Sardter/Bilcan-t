@@ -218,6 +218,65 @@ public class MainScreen implements Screen {
     }
 
 
+
+    public void createObjects() {
+        GameObject[] gameObjects = {
+                new GameObject("rectext.png", "Obj1", "desc1",
+                        64,64, 200, 200),
+                new GameObject("rectext.png", "Obj2", "desc2",
+                        64, 64, 360, 360),
+        };
+        //setting the gameOBjects to include Bilcant game
+
+
+        DialogOption[] options = {
+                new DialogOption("good, you?", 1, true),
+                new DialogOption("shut up, beach", -1, false)
+        };
+
+        DialogItem[] dialogItems = {
+                new DialogItem("hey man, how are you?", options),
+                new DialogItem("uga uga", null)
+        };
+
+        /*
+        NonPlayerCharacter[] missionNPCs = {
+                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc desc",
+                    true, 200, 200, new NPCDialog(missionDialogItems)),
+        };
+        */
+
+
+
+
+        NonPlayerCharacter[] nonPlayerCharacters = {
+                new NonPlayerCharacter("bucket.png", "important", "npc desc",
+                        true, 100, 200, new NPCDialog(dialogItems)),
+                new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
+                true, 100, 100, new NPCDialog(null)),
+                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
+                        100, 300)*/
+                new NonPlayerCharacter("bucket.png", "npc", "npc desc",
+                        false, 200, 100, new NPCDialog(null)),
+
+        };
+
+        for (NonPlayerCharacter npc : nonPlayerCharacters) {
+            NPCRoute[] routes = {
+                    new NPCRoute(300, 300),
+                    new NPCRoute(350, 300),
+                    new NPCRoute(400, 400),
+
+            };
+            NPCRouter router = new NPCRouter(npc, routes);
+            npc.setRouter(router);
+        }
+
+        this.objects.addAll(Arrays.asList(gameObjects));
+        this.objects.addAll(Arrays.asList(nonPlayerCharacters));
+    }
+
+
     public void interactOnVicinity() {
         for ( GameObject object : objects) {
             if (object instanceof  NonPlayerCharacter) {
@@ -244,6 +303,9 @@ public class MainScreen implements Screen {
         preferences.putString("inventory", character.getInventory().toJson());
         preferences.putString("stats", character.getStatsInJson());
         preferences.putInteger("mission", missionRouter.getIndex());
+        for (int i = 0; i < missionRouter.getCurrentMission().getTasks().length; i++) {
+            preferences.putBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean());
+        }
         System.out.println(preferences.getInteger("mission"));
     }
 
@@ -257,6 +319,20 @@ public class MainScreen implements Screen {
         character.getInventory().fromJson(preferences.getString("inventory"));
         character.setStatsFromJson(preferences.getString("stats"));
         missionRouter.setIndex(preferences.getInteger("mission"));
+
+        int tasknumber = 0;
+        for (int i = 0; i < missionRouter.getCurrentMission().getTasks().length; i++) {
+            if(preferences.getBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean())){
+                missionRouter.getCurrentMission().getTasks()[i].setCompleted(true);
+                if(tasknumber >= missionRouter.getCurrentMission().getTasks().length -1){
+                    missionRouter.getCurrentMission().onCompleted(game);
+            }
+                else{
+                    missionRouter.getCurrentMission().nextTask();
+                    tasknumber++;
+                }
+            }
+        }
     }
 
     @Override

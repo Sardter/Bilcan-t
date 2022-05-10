@@ -8,7 +8,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.GameObject;
+import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
 import com.badlogic.mygame.views.windows.NPCInteractWindow;
 /**
@@ -61,15 +63,18 @@ public class NonPlayerCharacter extends GameObject {
         return isInCollision;
     }
 
-
     @Override
     public void interact(InteractiveWindow interactWindow) {
         if (!(interactWindow instanceof NPCInteractWindow)) return;
         System.out.println(this);
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
-        if(this.name.equals("take a quiz NPC")){
+        if(this.name.equals("take a quiz NPC") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
+
             //calls did interacted with npc method which is inside the mainStoryMissionLesson class
+            MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.setGame(game);
+            currentMission.getTasks()[0].isCompleted();
         }
     }
 

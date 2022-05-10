@@ -1,4 +1,7 @@
 package com.badlogic.mygame.models.missions;
+
+import com.badlogic.mygame.BilcantGame;
+
 /**
 
 
@@ -9,7 +12,7 @@ package com.badlogic.mygame.models.missions;
 public abstract class Task {
     private final String description;
 
-    private boolean completed;
+    private boolean completed = false;
 
     public Task(String description) {
         this.description = description;
@@ -24,4 +27,8 @@ public abstract class Task {
     }
 
     public abstract boolean isCompleted();
+
+    public boolean getBoolean(){
+        return completed;
+    }
 }

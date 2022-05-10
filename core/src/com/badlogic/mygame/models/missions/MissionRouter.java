@@ -32,4 +32,8 @@ public class MissionRouter {
     public void next() {
         index++;
     }
+
+    public Mission[] getCurrentMissions() {
+        return missions;
+    }
 }

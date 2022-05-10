@@ -1,5 +1,6 @@
 package com.badlogic.mygame.models.missions;
 
+import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.player.Player;
 
 public class eat3FoodMission extends Mission {
@@ -9,8 +10,8 @@ public class eat3FoodMission extends Mission {
     }
 
     @Override
-    public void onCompleted() {
-
+    public void onCompleted(BilcantGame game) {
+        game.getMainScreen().saveGame();
     }
 
     public void GetExperience(){
