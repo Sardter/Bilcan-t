@@ -4,8 +4,8 @@ import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.player.Player;
 
 public class MinigameMissions extends Mission{
-    private String Task1Description = "play the FindaTable mini game in the cafetaria";
-    private String Task2Description = "now play the escape the bees game";
+    private String Task1Description = "play the FindaTable mini game in the cafetaria, to play go to the topmost door and then to the table icon";
+    private String Task2Description = "now play the escape the bees game, go to the bee icon";
 
     private BilcantGame game;
 

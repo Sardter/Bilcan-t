@@ -193,8 +193,6 @@ public class MainScreen implements Screen {
         touchContainer.add(touchpad).pad(20);
         touchContainer.bottom().right();
 
-
-
         Table activeMissionContainer = new Table();
         activeMissionContainer.setFillParent(true);
         stage.addActor(activeMissionContainer);
@@ -236,10 +234,12 @@ public class MainScreen implements Screen {
                 new DialogOption("shut up, beach", -1, false)
         };
 
+
         DialogItem[] dialogItems = {
                 new DialogItem("hey man, how are you?", options),
                 new DialogItem("uga uga", null)
         };
+
 
         /*
         NonPlayerCharacter[] missionNPCs = {
@@ -255,7 +255,7 @@ public class MainScreen implements Screen {
                 new NonPlayerCharacter("bucket.png", "important", "npc desc",
                         true, 100, 200, new NPCDialog(dialogItems)),
                 new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
-                true, 100, 100, new NPCDialog(null)),
+                true, 100, 100, null),
                 /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
                         100, 300)*/
                 new NonPlayerCharacter("bucket.png", "npc", "npc desc",
