@@ -79,7 +79,7 @@ public class AvatarSelectionScreen implements Screen {
         selenContainer.addActor(new Image(new TextureRegionDrawable(
                 new TextureRegion(
                         new Texture("npc_skins/npc1.png")))));
-        TextButton selectSelen = new TextButton("Selen",skin1);
+        TextButton selectSelen = new TextButton("Alara",skin1);
         selenContainer.addActor(selectSelen);
         selectSelen.addListener(new ChangeListener() {
             @Override

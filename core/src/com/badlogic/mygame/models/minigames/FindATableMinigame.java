@@ -169,7 +169,10 @@ public class FindATableMinigame extends Minigame {
                 character.y = y;
                 calculateDistances(character);
                 turnCount++;
-                if (turnCount == maxTries) lost = true;
+                System.out.println(turnCount);
+                if (turnCount == maxTries){
+                    lost = true;
+                }
             }
         }
 
@@ -184,11 +187,18 @@ public class FindATableMinigame extends Minigame {
         String[] windowItems = {"Won!", "Found a table!"};
         ((FindTheTableScreen) screen).getCompletionWindow().setObject(windowItems);
         ((FindTheTableScreen) screen).getCompletionWindow().setVisible(true);
+
+
         BilcantGame game = ((FindTheTableScreen) screen).getGame();
-        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")){
+        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")
+                && game.getMissionRouter().getCurrentMission().getTaskIndex() == 0){
             MinigameMissions currentMission = (MinigameMissions) game.getMissionRouter().getCurrentMission();
             currentMission.getCurrentTask().isCompleted();
         }
+        game.getMainScreen().saveGame();
+        game.getMainScreen().loadGame();
+
+
     }
 
     @Override
@@ -196,5 +206,15 @@ public class FindATableMinigame extends Minigame {
         String[] windowItems = {"Lost!", "You will starve today!"};
         ((FindTheTableScreen) screen).getCompletionWindow().setObject(windowItems);
         ((FindTheTableScreen) screen).getCompletionWindow().setVisible(true);
+
+        BilcantGame game = ((FindTheTableScreen) screen).getGame();
+
+        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")
+                && game.getMissionRouter().getCurrentMission().getTaskIndex() == 0){
+            MinigameMissions currentMission = (MinigameMissions) game.getMissionRouter().getCurrentMission();
+            currentMission.getCurrentTask().isCompleted();
+        }
+        game.getMainScreen().saveGame();
+        game.getMainScreen().loadGame();
     }
 }

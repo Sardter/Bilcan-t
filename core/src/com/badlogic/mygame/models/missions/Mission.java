@@ -33,7 +33,7 @@ public abstract class Mission {
         return tasks;
     }
 
-    public Player getPlayer(){
+    public Player getPlayer() {
         return player;
     }
 
@@ -43,13 +43,18 @@ public abstract class Mission {
         return tasks[taskIndex];
     }
 
-    public void nextTask(){
-        if(taskIndex < 3){
-            taskIndex++;
+    public void nextTask() {
+
+        if (taskIndex < tasks.length) {
+
+            if (!(tasks[taskIndex] == null)) {
+
+                taskIndex++;
+            }
         }
     }
 
-    public int getTaskIndex(){
+    public int getTaskIndex() {
         return taskIndex;
     }
 
@@ -57,9 +62,11 @@ public abstract class Mission {
         return xp;
     }
 
+    public abstract boolean getMissioncompleted();
+
     public String getQuestExplanation() {
 
-        if(this instanceof MainStoryMissionLesson) {
+        if (this instanceof MainStoryMissionLesson) {
             int i = 0;
             for (int j = 0; j < tasks.length; j++) {
                 if (!tasks[j].getBoolean()) {
@@ -69,6 +76,7 @@ public abstract class Mission {
         }
         return description;
     }
+
     public String getName() {
         return this.name;
     }
@@ -95,3 +103,4 @@ public abstract class Mission {
         }
     }
 }
+

@@ -22,8 +22,11 @@ public class MinigameMissions extends Mission{
         player.setGpa(4);
         player.addXP(1500);
         missionCompleted = true;
-        game.getMainScreen().saveGame();
 
+    }
+    @Override
+    public boolean getMissioncompleted(){
+        return missionCompleted;
     }
 
     Task task1 = new Task(Task1Description) {
@@ -31,13 +34,11 @@ public class MinigameMissions extends Mission{
         public boolean isCompleted() {
 
             if(!missionCompleted){
+                System.out.println("task 1 ez");
                 player.addXP(10);
                 task1.setCompleted(true);
                 nextTask();
-                System.out.println("task 1 ez");
-                game.getMainScreen().saveGame();
             }
-
             return true;
         }
     };
@@ -46,13 +47,11 @@ public class MinigameMissions extends Mission{
         public boolean isCompleted() {
 
             if(!missionCompleted){
+                System.out.println("task 2 ez");
                 player.addXP(100);
                 task2.setCompleted(true);
-                nextTask();
-                System.out.println("task 2 ez");
-                game.getMainScreen().saveGame();
+                onCompleted(game);
             }
-
             return true;
         }
     };

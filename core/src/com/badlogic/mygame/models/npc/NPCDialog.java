@@ -15,7 +15,7 @@ public class NPCDialog {
     protected String[] defaultPrompts = {
             "Hello",
             "How are you?",
-            "Buzz off!"
+            "Go away"
     };
     private Random random;
 
