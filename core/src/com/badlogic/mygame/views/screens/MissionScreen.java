@@ -68,28 +68,10 @@ public class MissionScreen implements Screen {
         table2.add(scrollPane).size(800, 500);
 
 
-        /*
-        final Mission[] missions = {
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-                new FirstMission(game.getPlayer()),
-        };
-        */
+        //final Mission[] missions = game.getMissionRouter().getCurrentMissions();
 
 
-        final Mission[] missions = game.getMissionRouter().getCurrentMissions();
-
-
-        //final Mission[] missions = game.getMissionRouter().getMissions();
+        final Mission[] missions = game.getMissionRouter().getMissions();
 
         final CheckBox[] checkBoxes = new CheckBox[missions.length];
 
@@ -100,6 +82,7 @@ public class MissionScreen implements Screen {
             final CheckBox activeMissionBox = new CheckBox(null,skin2);
             if (i == game.getSelectedMission()) {
                 activeMissionBox.setChecked(true);
+                game.getMissionRouter().setIndex(i);
             }
             final int finalI = i;
             activeMissionBox.addListener(new EventListener() {

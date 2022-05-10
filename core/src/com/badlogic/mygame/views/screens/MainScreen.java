@@ -138,8 +138,8 @@ public class MainScreen implements Screen {
 
         if (willBeLoaded) {
             loadGame();
-            game.initializeMissions();
-            missionRouter = game.getMissionRouter();
+            //game.initializeMissions();
+            //missionRouter = game.getMissionRouter();
         } else {
             character.x = map.getSpawnX();
             character.y = map.getSpawnY();
@@ -246,14 +246,15 @@ public class MainScreen implements Screen {
         mapRouter.setIndex(preferences.getInteger("mapIndex"));
         character.getInventory().fromJson(preferences.getString("inventory"));
         character.setStatsFromJson(preferences.getString("stats"));
-        missionRouter.setIndex(preferences.getInteger("mission"));
         missionRouter.dataFromJson(preferences.getString("missionData"));
+        missionRouter.setIndex(preferences.getInteger("mission"));
     }
 
     public void drawTasks() {
         activeMissionContainer.removeActor(updatedContainer);
         updatedContainer = new Table();
         activeMissionContainer.add(updatedContainer);
+        System.out.println(missionRouter.getIndex());
         Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
         Label currentTask = new Label(missionRouter.getCurrentMission()
                 .getCurrentTask().getDescription(), skin2);
