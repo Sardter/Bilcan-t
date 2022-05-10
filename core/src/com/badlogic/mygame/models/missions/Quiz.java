@@ -1,5 +1,6 @@
 package com.badlogic.mygame.models.missions;
 
+import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.player.Player;
 
 /* This class contains the questions, true answers and needs a UI to be displayed properly
@@ -82,6 +83,7 @@ public class Quiz {
         return questions.length;
     }
     public void onWin(){
+        //player.getInventory().addItem(idcard);
         player.addXP(100);
     }
     public void onLose(){

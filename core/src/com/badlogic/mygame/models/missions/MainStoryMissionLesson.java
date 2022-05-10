@@ -42,7 +42,6 @@ public class MainStoryMissionLesson extends Mission{
                     System.out.println("task 1 ez");
                 }
             }
-
             return true;
         }
     };

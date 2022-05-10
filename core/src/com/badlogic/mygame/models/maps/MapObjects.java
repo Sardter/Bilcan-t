@@ -67,14 +67,16 @@ public class MapObjects {
                         64, 64, 600, 1000, mapRouter, MapRouter.UPPER_CAMPUS),
                 new Door("item_skins/door.png", "Dorms", "desc2",
                         64, 64, 700, 0, mapRouter, MapRouter.DEVELOPMENT),
-                new Door("item_skins/door.png", "A Building", "desc2",
-                        64, 64, 1050, 100, mapRouter, MapRouter.DEVELOPMENT),
+                new Door("rectext.png", "A Building", "desc2",
+                        64, 64, 800, 800, mapRouter, MapRouter.DEVELOPMENT),
+                new GameObject("Bilkent-02.jpeg", "A building", "ID building",
+                        64, 64, 450, 400),
                 new GameObject("Bilkent-02.jpeg", "SA building", "important quiz",
-                        64, 64, 100, 100),
+                        64, 64, 100, 0),
                 new GameObject("B_building - Copy.jpg", "B building", "Math lessons",
-                64, 64, 600, 200),
+                64, 64, 200, 200),
                 new GameObject("rectext.png", "G building", "ENG lessons",
-                        64, 64, 600, 90)
+                        64, 64, 0, 200)
                 ));
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).setGame(mapRouter.getGame());

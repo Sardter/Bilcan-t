@@ -12,7 +12,7 @@ public class MinigameMissions extends Mission{
     private boolean missionCompleted = false;
 
     public MinigameMissions(Player player){
-        super(player,"mini game Mission", "aglama", 1200, null, new Task[2]);
+        super(player,"mini game Mission", "play and struggle to complete the mini games", 1200, null, new Task[2]);
         tasks[0] = task1;
         tasks[1] = task2;
     }

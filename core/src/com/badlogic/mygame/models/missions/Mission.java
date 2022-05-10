@@ -40,6 +40,10 @@ public abstract class Mission {
         }
     }
 
+    public int getTaskIndex(){
+        return taskIndex;
+    }
+
     public int getXPReward() {
         return xp;
     }
