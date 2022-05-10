@@ -211,7 +211,6 @@ public class MapObjects {
 
         NonPlayerCharacter[] nonPlayerCharacters = {
                 new NonPlayerCharacter("npc_skins/npc1.png", "important", "npc desc",
-<<<<<<< HEAD
                         true, 100, 200, new NPCDialog(new DialogItem[] {
                         new DialogItem("hey man, how are you?", new DialogOption[] {
                                 new DialogOption("good, you?", 1, true),
@@ -221,11 +220,7 @@ public class MapObjects {
                 })),
                 new NonPlayerCharacter("npc_skins/npc3.png", "important 2", "npc desc",
                         true, 100, 100, new NPCDialog(null)),
-                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
-                        100, 300)*/
-=======
-                        true, 100, 200, new NPCDialog(dialogItems)),
->>>>>>> 44046b60462df7720a970fcdc15db07f65c81921
+
 
                 new NonPlayerCharacter("bucket.png", "npc", "npc desc",
                         false, 200, 100, new NPCDialog(null)),
