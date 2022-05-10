@@ -3,6 +3,7 @@ package com.badlogic.mygame;
 import com.badlogic.gdx.Game;
 import com.badlogic.mygame.models.missions.FirstMission;
 import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
+import com.badlogic.mygame.models.missions.MinigameMissions;
 import com.badlogic.mygame.models.missions.Mission;
 import com.badlogic.mygame.models.missions.MissionRouter;
 import com.badlogic.mygame.models.missions.Task;
@@ -66,7 +67,8 @@ public class BilcantGame extends Game {
     public void initializeMissions() {
         missionRouter = new MissionRouter(new Mission[]{
                 new MainStoryMissionLesson(player),
-                new FirstMission(player)
+                new FirstMission(player),
+                new MinigameMissions(player)
         });
         System.out.println(missionRouter);
     }
@@ -132,7 +134,9 @@ public class BilcantGame extends Game {
                 this.setScreen(findTheTableScreen);
                 break;
             case QUIZ:
-                quizScreen = new QuizScreen(this);
+                quizScreen = new QuizScreen(this) {
+
+                };
                 this.setScreen(quizScreen);
                 break;
             case AVATAR_SELECTION:

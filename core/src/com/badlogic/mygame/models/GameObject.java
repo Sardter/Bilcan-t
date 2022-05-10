@@ -78,10 +78,15 @@ public class GameObject extends Rectangle {
         //System.out.println("smt"+ id);
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
-        if(this.name.equals("SA building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
+        if(this.name.equals("SA building") ){ //&& game.getMissionRouter().getCurrentMission().getName().equals("miniGame")
             //instanciate the quiz mechanism
+            game.getMainScreen().saveGame();
+            game.changeScreen(BilcantGame.QUIZ);
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
             currentMission.getCurrentTask().isCompleted();
+
+
+
         }
         if(this.name.equals("B building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterBbuilding() from the MainStoryMissionLesson
