@@ -264,12 +264,14 @@ public class EscapeTheBeesMinigame extends Minigame {
 
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
+
         BilcantGame game = ((EscapeTheBeesMinigameScreen) screen).getGame();
-        MinigameMissions currentMission = (MinigameMissions) game.getMissionRouter().getCurrentMission();
+
 
         if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")
-                && currentMission.getTaskIndex() == 1 && !currentMission.getCurrentTask().getBoolean()){
-            currentMission.getCurrentTask().isCompleted();
+                && game.getMissionRouter().getCurrentMission().getTaskIndex() == 1
+                && !game.getMissionRouter().getCurrentMission().getCurrentTask().getBoolean()){
+            game.getMissionRouter().getCurrentMission().getCurrentTask().isCompleted();
         }
 
         game.getMainScreen().saveGame();
@@ -285,22 +287,21 @@ public class EscapeTheBeesMinigame extends Minigame {
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
 
         BilcantGame game = ((EscapeTheBeesMinigameScreen) screen).getGame();
-        MinigameMissions currentMission = (MinigameMissions) game.getMissionRouter().getCurrentMission();
 
         if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")
-                && currentMission.getTaskIndex() == 1 && !currentMission.getCurrentTask().getBoolean()){
-            currentMission.getCurrentTask().isCompleted();
+                && game.getMissionRouter().getCurrentMission().getTaskIndex() == 1
+                && !game.getMissionRouter().getCurrentMission().getCurrentTask().getBoolean()){
+            game.getMissionRouter().getCurrentMission().getCurrentTask().isCompleted();
         }
 
         game.getMainScreen().saveGame();
         game.getMainScreen().loadGame();
-
-
     }
 
     private boolean validMove(int x, int y) {
         return 0 <= x && x < positions.length && 0 <= y && y < positions[0].length;
     }
+
 
     @Override
     public void play(int[] input) {

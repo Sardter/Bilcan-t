@@ -15,6 +15,11 @@ public class FirstMission extends Mission {
     private String Task2Description = "now go the A building to drop the id Card";
     private BilcantGame game;
 
+    @Override
+    public boolean getMissioncompleted(){
+        return missionCompleted;
+    }
+
     Task task1 = new Task(Task1Description) {
         @Override
         public boolean isCompleted() {

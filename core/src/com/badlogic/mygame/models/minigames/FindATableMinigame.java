@@ -209,7 +209,8 @@ public class FindATableMinigame extends Minigame {
 
         BilcantGame game = ((FindTheTableScreen) screen).getGame();
 
-        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")){
+        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")
+                && game.getMissionRouter().getCurrentMission().getTaskIndex() == 0){
             MinigameMissions currentMission = (MinigameMissions) game.getMissionRouter().getCurrentMission();
             currentMission.getCurrentTask().isCompleted();
         }

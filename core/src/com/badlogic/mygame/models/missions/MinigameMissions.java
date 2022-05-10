@@ -24,6 +24,10 @@ public class MinigameMissions extends Mission{
         missionCompleted = true;
 
     }
+    @Override
+    public boolean getMissioncompleted(){
+        return missionCompleted;
+    }
 
     Task task1 = new Task(Task1Description) {
         @Override

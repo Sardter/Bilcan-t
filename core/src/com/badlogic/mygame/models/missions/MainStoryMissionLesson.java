@@ -31,6 +31,10 @@ public class MainStoryMissionLesson extends Mission{
         missionCompleted = true;
     }
 
+    @Override
+    public boolean getMissioncompleted(){
+        return missionCompleted;
+    }
     Task task1 = new Task(Task1Description) {
         @Override
         public boolean isCompleted() {
@@ -51,7 +55,6 @@ public class MainStoryMissionLesson extends Mission{
         public boolean isCompleted() {
 
             if(!missionCompleted){
-                System.out.println("task 2 no ez");
                 if(task1.getBoolean()){
                     player.addXP(100);
                     task2.setCompleted(true);
@@ -71,11 +74,10 @@ public class MainStoryMissionLesson extends Mission{
                 if(task2.getBoolean()){
                     player.addXP(1000);
                     task3.setCompleted(true);
-<<<<<<< HEAD
-=======
+
                     nextTask();
                     game.changeScreen(BilcantGame.WIN_SCREEN);
->>>>>>> 1f36b69ea68373b923d6f53301f860ba9333f49e
+
                     System.out.println("task 3 ez");
                 }
             }
