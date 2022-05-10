@@ -88,11 +88,6 @@ public class NonPlayerCharacter extends GameObject {
      * to make an NPC move in a specific loop
      * there is a speed variable to make them look more random and realistic
      */
-
-
-
-
-
     public boolean getISImportant(){
         return isImportant;
     }

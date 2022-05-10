@@ -105,12 +105,29 @@ public class MapObjects {
                             new NPCRoute(20,400),
                     }));
                 }},
+                /*
+                new NonPlayerCharacter("npc_skins/npc11.png", "important 2", "npc desc",
+                        true, 100, 200, new NPCDialog(new DialogItem[] {
+                        new DialogItem("Considering my humble opinion it is extremely possible for earth to be flat", new DialogOption[]{
+                                new DialogOption("Oh so True..", 1, true),
+                                new DialogOption("NEINN! Es ist nicht richtig", -1, false)
+                        }),
+                        new DialogItem("Feza gets FZ", null)
+                })),
+                */
+
                 new NonPlayerCharacter("npc_skins/npc11.png", "npc 5", "npc desc",
                         true, 800, 400, new NPCDialog(null)) {{
                     setRouter(new NPCRouter(this, new NPCRoute[]{}));
                 }},
-                new NonPlayerCharacter("npc_skins/npc12.png", "npc 6", "npc desc",
-                        true, 830, 370, new NPCDialog(null)) {{
+                new NonPlayerCharacter("npc_skins/npc12.png", "wise NPC", "npc desc",
+                        true, 830, 370, new NPCDialog(new DialogItem[] {
+                        new DialogItem("Earth is likely flat", new DialogOption[]{
+                                new DialogOption("Oh so True..", 1, true),
+                                new DialogOption("NEINN! Es ist nicht richtig", -1, true)
+                        }),
+                        new DialogItem("Feza gets FZ", null)
+                })) {{
                     setRouter(new NPCRouter(this, new NPCRoute[]{}));
                 }},
                 new NonPlayerCharacter("npc_skins/npc15.png", "npc 7", "npc desc",
@@ -192,14 +209,17 @@ public class MapObjects {
         DialogItem[] missionDialogItems = {
                 new DialogItem("uga buga take a quiz at SA building", null)
         };
+        DialogItem[] dialogItems2 = {
+                new DialogItem("Considering my humble opinion it is extremely possible for earth to be flat", new DialogOption[]{
+                        new DialogOption("Oh so True..", 1, true),
+                        new DialogOption("NEINN! Es ist nicht richtig", -1, false)
+                }),
+                new DialogItem("Feza gets FZ", null)
+        };
 
         NonPlayerCharacter[] nonPlayerCharacters = {
                 new NonPlayerCharacter("npc_skins/npc1.png", "important", "npc desc",
                         true, 100, 200, new NPCDialog(dialogItems)),
-                new NonPlayerCharacter("npc_skins/npc3.png", "important 2", "npc desc",
-                        true, 100, 100, new NPCDialog(null)),
-                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
-                        100, 300)*/
 
                 new NonPlayerCharacter("bucket.png", "npc", "npc desc",
                         false, 200, 100, new NPCDialog(null)),
