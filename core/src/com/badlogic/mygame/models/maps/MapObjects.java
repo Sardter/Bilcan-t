@@ -103,9 +103,10 @@ public class MapObjects {
                         true, 830, 370, new NPCDialog(null)) {{
                     setRouter(new NPCRouter(this, new NPCRoute[]{}));
                 }},
-                new NonPlayerCharacter("npc_skins/npc15.png", "npc 7", "npc desc",
+                new NonPlayerCharacter("npc_skins/npc15.png", "Cat Girl", "npc desc",
                         true, 970, 200, new NPCDialog(null)) {{
                     setRouter(new NPCRouter(this, new NPCRoute[]{}));
+                    setGame(mapRouter.getGame());
                 }},
                 new NonPlayerCharacter("npc_skins/npc5.png", "npc 2", "npc desc",
                         false, 600, 700, new NPCDialog(null)) {{
@@ -173,22 +174,19 @@ public class MapObjects {
             gameObjects[i].setGame(mapRouter.getGame());
         }
 
-        DialogOption[] options = {
-                new DialogOption("good, you?", 1, true),
-                new DialogOption("shut up, beach", -1, false)
-        };
-
-        DialogItem[] dialogItems = {
-                new DialogItem("hey man, how are you?", options),
-                new DialogItem("uga uga", null)
-        };
         DialogItem[] missionDialogItems = {
                 new DialogItem("uga buga take a quiz at SA building", null)
         };
 
         NonPlayerCharacter[] nonPlayerCharacters = {
                 new NonPlayerCharacter("npc_skins/npc1.png", "important", "npc desc",
-                        true, 100, 200, new NPCDialog(dialogItems)),
+                        true, 100, 200, new NPCDialog(new DialogItem[] {
+                        new DialogItem("hey man, how are you?", new DialogOption[] {
+                                new DialogOption("good, you?", 1, true),
+                                new DialogOption("shut up, beach", -1, false)
+                        }),
+                        new DialogItem("uga uga", null)
+                })),
                 new NonPlayerCharacter("npc_skins/npc3.png", "important 2", "npc desc",
                         true, 100, 100, new NPCDialog(null)),
                 /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,

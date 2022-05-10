@@ -56,7 +56,7 @@ public class MainScreen implements Screen {
     private InteractWindow interactWindow;
     private NPCInteractWindow npcInteractWindow;
     private Stage stage;
-    private Table interactContainer, menuContainer;
+    private Table interactContainer, menuContainer, activeMissionContainer, updatedContainer;
     private TextButton interactButton;
     private boolean moveOnMouse, isIneteracting;
     private boolean willBeLoaded;
@@ -66,6 +66,9 @@ public class MainScreen implements Screen {
     final static int BOUNDRY_X = 800, BOUNDRY_Y = 480;
     final static int STARTING_POSITION_X = BOUNDRY_X / 2, STARTING_POSITION_Y = BOUNDRY_Y / 2;
     //final NonPlayerCharacter n = new NonPlayerCharacter();
+
+    Skin skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+    Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
     public MainScreen(BilcantGame game) {
         this.game = game;
@@ -138,7 +141,6 @@ public class MainScreen implements Screen {
             game.initializeMissions();
             missionRouter = game.getMissionRouter();
         } else {
-            System.out.println(character);
             character.x = map.getSpawnX();
             character.y = map.getSpawnY();
             camera.position.x = map.getSpawnX();
@@ -149,9 +151,6 @@ public class MainScreen implements Screen {
         interactContainer = new Table();
         interactContainer.setFillParent(true);
         stage.addActor(interactContainer);
-
-        Skin skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
-        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
         interactButton = new TextButton("Interact", skin1);
         interactButton.addListener(new ChangeListener() {
@@ -193,18 +192,11 @@ public class MainScreen implements Screen {
 
 
 
-        Table activeMissionContainer = new Table();
-        activeMissionContainer.setFillParent(true);
+        activeMissionContainer = new Table();
         stage.addActor(activeMissionContainer);
+        activeMissionContainer.setFillParent(true);
         activeMissionContainer.top().right().pad(10);
-        System.out.println(missionRouter);
-        Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
-        Label currentTask = new Label(missionRouter.getCurrentMission()
-                .getCurrentTask().getDescription(), skin2);
-        currentTask.setFontScale(0.5f);
-        activeMissionContainer.add(missionTitle);
-        activeMissionContainer.row();
-        activeMissionContainer.add(currentTask);
+        drawTasks();
 
         interactWindow.setVisible(false);
         interactWindow.setPosition(380, 220);
@@ -218,63 +210,6 @@ public class MainScreen implements Screen {
     }
 
 
-
-    public void createObjects() {
-        GameObject[] gameObjects = {
-                new GameObject("rectext.png", "Obj1", "desc1",
-                        64,64, 200, 200),
-                new GameObject("rectext.png", "Obj2", "desc2",
-                        64, 64, 360, 360),
-        };
-        //setting the gameOBjects to include Bilcant game
-
-
-        DialogOption[] options = {
-                new DialogOption("good, you?", 1, true),
-                new DialogOption("shut up, beach", -1, false)
-        };
-
-        DialogItem[] dialogItems = {
-                new DialogItem("hey man, how are you?", options),
-                new DialogItem("uga uga", null)
-        };
-
-        /*
-        NonPlayerCharacter[] missionNPCs = {
-                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc desc",
-                    true, 200, 200, new NPCDialog(missionDialogItems)),
-        };
-        */
-
-
-
-
-        NonPlayerCharacter[] nonPlayerCharacters = {
-                new NonPlayerCharacter("bucket.png", "important", "npc desc",
-                        true, 100, 200, new NPCDialog(dialogItems)),
-                new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
-                true, 100, 100, new NPCDialog(null)),
-                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
-                        100, 300)*/
-                new NonPlayerCharacter("bucket.png", "npc", "npc desc",
-                        false, 200, 100, new NPCDialog(null)),
-
-        };
-
-        for (NonPlayerCharacter npc : nonPlayerCharacters) {
-            NPCRoute[] routes = {
-                    new NPCRoute(300, 300),
-                    new NPCRoute(350, 300),
-                    new NPCRoute(400, 400),
-
-            };
-            NPCRouter router = new NPCRouter(npc, routes);
-            npc.setRouter(router);
-        }
-
-        this.objects.addAll(Arrays.asList(gameObjects));
-        this.objects.addAll(Arrays.asList(nonPlayerCharacters));
-    }
 
 
     public void interactOnVicinity() {
@@ -303,10 +238,7 @@ public class MainScreen implements Screen {
         preferences.putString("inventory", character.getInventory().toJson());
         preferences.putString("stats", character.getStatsInJson());
         preferences.putInteger("mission", missionRouter.getIndex());
-        for (int i = 0; i < missionRouter.getCurrentMission().getTasks().length; i++) {
-            preferences.putBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean());
-        }
-        System.out.println(preferences.getInteger("mission"));
+        preferences.putString("missionData", missionRouter.missionsDataToJson());
     }
 
     public void loadGame() {
@@ -319,20 +251,20 @@ public class MainScreen implements Screen {
         character.getInventory().fromJson(preferences.getString("inventory"));
         character.setStatsFromJson(preferences.getString("stats"));
         missionRouter.setIndex(preferences.getInteger("mission"));
+        missionRouter.dataFromJson(preferences.getString("missionData"));
+    }
 
-        int tasknumber = 0;
-        for (int i = 0; i < missionRouter.getCurrentMission().getTasks().length; i++) {
-            if(preferences.getBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean())){
-                missionRouter.getCurrentMission().getTasks()[i].setCompleted(true);
-                if(tasknumber >= missionRouter.getCurrentMission().getTasks().length -1){
-                    missionRouter.getCurrentMission().onCompleted(game);
-            }
-                else{
-                    missionRouter.getCurrentMission().nextTask();
-                    tasknumber++;
-                }
-            }
-        }
+    public void drawTasks() {
+        activeMissionContainer.removeActor(updatedContainer);
+        updatedContainer = new Table();
+        activeMissionContainer.add(updatedContainer);
+        Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
+        Label currentTask = new Label(missionRouter.getCurrentMission()
+                .getCurrentTask().getDescription(), skin2);
+        currentTask.setFontScale(0.5f);
+        updatedContainer.add(missionTitle);
+        updatedContainer.row();
+        updatedContainer.add(currentTask);
     }
 
     @Override
