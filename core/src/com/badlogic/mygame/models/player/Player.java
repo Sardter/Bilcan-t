@@ -110,6 +110,7 @@ public class Player extends Rectangle {
     }
     public void setStatsFromJson(String json){
         HashMap<String, Float> map = new Json().fromJson(HashMap.class, json);
+        System.out.println(map);
         setGpa(map.get("gpa"));
         setEnergy(map.get("energy"));
         setPopularity(map.get("popularity"));

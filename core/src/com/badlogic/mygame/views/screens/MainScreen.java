@@ -255,8 +255,12 @@ public class MainScreen implements Screen {
         camera.position.y = preferences.getFloat("y");
         mapRouter.setIndex(preferences.getInteger("mapIndex"));
         character.getInventory().fromJson(preferences.getString("inventory"));
-        character.setStatsFromJson(preferences.getString("stats"));
-        missionRouter.dataFromJson(preferences.getString("missionData"));
+        try {
+            character.setStatsFromJson(preferences.getString("stats"));
+            missionRouter.dataFromJson(preferences.getString("missionData"));
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
         missionRouter.setIndex(preferences.getInteger("mission"));
     }
 
@@ -272,6 +276,12 @@ public class MainScreen implements Screen {
         updatedContainer.add(missionTitle);
         updatedContainer.row();
         updatedContainer.add(currentTask);
+    }
+
+    public void onGameOver() {
+        if (character.getGpa() <= 0 || character.getEnergy() <= 0 || character.getPopularity() <= 0) {
+            game.changeScreen(BilcantGame.ENDGAME);
+        }
     }
 
     @Override
@@ -291,11 +301,10 @@ public class MainScreen implements Screen {
             batch.draw(object.getTexture(), object.x, object.y);
         }
 
-
-
         batch.end();
 
         Controller.move(this);
+        onGameOver();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
