@@ -70,7 +70,7 @@ public class MainStoryMissionLesson extends Mission{
                 if(task2.getBoolean()){
                     player.addXP(1000);
                     task3.setCompleted(true);
-                    nextTask();
+                    game.changeScreen(BilcantGame.WIN_SCREEN);
                     System.out.println("task 3 ez");
                 }
             }

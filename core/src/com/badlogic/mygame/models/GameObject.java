@@ -93,7 +93,10 @@ public class GameObject extends Rectangle {
         if(this.name.equals("B building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterBbuilding() from the MainStoryMissionLesson
             //game.getPlayer().getInventory().addItem();
+            game.getMainScreen().saveGame();
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.setGame(game);
+
             currentMission.DidEnterBbuilding(game);
 
             game.getMainScreen().saveGame();
@@ -101,7 +104,11 @@ public class GameObject extends Rectangle {
         }
         if(this.name.equals("G building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterGbuilding() from the MainStoryMissionLesson
+            game.getMainScreen().saveGame();
+
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.setGame(game);
+
             currentMission.DidEnterGbuilding(game);
 
             game.getMainScreen().saveGame();
