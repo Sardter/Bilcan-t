@@ -78,6 +78,7 @@ public class QuizScreen implements Screen {
         exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                System.out.println(game);
                 game.changeScreen(BilcantGame.LOADGAME);
             }
         });

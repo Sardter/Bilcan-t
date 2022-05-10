@@ -125,9 +125,7 @@ public class MainScreen implements Screen {
                                 new Texture("itemWindowBackground.png")))
         ));
 
-        /* character = new Player(Player.MERT, 25, 45,
-                STARTING_POSITION_X, STARTING_POSITION_Y); */
-        //game.setPlayer(character);
+
         character = game.getPlayer();
         mapRouter = new MapRouter(this, game);
         map = mapRouter.getMap();
@@ -309,7 +307,6 @@ public class MainScreen implements Screen {
             preferences.putBoolean("mainMission" + i ,missionRouter.getCurrentMission().getTasks()[i].getBoolean());
         }
         System.out.println(preferences.getInteger("mission"));
-        //preferences.flush();
     }
 
     public void loadGame() {

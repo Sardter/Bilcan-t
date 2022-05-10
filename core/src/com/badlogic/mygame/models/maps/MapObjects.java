@@ -68,8 +68,18 @@ public class MapObjects {
                 new Door("item_skins/door.png", "Dorms", "desc2",
                         64, 64, 700, 0, mapRouter, MapRouter.DEVELOPMENT),
                 new Door("item_skins/door.png", "A Building", "desc2",
-                        64, 64, 1050, 100, mapRouter, MapRouter.DEVELOPMENT)
+                        64, 64, 1050, 100, mapRouter, MapRouter.DEVELOPMENT),
+                new GameObject("Bilkent-02.jpeg", "SA building", "important quiz",
+                        64, 64, 100, 100),
+                new GameObject("B_building - Copy.jpg", "B building", "Math lessons",
+                64, 64, 600, 200),
+                new GameObject("rectext.png", "G building", "ENG lessons",
+                        64, 64, 600, 90)
                 ));
+        for (int i = 0; i < objects.size(); i++) {
+            objects.get(i).setGame(mapRouter.getGame());
+        }
+
 
         this.objects.addAll(Arrays.asList(
                 new NonPlayerCharacter("npc_skins/npc4.png", "npc 1", "npc desc",
@@ -174,21 +184,18 @@ public class MapObjects {
                 new Door("item_skins/door.png", "Obj2", "desc2",
                         64, 64, 260, 260, mapRouter, MapRouter.DEV_2),
 
-                new GameObject("rectext.png", "SA building", "important quiz",
-                        64, 64, 600, 300),
-                new GameObject("B_building - Copy.jpg", "B building", "Math lessons",
-                        64, 64, 600, 200),
-                new GameObject("rectext.png", "G building", "ENG lessons",
-                        64, 64, 600, 90),
 
-                new MinigameLinker("bucket.png", "Obj3", "miniGame", 64, 64,
+
+
+                /*
+                new MinigameLinker("bucket.png", "SA building", "miniGame", 64, 64,
                         480, 200, mapRouter.getGame(), BilcantGame.QUIZ),
+
+                 */
 
         };
 
-        for (int i = 0; i < gameObjects.length; i++) {
-            gameObjects[i].setGame(mapRouter.getGame());
-        }
+
 
         DialogOption[] options = {
                 new DialogOption("good, you?", 1, true),
