@@ -62,7 +62,7 @@ public class FindTheTableScreen implements Screen {
                         new Texture(Gdx.files.internal("find_the_table_back.jpeg"))));
         table1.setBackground(textureRegionDrawableBg);
 
-        miniGame = new FindATableMinigame(game.getPlayer(), this, 3);
+        miniGame = new FindATableMinigame(game.getPlayer(), this, 3, game);
 
         container = new Table();
         container.setFillParent(true);

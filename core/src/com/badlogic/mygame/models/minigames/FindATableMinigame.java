@@ -2,6 +2,10 @@ package com.badlogic.mygame.models.minigames;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
+import com.badlogic.mygame.BilcantGame;
+import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
+import com.badlogic.mygame.models.missions.MinigameMissions;
+import com.badlogic.mygame.models.missions.MissionRouter;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.FindTheTableScreen;
 
@@ -58,7 +62,7 @@ public class FindATableMinigame extends Minigame {
         return dinningTables;
     }
 
-    public FindATableMinigame(Player player, FindTheTableScreen screen, int tableSize) {
+    public FindATableMinigame(Player player, FindTheTableScreen screen, int tableSize, BilcantGame game) {
         super(player, screen);
         dinningTables = new DinningTable[tableSize][];
         for (int i = 0; i < dinningTables.length; i++) {
@@ -180,6 +184,11 @@ public class FindATableMinigame extends Minigame {
         String[] windowItems = {"Won!", "Found a table!"};
         ((FindTheTableScreen) screen).getCompletionWindow().setObject(windowItems);
         ((FindTheTableScreen) screen).getCompletionWindow().setVisible(true);
+        BilcantGame game = ((FindTheTableScreen) screen).getGame();
+        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")){
+            MinigameMissions currentMission = (MinigameMissions) game.getMissionRouter().getCurrentMission();
+            currentMission.getCurrentTask().isCompleted();
+        }
     }
 
     @Override

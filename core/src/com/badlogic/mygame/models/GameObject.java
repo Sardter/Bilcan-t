@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.mygame.BilcantGame;
+import com.badlogic.mygame.models.missions.FirstMission;
 import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
 
@@ -95,6 +96,11 @@ public class GameObject extends Rectangle {
             //call the DidEnterGbuilding() from the MainStoryMissionLesson
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
             currentMission.DidEnterGbuilding(game);
+        }
+        FirstMission currentMission = (FirstMission) game.getMissionRouter().getCurrentMission();
+        if(this.name.equals("A building") && game.getMissionRouter().getCurrentMission().getName().equals("First Mission")
+        && currentMission.getPlayer().getInventory().isItIn("idCard")){
+            currentMission.onCompleted(game);
         }
     }
 }

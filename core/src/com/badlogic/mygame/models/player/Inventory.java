@@ -42,6 +42,15 @@ public class Inventory{
         return true;
     }
 
+    public boolean isItIn(String name){
+        for (int i = 0; i < items.size(); i++) {
+            if(name.equals(items.get(i).getName())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void delete(Item item){
         for (int i = 0; i < items.size(); i++) {
             if(item == items.get(i)){
