@@ -97,9 +97,10 @@ public class GameObject extends Rectangle {
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
             currentMission.DidEnterGbuilding(game);
         }
-        FirstMission currentMission = (FirstMission) game.getMissionRouter().getCurrentMission();
+
         if(this.name.equals("A building") && game.getMissionRouter().getCurrentMission().getName().equals("First Mission")
-        && currentMission.getPlayer().getInventory().isItIn("idCard")){
+        && game.getMissionRouter().getCurrentMission().getPlayer().getInventory().isItIn("idCard")){
+            FirstMission currentMission = (FirstMission) game.getMissionRouter().getCurrentMission();
             currentMission.onCompleted(game);
         }
     }

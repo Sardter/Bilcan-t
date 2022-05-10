@@ -1,6 +1,7 @@
 package com.badlogic.mygame.models.missions;
 
 import com.badlogic.mygame.BilcantGame;
+import com.badlogic.mygame.models.items.IdCard;
 import com.badlogic.mygame.models.player.Player;
 
 /* This class contains the questions, true answers and needs a UI to be displayed properly
@@ -9,6 +10,7 @@ public class Quiz {
     private String Quizexplanation;
     private Question[] questions;
     private final Player player;
+    private IdCard id;
 
 
     private String[] choices1 = {"Bees","Lunch queue","FZ","all of above"};
@@ -26,6 +28,7 @@ public class Quiz {
     public Quiz(String aQuizExplanation){
         this.Quizexplanation = aQuizExplanation;
         this.player = null;
+        this.id = new IdCard("Alara", "1");
         questions = new Question[3];
         questions[0] = question1;
         questions[1] = question2;
@@ -34,6 +37,7 @@ public class Quiz {
     public Quiz(String aQuizExplanation, Player player){
         this.Quizexplanation = aQuizExplanation;
         this.player = player;
+        this.id = new IdCard("Alara", "1");
         questions = new Question[3];
         questions[0] = question1;
         questions[1] = question2;
@@ -83,7 +87,7 @@ public class Quiz {
         return questions.length;
     }
     public void onWin(){
-        //player.getInventory().addItem(idcard);
+        id.use(player);
         player.addXP(100);
     }
     public void onLose(){

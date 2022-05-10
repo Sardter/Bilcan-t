@@ -33,6 +33,10 @@ public abstract class Mission {
         return tasks;
     }
 
+    public Player getPlayer(){
+        return player;
+    }
+
     public abstract void onCompleted(BilcantGame game);
 
     public Task getCurrentTask() {
