@@ -7,23 +7,28 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
+import com.badlogic.mygame.models.player.Player;
+
 /**
           This screen is the screen for the menu.
           The user is able to switch to MissionScreen, InventoryScreen and InfoScreen, which are all separated classes.
  */
-public class MenuScreen implements Screen {
+public class AvatarSelectionScreen implements Screen {
     private BilcantGame game;
     private Stage stage;
 
-    public MenuScreen(BilcantGame game) {
+    public AvatarSelectionScreen(BilcantGame game) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
@@ -38,13 +43,9 @@ public class MenuScreen implements Screen {
         //table.setDebug(true);
         stage.addActor(table);
 
-        Skin skin = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
+        Skin skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
-        Label menuLabel = new Label("Bilcan't", skin);
-        TextButton newGame = new TextButton("New Game", skin);
-        TextButton loadGame = new TextButton("Load Game", skin);
-        TextButton preferences = new TextButton("Preferences", skin);
-        TextButton exit = new TextButton("Exit", skin);
 
         TextureRegionDrawable textureRegionDrawableBg =
                 new TextureRegionDrawable(new TextureRegion(
@@ -52,43 +53,59 @@ public class MenuScreen implements Screen {
 
 
         table.setBackground(textureRegionDrawableBg);
-        table.add(menuLabel);
-        table.row().pad(20, 0, 10, 0);
-        table.add(newGame).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
-        table.add(loadGame).fillX().uniformX();
-        table.row().pad(10, 0, 10, 0);
-        table.add(preferences).fillX().uniformX();
-        table.row();
-        table.add(exit).fillX().uniformX();
+        Table labelContainer = new Table();
+        labelContainer.add(new Label("Select Avatar", skin2)).pad(10);
+        labelContainer.setFillParent(true);
+        labelContainer.top();
+        stage.addActor(labelContainer);
 
-        exit.addListener(new ChangeListener() {
+        VerticalGroup mertContainer = new VerticalGroup();
+        mertContainer.addActor(new Image(new TextureRegionDrawable(
+                new TextureRegion(
+                        new Texture("npc_skins/npc8.png")))));
+        TextButton selectMert = new TextButton("Mert",skin1);
+        mertContainer.addActor(selectMert);
+        selectMert.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
+                game.setPlayer(new Player(Player.MERT, 25, 45, 0, 0));
+                game.changeScreen(BilcantGame.APPLICATION);
             }
         });
+        mertContainer.space(10);
+        table.add(mertContainer).pad(10);
 
-        newGame.addListener(new ChangeListener() {
+        VerticalGroup selenContainer = new VerticalGroup();
+        selenContainer.addActor(new Image(new TextureRegionDrawable(
+                new TextureRegion(
+                        new Texture("npc_skins/npc1.png")))));
+        TextButton selectSelen = new TextButton("Selen",skin1);
+        selenContainer.addActor(selectSelen);
+        selectSelen.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(BilcantGame.AVATAR_SELECTION);
+                game.setPlayer(new Player(Player.SELEN, 25, 45, 0, 0));
+                game.changeScreen(BilcantGame.APPLICATION);
             }
         });
+        selenContainer.space(10);
+        table.add(selenContainer).pad(10);
 
-        preferences.addListener(new ChangeListener() {
+        VerticalGroup denizContainer = new VerticalGroup();
+        denizContainer.addActor(new Image(new TextureRegionDrawable(
+                new TextureRegion(
+                        new Texture("npc_skins/npc10.png")))));
+        TextButton selectDeniz = new TextButton("Deniz",skin1);
+        denizContainer.addActor(selectDeniz);
+        selectDeniz.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(BilcantGame.PREFERENCES);
+                game.setPlayer(new Player(Player.DENIZ, 25, 45, 0, 0));
+                game.changeScreen(BilcantGame.APPLICATION);
             }
         });
-
-        loadGame.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(BilcantGame.LOADGAME);
-            }
-        });
+        denizContainer.space(10);
+        table.add(denizContainer).pad(10);
     }
 
     @Override

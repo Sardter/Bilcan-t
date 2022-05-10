@@ -18,6 +18,7 @@ public class Player extends Rectangle {
     private Inventory inventory;
     private long experience;
     private int level;
+    private int type;
     private int[] levelCaps = {
             1000,
             2000,
@@ -26,21 +27,48 @@ public class Player extends Rectangle {
             5000,
     };
 
-    public Player(String textureUrl, int width, int height, int x, int y) {
+    public static final int MERT = 0, SELEN = 1, DENIZ = 2;
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+        selectTexture(type);
+    }
+
+    private void selectTexture(int type) {
+        switch (type) {
+            case MERT:
+                texture = new Texture("npc_skins/npc8.png");
+                break;
+            case SELEN:
+                texture = new Texture("npc_skins/npc1.png");
+                break;
+            case DENIZ:
+                texture = new Texture("npc_skins/npc10.png");
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
+        }
+
+    }
+
+    public Player(int type, int width, int height, float x, float y) {
         super();
         super.width = width;
         super.height = height;
         super.x = x;
         super.y = y;
-        setEnergy(0f);
+        setEnergy(0.5f);
         setGpa(2f);
-        setPopularity(0f);
+        setPopularity(0.5f);
         setExperience(0);
 
         level = 0;
-
-        System.out.println(textureUrl);
-        texture = new Texture(textureUrl);
+        selectTexture(type);
+        this.type = type;
         setInventory();
     }
 

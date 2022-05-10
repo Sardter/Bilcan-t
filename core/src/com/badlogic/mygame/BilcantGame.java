@@ -7,6 +7,7 @@ import com.badlogic.mygame.models.missions.Mission;
 import com.badlogic.mygame.models.missions.MissionRouter;
 import com.badlogic.mygame.models.missions.Task;
 import com.badlogic.mygame.models.player.Player;
+import com.badlogic.mygame.views.screens.AvatarSelectionScreen;
 import com.badlogic.mygame.views.screens.EndScreen;
 import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
 import com.badlogic.mygame.views.screens.FindTheTableScreen;
@@ -43,6 +44,7 @@ public class BilcantGame extends Game {
     private EscapeTheBeesMinigameScreen escapeTheBeesMinigameScreen;
     private FindTheTableScreen findTheTableScreen;
     private QuizScreen quizScreen;
+    private AvatarSelectionScreen avatarSelectionScreen;
     private Player player;
     private MissionRouter missionRouter;
     private MainStoryMissionLesson mainStory;
@@ -68,6 +70,7 @@ public class BilcantGame extends Game {
                 new FirstMission(player),
                 new MainStoryMissionLesson(player)
         });
+        System.out.println(missionRouter);
     }
 
     public final static int MENU = 0;
@@ -82,6 +85,7 @@ public class BilcantGame extends Game {
     public final static int ESCAPE_THE_BEES = 9;
     public final static int FIND_THE_TABLE = 10;
     public final static int QUIZ = 11;
+    public final static int AVATAR_SELECTION = 12;
 
     public void changeScreen(int screen){
         switch(screen){
@@ -132,6 +136,10 @@ public class BilcantGame extends Game {
             case QUIZ:
                 quizScreen = new QuizScreen(this);
                 this.setScreen(quizScreen);
+                break;
+            case AVATAR_SELECTION:
+                avatarSelectionScreen = new AvatarSelectionScreen(this);
+                this.setScreen(avatarSelectionScreen);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + screen);

@@ -125,22 +125,28 @@ public class MainScreen implements Screen {
                                 new Texture("itemWindowBackground.png")))
         ));
 
-        character = new Player("npc_skins/npc10.png", 25, 45,
-                STARTING_POSITION_X, STARTING_POSITION_Y);
-        game.setPlayer(character);
-        game.initializeMissions();
+        /* character = new Player(Player.MERT, 25, 45,
+                STARTING_POSITION_X, STARTING_POSITION_Y); */
+        //game.setPlayer(character);
+        character = game.getPlayer();
         mapRouter = new MapRouter(this, game);
-        //System.out.println(game.getPlayer());
+        map = mapRouter.getMap();
+        this.objects = map.getObjects().getObjects();
+        game.initializeMissions();
         missionRouter = game.getMissionRouter();
+
         if (willBeLoaded) {
             loadGame();
+            game.initializeMissions();
+            missionRouter = game.getMissionRouter();
+        } else {
+            System.out.println(character);
+            character.x = map.getSpawnX();
+            character.y = map.getSpawnY();
+            camera.position.x = map.getSpawnX();
+            camera.position.y = map.getSpawnY();
         }
-        map = mapRouter.getMap();
-        character.x = map.getSpawnX();
-        character.y = map.getSpawnY();
-        camera.position.x = map.getSpawnX();
-        camera.position.y = map.getSpawnY();
-        this.objects = map.getObjects().getObjects();
+
 
         interactContainer = new Table();
         interactContainer.setFillParent(true);
@@ -188,10 +194,12 @@ public class MainScreen implements Screen {
         touchContainer.bottom().right();
 
 
+
         Table activeMissionContainer = new Table();
         activeMissionContainer.setFillParent(true);
         stage.addActor(activeMissionContainer);
         activeMissionContainer.top().right().pad(10);
+        System.out.println(missionRouter);
         Label missionTitle = new Label(missionRouter.getCurrentMission().getName(), skin2);
         Label currentTask = new Label(missionRouter.getCurrentMission()
                 .getCurrentTask().getDescription(), skin2);
@@ -233,6 +241,7 @@ public class MainScreen implements Screen {
         Preferences preferences = Gdx.app.getPreferences("myprefs");
         preferences.putFloat("x", character.x);
         preferences.putFloat("y", character.y);
+        preferences.putInteger("avatar", character.getType());
         preferences.putInteger("mapIndex", mapRouter.getIndex());
         preferences.putString("inventory", character.getInventory().toJson());
         preferences.putString("stats", character.getStatsInJson());
@@ -243,8 +252,8 @@ public class MainScreen implements Screen {
 
     public void loadGame() {
         Preferences preferences = Gdx.app.getPreferences("myprefs");
-        character.x = preferences.getFloat("x");
-        character.y = preferences.getFloat("y");
+        character = new Player(preferences.getInteger("avatar"), 64, 64,
+                preferences.getFloat("x"), preferences.getFloat("y"));
         camera.position.x = preferences.getFloat("x");
         camera.position.y = preferences.getFloat("y");
         mapRouter.setIndex(preferences.getInteger("mapIndex"));
