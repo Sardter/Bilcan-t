@@ -132,7 +132,7 @@ public class MapObjects {
                 })) {{
                     setRouter(new NPCRouter(this, new NPCRoute[]{}));
                 }},
-                new NonPlayerCharacter("npc_skins/npc15.png", "Cat Girl", "npc desc",
+                new NonPlayerCharacter("npc_skins/npc15.png", "Cat Girl", "pop-Quiz!! in SA B.",
                         true, 970, 200, new NPCDialog(null)) {{
                     setRouter(new NPCRouter(this, new NPCRoute[]{}));
                     setGame(mapRouter.getGame());

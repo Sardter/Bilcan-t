@@ -14,6 +14,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
+import com.badlogic.mygame.models.items.IdCard;
+import com.badlogic.mygame.models.missions.FirstMission;
+import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.models.missions.Quiz;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 /**
@@ -175,9 +178,11 @@ public class QuizScreen implements Screen {
             }
         }
     }
+
     private void endScreen(Table table){
         if(score > 3 * quiz.getQuestionsLenght() / 4){
-            quiz.onWin();
+            quiz.onWin(game);
+
         }
         else{
             quiz.onLose();

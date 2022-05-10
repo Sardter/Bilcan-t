@@ -44,7 +44,7 @@ public abstract class Mission {
     }
 
     public void nextTask(){
-        if(taskIndex < 3){
+        if(taskIndex < tasks.length){
             taskIndex++;
         }
     }

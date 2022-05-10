@@ -264,13 +264,16 @@ public class EscapeTheBeesMinigame extends Minigame {
 
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
-        ((EscapeTheBeesMinigameScreen) screen).getGame().getMainScreen().saveGame();
         BilcantGame game = ((EscapeTheBeesMinigameScreen) screen).getGame();
         MinigameMissions currentMission = (MinigameMissions) game.getMissionRouter().getCurrentMission();
 
-        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission") && currentMission.getTaskIndex() == 1){
+        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")
+                && currentMission.getTaskIndex() == 1 && !currentMission.getCurrentTask().getBoolean()){
             currentMission.getCurrentTask().isCompleted();
         }
+
+        game.getMainScreen().saveGame();
+        game.getMainScreen().loadGame();
     }
 
     @Override
@@ -280,6 +283,19 @@ public class EscapeTheBeesMinigame extends Minigame {
         String[] windowItems = {"Lost!", "Bee got you first!"};
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setObject(windowItems);
         ((EscapeTheBeesMinigameScreen) screen).getCompletionWindow().setVisible(true);
+
+        BilcantGame game = ((EscapeTheBeesMinigameScreen) screen).getGame();
+        MinigameMissions currentMission = (MinigameMissions) game.getMissionRouter().getCurrentMission();
+
+        if(game.getMissionRouter().getCurrentMission().getName().equals("mini game Mission")
+                && currentMission.getTaskIndex() == 1 && !currentMission.getCurrentTask().getBoolean()){
+            currentMission.getCurrentTask().isCompleted();
+        }
+
+        game.getMainScreen().saveGame();
+        game.getMainScreen().loadGame();
+
+
     }
 
     private boolean validMove(int x, int y) {

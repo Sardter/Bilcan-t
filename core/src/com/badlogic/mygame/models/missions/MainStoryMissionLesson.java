@@ -11,7 +11,7 @@ public class MainStoryMissionLesson extends Mission{
         this.game = game;
     }
 
-    private String Task1Description = "interact with specific NPC to learn about the existance of a quiz";
+    private String Task1Description = "interact with specific cat girl NPC to learn about the existance of a quiz";
     private String Task2Description = "now take a quiz at the SA building";
     private String Task3Description = "attend 2 lessons by going to the buildings B and G";
 
@@ -70,7 +70,6 @@ public class MainStoryMissionLesson extends Mission{
                 if(task2.getBoolean()){
                     player.addXP(1000);
                     task3.setCompleted(true);
-                    nextTask();
                     System.out.println("task 3 ez");
                 }
             }

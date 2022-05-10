@@ -61,8 +61,6 @@ public class Quiz {
         }
     }
 
-    /* the necessary methods that will be used to display Quiz
-     */
 
     //all the indexes are used to select the necessary Question from the questions array
     public String getQuestionExplanation(int index){
@@ -86,8 +84,17 @@ public class Quiz {
     public int getQuestionsLenght(){
         return questions.length;
     }
-    public void onWin(){
-        id.use(player);
+    public void onWin(BilcantGame game){
+        if(game.getMissionRouter().getCurrentMission().getName().equals("First Mission")
+                && game.getMissionRouter().getCurrentMission().getTaskIndex() == 0
+                && !game.getMissionRouter().getCurrentMission().getCurrentTask().getBoolean()){
+
+            FirstMission currentMission = (FirstMission) game.getMissionRouter().getCurrentMission();
+            currentMission.getCurrentTask().isCompleted();
+            id.use(player);
+            game.getMainScreen().saveGame();
+            game.getMainScreen().loadGame();
+        }
         player.addXP(100);
     }
     public void onLose(){
