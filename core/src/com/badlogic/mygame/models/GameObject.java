@@ -4,7 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.mygame.BilcantGame;
+import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
+
+import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
 import java.util.Random;
 
@@ -17,6 +21,7 @@ public class GameObject extends Rectangle {
     private boolean canInteract = true;
     private int id;
     protected String name, description;
+    protected BilcantGame game;
 
 
     private Random rand = new Random();
@@ -57,21 +62,32 @@ public class GameObject extends Rectangle {
     public String getName() {return this.name;}
     public String getDescription() {return this.description;}
 
+    public void setGame(BilcantGame game){
+        this.game = game;
+    }
+
     public void setOnVicinity(boolean bool) {this.onVicinity = bool;}
 
     public void interact(InteractiveWindow interactWindow) {
         //System.out.println("smt"+ id);
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
-        if(this.name.equals("SA building")){
+        if(this.name.equals("SA building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
+
             //instanciate the quiz mechanism
+            MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.getCurrentTask().isCompleted();
         }
-        if(this.name.equals("B building")){
+        if(this.name.equals("B building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterBbuilding() from the MainStoryMissionLesson
+            MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.DidEnterBbuilding();
         }
-        if(this.name.equals("G building")){
+        if(this.name.equals("G building") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
             //call the DidEnterGbuilding() from the MainStoryMissionLesson
-            game
+            MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
+            currentMission.DidEnterGbuilding();
+
         }
     }
 }

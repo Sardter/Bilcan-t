@@ -33,8 +33,6 @@ public class BilcantGame extends Game {
     private EscapeTheBeesMinigameScreen escapeTheBeesMinigameScreen;
     private Player player;
     private MissionRouter missionRouter;
-    private MainStoryMissionLesson mainStory;
-
 
     public BilcantGame() {
         preferences = new AppPreferences();
@@ -53,8 +51,9 @@ public class BilcantGame extends Game {
 
     public void initializeMissions() {
         missionRouter = new MissionRouter(new Mission[]{
-                new FirstMission(player),
-                new MainStoryMissionLesson(player)
+                new MainStoryMissionLesson(player),
+                new FirstMission(player)
+
         });
     }
 

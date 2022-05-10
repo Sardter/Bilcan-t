@@ -63,6 +63,7 @@ public class MissionScreen implements Screen {
         table2.add(scrollPane).size(800, 500);
 
 
+        /*
         final Mission[] missions = {
                 new FirstMission(game.getPlayer()),
                 new FirstMission(game.getPlayer()),
@@ -77,6 +78,10 @@ public class MissionScreen implements Screen {
                 new FirstMission(game.getPlayer()),
                 new FirstMission(game.getPlayer()),
         };
+        */
+
+
+        final Mission[] missions = game.getMissionRouter().getCurrentMissions();
 
         final CheckBox[] checkBoxes = new CheckBox[missions.length];
 

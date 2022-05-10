@@ -12,22 +12,39 @@ public class MainStoryMissionLesson extends Mission{
 
     private boolean[] enteredBuiildings = {false, false};
 
+    private boolean missionCompleted = false;
+
     String aQuizexplanation = "this is a Bilcan-t academic quiz to upset you and see how miserable you are";
     private Quiz quizTask = new Quiz( aQuizexplanation);
+
+    @Override
+    public void onCompleted() {
+        player.setGPA(4);
+        player.addExperience(1500);
+        missionCompleted = true;
+    }
 
     Task task1 = new Task(Task1Description) {
         @Override
         public boolean isCompleted() {
-            player.addExperience(10);
-            task1.setCompleted(true);
+            if(!missionCompleted){
+                player.addExperience(10);
+                task1.setCompleted(true);
+                nextTask();
+                System.out.println("task 1 ez");
+            }
             return true;
         }
     };
     Task task2 = new Task(Task2Description) {
         @Override
         public boolean isCompleted() {
-            player.addExperience(100);
-            task2.setCompleted(true);
+            if(!missionCompleted){
+                player.addExperience(100);
+                task2.setCompleted(true);
+                nextTask();
+                System.out.println("task 2 ez");
+            }
             return true;
         }
     };
@@ -35,8 +52,13 @@ public class MainStoryMissionLesson extends Mission{
     Task task3 = new Task(Task3Description) {
         @Override
         public boolean isCompleted() {
-            player.addExperience(1000);
-            task3.setCompleted(true);
+            if(!missionCompleted){
+                player.addExperience(1000);
+                task3.setCompleted(true);
+                nextTask();
+                System.out.println("task 3 ez");
+                onCompleted();
+            }
             return true;
         }
     };
@@ -46,20 +68,6 @@ public class MainStoryMissionLesson extends Mission{
         tasks[0] = task1;
         tasks[1] = task2;
         tasks[2] = task3;
-    }
-    @Override
-    public void onCompleted() {
-        if(checkIfTasksCompleted() == false) {return;}
-        player.setGPA(4);
-        player.addExperience(1500);
-    }
-    public boolean checkIfTasksCompleted(){
-        for (int i = 0; i < tasks.length; i++) {
-            if(!tasks[i].isCompleted()){
-                return false;
-            }
-        }
-        return true;
     }
 
     //must construct in the main class a stationary NPC which says that there is a quiz in the SA building (done)
@@ -82,6 +90,7 @@ public class MainStoryMissionLesson extends Mission{
         if(enteredBuiildings[1] == true){
             task3.isCompleted();
         }
+
     }
 
     //must be called after entering the G building

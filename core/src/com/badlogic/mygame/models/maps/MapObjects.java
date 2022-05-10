@@ -65,7 +65,17 @@ public class MapObjects {
                         64, 64, 360, 360),
                 new Door("drop.png", "Obj2", "desc2",
                         64, 64, 260, 260, mapRouter, MapRouter.DEV_2),
+                new GameObject("rectext.png", "SA building", "important quiz",
+                        64, 64, 600, 300),
+                new GameObject("B_building - Copy.jpg", "B building", "Math lessons",
+                        64, 64, 600, 200),
+                new GameObject("rectext.png", "G building", "ENG lessons",
+                        64, 64, 600, 90),
         };
+
+        for (int i = 0; i < gameObjects.length; i++) {
+            gameObjects[i].setGame(mapRouter.getGame());
+        }
 
         DialogOption[] options = {
                 new DialogOption("good, you?", 1, true),
@@ -76,6 +86,9 @@ public class MapObjects {
                 new DialogItem("hey man, how are you?", options),
                 new DialogItem("uga uga", null)
         };
+        DialogItem[] missionDialogItems = {
+                new DialogItem("uga buga take a quiz at SA building", null)
+        };
 
         NonPlayerCharacter[] nonPlayerCharacters = {
                 new NonPlayerCharacter("bucket.png", "important", "npc desc",
@@ -85,8 +98,12 @@ public class MapObjects {
                 /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
                         100, 300)*/
                 new NonPlayerCharacter("bucket.png", "npc", "npc desc",
-                        false, 200, 100, new NPCDialog(null))
+                        false, 200, 100, new NPCDialog(null)),
+                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc that gives quiz quest",
+                        true, 300, 100, new NPCDialog(missionDialogItems)),
         };
+
+        nonPlayerCharacters[3].setGame(mapRouter.getGame());
 
         for (NonPlayerCharacter npc : nonPlayerCharacters) {
             NPCRoute[] routes = {

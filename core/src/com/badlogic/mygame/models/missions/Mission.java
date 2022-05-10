@@ -29,6 +29,12 @@ public abstract class Mission {
         return tasks[taskIndex];
     }
 
+    public void nextTask(){
+        if(taskIndex < 3){
+            taskIndex++;
+        }
+    }
+
     public int getXPReward() {
         return xp;
     }

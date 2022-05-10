@@ -207,13 +207,9 @@ public class MainScreen implements Screen {
                         64,64, 200, 200),
                 new GameObject("rectext.png", "Obj2", "desc2",
                         64, 64, 360, 360),
-                new GameObject("rectext.png", "SA building", "important quiz",
-                        64, 64, 600, 300),
-                new GameObject("rectext.png", "B building", "Math lessons",
-                        64, 64, 600, 200),
-                new GameObject("rectext.png", "G building", "ENG lessons",
-                        64, 64, 600, 90),
         };
+        //setting the gameOBjects to include Bilcant game
+
 
         DialogOption[] options = {
                 new DialogOption("good, you?", 1, true),
@@ -223,9 +219,6 @@ public class MainScreen implements Screen {
         DialogItem[] dialogItems = {
                 new DialogItem("hey man, how are you?", options),
                 new DialogItem("uga uga", null)
-        };
-        DialogItem[] missionDialogItems = {
-                new DialogItem("uga buga take a quiz at SA building", null)
         };
 
         /*
@@ -248,8 +241,6 @@ public class MainScreen implements Screen {
                 new NonPlayerCharacter("bucket.png", "npc", "npc desc",
                         false, 200, 100, new NPCDialog(null)),
 
-                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc that gives quiz quest",
-                        true, 500, 500, new NPCDialog(missionDialogItems)),
         };
 
         for (NonPlayerCharacter npc : nonPlayerCharacters) {
