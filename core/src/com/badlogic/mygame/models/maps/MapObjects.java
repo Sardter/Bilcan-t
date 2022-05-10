@@ -68,8 +68,18 @@ public class MapObjects {
                 new Door("item_skins/door.png", "Dorms", "desc2",
                         64, 64, 700, 0, mapRouter, MapRouter.DEVELOPMENT),
                 new Door("item_skins/door.png", "A Building", "desc2",
-                        64, 64, 1050, 100, mapRouter, MapRouter.DEVELOPMENT)
+                        64, 64, 1050, 100, mapRouter, MapRouter.DEVELOPMENT),
+                new GameObject("Bilkent-02.jpeg", "SA building", "important quiz",
+                        64, 64, 100, 100),
+                new GameObject("B_building - Copy.jpg", "B building", "Math lessons",
+                64, 64, 600, 200),
+                new GameObject("rectext.png", "G building", "ENG lessons",
+                        64, 64, 600, 90)
                 ));
+        for (int i = 0; i < objects.size(); i++) {
+            objects.get(i).setGame(mapRouter.getGame());
+        }
+
 
         this.objects.addAll(Arrays.asList(
                 new NonPlayerCharacter("npc_skins/npc4.png", "npc 1", "npc desc",
@@ -95,12 +105,29 @@ public class MapObjects {
                             new NPCRoute(20,400),
                     }));
                 }},
+                /*
+                new NonPlayerCharacter("npc_skins/npc11.png", "important 2", "npc desc",
+                        true, 100, 200, new NPCDialog(new DialogItem[] {
+                        new DialogItem("Considering my humble opinion it is extremely possible for earth to be flat", new DialogOption[]{
+                                new DialogOption("Oh so True..", 1, true),
+                                new DialogOption("NEINN! Es ist nicht richtig", -1, false)
+                        }),
+                        new DialogItem("Feza gets FZ", null)
+                })),
+                */
+
                 new NonPlayerCharacter("npc_skins/npc11.png", "npc 5", "npc desc",
                         true, 800, 400, new NPCDialog(null)) {{
                     setRouter(new NPCRouter(this, new NPCRoute[]{}));
                 }},
-                new NonPlayerCharacter("npc_skins/npc12.png", "npc 6", "npc desc",
-                        true, 830, 370, new NPCDialog(null)) {{
+                new NonPlayerCharacter("npc_skins/npc12.png", "wise NPC", "npc desc",
+                        true, 830, 370, new NPCDialog(new DialogItem[] {
+                        new DialogItem("Earth is likely flat", new DialogOption[]{
+                                new DialogOption("Oh so True..", 1, true),
+                                new DialogOption("NEINN! Es ist nicht richtig", -1, true)
+                        }),
+                        new DialogItem("Feza gets FZ", null)
+                })) {{
                     setRouter(new NPCRouter(this, new NPCRoute[]{}));
                 }},
                 new NonPlayerCharacter("npc_skins/npc15.png", "Cat Girl", "npc desc",
@@ -158,28 +185,33 @@ public class MapObjects {
                 new Door("item_skins/door.png", "Obj2", "desc2",
                         64, 64, 260, 260, mapRouter, MapRouter.DEV_2),
 
-                new GameObject("rectext.png", "SA building", "important quiz",
-                        64, 64, 600, 300),
-                new GameObject("B_building - Copy.jpg", "B building", "Math lessons",
-                        64, 64, 600, 200),
-                new GameObject("rectext.png", "G building", "ENG lessons",
-                        64, 64, 600, 90),
 
-                new MinigameLinker("bucket.png", "Obj3", "miniGame", 64, 64,
+
+
+                /*
+                new MinigameLinker("bucket.png", "SA building", "miniGame", 64, 64,
                         480, 200, mapRouter.getGame(), BilcantGame.QUIZ),
+
+                 */
 
         };
 
-        for (int i = 0; i < gameObjects.length; i++) {
-            gameObjects[i].setGame(mapRouter.getGame());
-        }
+
 
         DialogItem[] missionDialogItems = {
                 new DialogItem("uga buga take a quiz at SA building", null)
         };
+        DialogItem[] dialogItems2 = {
+                new DialogItem("Considering my humble opinion it is extremely possible for earth to be flat", new DialogOption[]{
+                        new DialogOption("Oh so True..", 1, true),
+                        new DialogOption("NEINN! Es ist nicht richtig", -1, false)
+                }),
+                new DialogItem("Feza gets FZ", null)
+        };
 
         NonPlayerCharacter[] nonPlayerCharacters = {
                 new NonPlayerCharacter("npc_skins/npc1.png", "important", "npc desc",
+<<<<<<< HEAD
                         true, 100, 200, new NPCDialog(new DialogItem[] {
                         new DialogItem("hey man, how are you?", new DialogOption[] {
                                 new DialogOption("good, you?", 1, true),
@@ -191,6 +223,9 @@ public class MapObjects {
                         true, 100, 100, new NPCDialog(null)),
                 /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
                         100, 300)*/
+=======
+                        true, 100, 200, new NPCDialog(dialogItems)),
+>>>>>>> 44046b60462df7720a970fcdc15db07f65c81921
 
                 new NonPlayerCharacter("bucket.png", "npc", "npc desc",
                         false, 200, 100, new NPCDialog(null)),

@@ -60,8 +60,12 @@ public class NonPlayerCharacter extends GameObject {
         System.out.println(this);
         interactWindow.setObject(this);
         interactWindow.setVisible(true);
+<<<<<<< HEAD
         System.out.println(game);
         if(this.name.equals("Cat Girl") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
+=======
+        if(this.name.equals("npc5") && game.getMissionRouter().getCurrentMission().getName().equals("main mission")){
+>>>>>>> 44046b60462df7720a970fcdc15db07f65c81921
 
             //calls did interacted with npc method which is inside the mainStoryMissionLesson class
             MainStoryMissionLesson currentMission = (MainStoryMissionLesson) game.getMissionRouter().getCurrentMission();
@@ -84,11 +88,6 @@ public class NonPlayerCharacter extends GameObject {
      * to make an NPC move in a specific loop
      * there is a speed variable to make them look more random and realistic
      */
-
-
-
-
-
     public boolean getISImportant(){
         return isImportant;
     }

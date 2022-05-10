@@ -82,7 +82,7 @@ public class Quiz {
         return questions.length;
     }
     public void onWin(){
-        player.addXP(25);
+        player.addXP(100);
     }
     public void onLose(){
         player.addXP(-5);

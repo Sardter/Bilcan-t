@@ -190,9 +190,14 @@ public class MainScreen implements Screen {
         touchContainer.add(touchpad).pad(20);
         touchContainer.bottom().right();
 
+<<<<<<< HEAD
 
 
         activeMissionContainer = new Table();
+=======
+        Table activeMissionContainer = new Table();
+        activeMissionContainer.setFillParent(true);
+>>>>>>> 44046b60462df7720a970fcdc15db07f65c81921
         stage.addActor(activeMissionContainer);
         activeMissionContainer.setFillParent(true);
         activeMissionContainer.top().right().pad(10);
@@ -211,6 +216,68 @@ public class MainScreen implements Screen {
 
 
 
+<<<<<<< HEAD
+=======
+    public void createObjects() {
+        GameObject[] gameObjects = {
+                new GameObject("rectext.png", "Obj1", "desc1",
+                        64,64, 200, 200),
+                new GameObject("rectext.png", "Obj2", "desc2",
+                        64, 64, 360, 360),
+        };
+        //setting the gameOBjects to include Bilcant game
+
+
+        DialogOption[] options = {
+                new DialogOption("good, you?", 1, true),
+                new DialogOption("shut up, beach", -1, false)
+        };
+
+
+        DialogItem[] dialogItems = {
+                new DialogItem("hey man, how are you?", options),
+                new DialogItem("uga uga", null)
+        };
+
+
+        /*
+        NonPlayerCharacter[] missionNPCs = {
+                new NonPlayerCharacter("bucket.png", "take a quiz NPC", "npc desc",
+                    true, 200, 200, new NPCDialog(missionDialogItems)),
+        };
+        */
+
+
+
+
+        NonPlayerCharacter[] nonPlayerCharacters = {
+                new NonPlayerCharacter("bucket.png", "important", "npc desc",
+                        true, 100, 200, new NPCDialog(dialogItems)),
+                new NonPlayerCharacter("bucket.png", "important 2", "npc desc",
+                true, 100, 100, null),
+                /*new NonPlayerCharacter(true,100, 200, 100, 200, 1,
+                        100, 300)*/
+                new NonPlayerCharacter("bucket.png", "npc", "npc desc",
+                        false, 200, 100, new NPCDialog(null)),
+
+        };
+
+        for (NonPlayerCharacter npc : nonPlayerCharacters) {
+            NPCRoute[] routes = {
+                    new NPCRoute(300, 300),
+                    new NPCRoute(350, 300),
+                    new NPCRoute(400, 400),
+
+            };
+            NPCRouter router = new NPCRouter(npc, routes);
+            npc.setRouter(router);
+        }
+
+        this.objects.addAll(Arrays.asList(gameObjects));
+        this.objects.addAll(Arrays.asList(nonPlayerCharacters));
+    }
+
+>>>>>>> 44046b60462df7720a970fcdc15db07f65c81921
 
     public void interactOnVicinity() {
         for ( GameObject object : objects) {

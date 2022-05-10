@@ -64,19 +64,19 @@ public class InfoScreen implements Screen {
 
         Information[] infoList = {
                 new Information("Bilkent Info-1",
-                        "Bilkent is widely selected all over the world because of the oppurtunities they offer."
+                        "Bilkent is widely selected all over the world \n because of the oppurtunities they offer."
                         , 0, Information.TUTORIAL),
                 new Information("Bilkent Info-2",
-                        "The university has a very good adaptation-to-university program, and has many courses for your interests",
+                        "The university has a very good adaptation-to-university \n program, and has many courses for your interests",
                         0, Information.TUTORIAL),
                 new Information("Game Tip-1",
-                        "In the find-the-table mini-game you should choose the table which has the longest time remaining as quickly as possible",
+                        "In the find-the-table mini-game you should choose the \n table which has the longest time remaining as quickly as possible",
                         0, Information.TUTORIAL),
                 new Information("Game Tip-2",
-                        "In quiz-game the odds are highly in favour of you. You can win a lot of xp but cannot lose as much xp",
+                        "In quiz-game the odds are highly in favour of you. You can \n win a lot of xp but cannot lose as much xp",
                         50, Information.TUTORIAL),
                 new Information("Game Tip-3",
-                        "Use your inventory wisely and do not give up the objects needed for the main missions",
+                        "Use your inventory wisely and do not give up the objects \nneeded for the main missions",
                         100, Information.TUTORIAL),
         };
 
