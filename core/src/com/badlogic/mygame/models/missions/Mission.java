@@ -44,15 +44,14 @@ public abstract class Mission {
     }
 
     public void nextTask(){
-<<<<<<< HEAD
+
         if(taskIndex < tasks.length){
-=======
+
         if(!(tasks[taskIndex] == null)){
->>>>>>> 1f36b69ea68373b923d6f53301f860ba9333f49e
+
             taskIndex++;
         }
     }
-
     public int getTaskIndex(){
         return taskIndex;
     }
