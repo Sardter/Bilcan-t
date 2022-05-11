@@ -89,11 +89,12 @@ public class Quiz {
                 && game.getMissionRouter().getCurrentMission().getTaskIndex() == 0
                 && !game.getMissionRouter().getCurrentMission().getCurrentTask().getBoolean()){
 
+            game.getMainScreen().saveGame();
+            id.use(player);
             FirstMission currentMission = (FirstMission) game.getMissionRouter().getCurrentMission();
             currentMission.getCurrentTask().isCompleted();
-            id.use(player);
             game.getMainScreen().saveGame();
-            game.getMainScreen().loadGame();
+            //game.getMainScreen().loadGame();
         }
         player.addXP(100);
     }

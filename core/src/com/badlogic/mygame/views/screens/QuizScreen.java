@@ -79,7 +79,7 @@ public class QuizScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println(game);
-                game.changeScreen(BilcantGame.LOADGAME);
+                game.changeScreen(BilcantGame.APPLICATION);
             }
         });
         table1.addActor(exit);
@@ -179,7 +179,6 @@ public class QuizScreen implements Screen {
     private void endScreen(Table table){
         if(score > 3 * quiz.getQuestionsLenght() / 4){
             quiz.onWin(game);
-
         }
         else{
             quiz.onLose();
@@ -195,7 +194,7 @@ public class QuizScreen implements Screen {
         exit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.changeScreen(BilcantGame.LOADGAME);
+                game.changeScreen(BilcantGame.APPLICATION);
             }
         });
 
