@@ -5,11 +5,8 @@ import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.items.Food;
 import com.badlogic.mygame.models.items.Item;
-import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
-import com.badlogic.mygame.models.missions.MinigameMissions;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
-import com.badlogic.mygame.views.screens.FindTheTableScreen;
 
 import java.util.ArrayList;
 import java.util.Random;

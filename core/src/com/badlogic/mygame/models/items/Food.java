@@ -1,6 +1,5 @@
 package com.badlogic.mygame.models.items;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.mygame.models.player.Inventory;
 import com.badlogic.mygame.models.player.Player;
 

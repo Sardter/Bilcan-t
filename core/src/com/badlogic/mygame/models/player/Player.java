@@ -1,7 +1,7 @@
 package com.badlogic.mygame.models.player;
 
 import com.badlogic.gdx.graphics.Texture;
-import  com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Json;
 
 import java.util.HashMap;
@@ -110,7 +110,7 @@ public class Player extends Rectangle {
     }
     public void setStatsFromJson(String json){
         HashMap<String, Float> map = new Json().fromJson(HashMap.class, json);
-        System.out.println(map);
+        System.out.println(json);
         setGpa(map.get("gpa"));
         setEnergy(map.get("energy"));
         setPopularity(map.get("popularity"));

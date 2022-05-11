@@ -7,11 +7,10 @@ import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.player.Player;
 
 import java.util.HashMap;
-import java.util.jar.JarEntry;
 
 public abstract class Mission {
     //variables
-    protected final Player player;
+    protected Player player;
     protected final String name, description;
     protected final int xp;
     protected final Item reward;

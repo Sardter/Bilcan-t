@@ -24,8 +24,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.models.player.Inventory;
 import com.badlogic.mygame.models.items.Item;
+import com.badlogic.mygame.models.player.Inventory;
 import com.badlogic.mygame.views.windows.ItemWindow;
 
 import java.util.ArrayList;

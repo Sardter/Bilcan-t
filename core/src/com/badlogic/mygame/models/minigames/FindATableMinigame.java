@@ -3,9 +3,7 @@ package com.badlogic.mygame.models.minigames;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.models.missions.MinigameMissions;
-import com.badlogic.mygame.models.missions.MissionRouter;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.FindTheTableScreen;
 

@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.models.missions.FirstMission;
 import com.badlogic.mygame.models.missions.Mission;
 /**
         Screen where you see the possible missions for the player.

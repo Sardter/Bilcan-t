@@ -9,8 +9,6 @@ import com.badlogic.mygame.models.missions.FirstMission;
 import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.views.windows.InteractiveWindow;
 
-import org.graalvm.compiler.asm.sparc.SPARCAssembler;
-
 import java.util.Random;
 /**
           Main parent class for the objects within the game.

@@ -40,7 +40,7 @@ public class NonPlayerCharacter extends GameObject {
 
     public NonPlayerCharacter(String textureUrl, String name, String description,
                               boolean isImportant, int posX, int posY, NPCDialog dialog) {
-            super(textureUrl, name, description, 50, 90, posX, posY);
+            super(textureUrl, name, description, 40, 80, posX, posY);
             this.isImportant = isImportant;
             this.speed = 2;
             this.dialog = dialog;

@@ -9,16 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.mygame.BilcantGame;
-import com.badlogic.mygame.models.items.IdCard;
-import com.badlogic.mygame.models.missions.FirstMission;
-import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.models.missions.Quiz;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 /**
             Quiz screen where questions of multiple choices are presented to the user, for user to choose the one correct answer.
             Answers are buttons; when clicked, if answer is correct it increments your score, if false it doesn't do anything.

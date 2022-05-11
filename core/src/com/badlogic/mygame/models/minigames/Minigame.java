@@ -1,9 +1,7 @@
 package com.badlogic.mygame.models.minigames;
 
 import com.badlogic.gdx.Screen;
-import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.player.Player;
-import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
 
 public abstract class Minigame {
     protected final Player player;

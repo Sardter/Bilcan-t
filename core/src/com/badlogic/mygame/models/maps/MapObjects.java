@@ -53,31 +53,21 @@ public class MapObjects {
 
     private void main_campus() {
         this.objects.addAll(Arrays.asList(
-                new Door("item_skins/door.png", "SB Building", "desc2",
-                64, 64, 350, 470, mapRouter, MapRouter.DEVELOPMENT),
-                new Door("item_skins/door.png", "SA Building", "desc2",
-                        64, 64, 370, 100, mapRouter, MapRouter.DEVELOPMENT),
-                new Door("item_skins/door.png", "B building", "desc2",
-                        64, 64, 200, 850, mapRouter, MapRouter.DEVELOPMENT),
                 new MinigameLinker("item_skins/bee.png", "Coffee Break", "desc2",
-                        64, 64, 900, 470, mapRouter.getGame(), BilcantGame.ESCAPE_THE_BEES),
-                new Door("item_skins/door.png", "G Building", "desc2",
-                        64, 64, 1070, 950, mapRouter, MapRouter.DEVELOPMENT),
+                        16, 16, 900, 470, mapRouter.getGame(), BilcantGame.ESCAPE_THE_BEES),
                 new Door("item_skins/door.png", "Upper Campus", "desc2",
-                        64, 64, 600, 1000, mapRouter, MapRouter.UPPER_CAMPUS),
-                new Door("item_skins/door.png", "Dorms", "desc2",
-                        64, 64, 700, 0, mapRouter, MapRouter.DEVELOPMENT),
-                new Door("rectext.png", "A Building", "desc2",
-                        64, 64, 800, 800, mapRouter, MapRouter.DEVELOPMENT),
+                        32, 64, 600, 1000, mapRouter, MapRouter.UPPER_CAMPUS),
                 new GameObject("Bilkent-02.jpeg", "A building", "ID building",
-                        64, 64, 450, 400),
+                        122, 85, 1100, 200),
                 new GameObject("Bilkent-02.jpeg", "SA building", "important quiz",
-                        64, 64, 100, 0),
+                        122, 85, 200, 500),
                 new GameObject("B_building - Copy.jpg", "B building", "Math lessons",
-                64, 64, 200, 200),
-                new GameObject("drop.png", "G building", "ENG lessons",
-                        64, 64, 600, 90)
+                100, 100, 200, 900),
+                new GameObject("gbuilding.jpeg", "G building", "ENG lessons",
+                        100, 100, 1100, 900)
                 ));
+
+
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).setGame(mapRouter.getGame());
         }
@@ -107,16 +97,6 @@ public class MapObjects {
                             new NPCRoute(20,400),
                     }));
                 }},
-                /*
-                new NonPlayerCharacter("npc_skins/npc11.png", "important 2", "npc desc",
-                        true, 100, 200, new NPCDialog(new DialogItem[] {
-                        new DialogItem("Considering my humble opinion it is extremely possible for earth to be flat", new DialogOption[]{
-                                new DialogOption("Oh so True..", 1, true),
-                                new DialogOption("NEINN! Es ist nicht richtig", -1, false)
-                        }),
-                        new DialogItem("Feza gets FZ", null)
-                })),
-                */
 
                 new NonPlayerCharacter("npc_skins/npc11.png", "npc 5", "npc desc",
                         true, 800, 400, new NPCDialog(null)) {{

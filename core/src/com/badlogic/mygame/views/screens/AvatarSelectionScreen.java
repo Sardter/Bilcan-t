@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -84,7 +83,7 @@ public class AvatarSelectionScreen implements Screen {
         selectSelen.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setPlayer(new Player(Player.SELEN, 25, 45, 0, 0));
+                game.setPlayer(new Player(Player.SELEN, 10, 45, 0, 0));
                 game.changeScreen(BilcantGame.APPLICATION);
             }
         });

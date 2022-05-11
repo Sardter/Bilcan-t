@@ -6,7 +6,6 @@ import com.badlogic.mygame.models.missions.MainStoryMissionLesson;
 import com.badlogic.mygame.models.missions.MinigameMissions;
 import com.badlogic.mygame.models.missions.Mission;
 import com.badlogic.mygame.models.missions.MissionRouter;
-import com.badlogic.mygame.models.missions.Task;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.screens.AvatarSelectionScreen;
 import com.badlogic.mygame.views.screens.EndScreen;

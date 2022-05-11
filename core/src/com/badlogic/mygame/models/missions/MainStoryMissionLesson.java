@@ -2,7 +2,6 @@ package com.badlogic.mygame.models.missions;
 
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.player.Player;
-import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
 
 //has chained missions related to the lessons in Collage
 public class MainStoryMissionLesson extends Mission{
@@ -41,6 +40,7 @@ public class MainStoryMissionLesson extends Mission{
 
             if(!missionCompleted){
                 if(!task1.getBoolean()){
+                    player = game.getPlayer();
                     player.addXP(10);
                     task1.setCompleted(true);
                     nextTask();
@@ -56,6 +56,7 @@ public class MainStoryMissionLesson extends Mission{
 
             if(!missionCompleted){
                 if(task1.getBoolean()){
+                    player = game.getPlayer();
                     player.addXP(100);
                     task2.setCompleted(true);
                     nextTask();
@@ -72,6 +73,7 @@ public class MainStoryMissionLesson extends Mission{
 
             if(!missionCompleted){
                 if(task2.getBoolean()){
+                    player = game.getPlayer();
                     player.addXP(1000);
                     task3.setCompleted(true);
 

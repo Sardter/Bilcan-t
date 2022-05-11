@@ -22,15 +22,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.controllers.Controller;
+import com.badlogic.mygame.models.GameObject;
+import com.badlogic.mygame.models.maps.GameMap;
 import com.badlogic.mygame.models.maps.MapRouter;
 import com.badlogic.mygame.models.missions.MissionRouter;
-import com.badlogic.mygame.models.maps.GameMap;
-import com.badlogic.mygame.models.GameObject;
-import com.badlogic.mygame.models.npc.DialogItem;
-import com.badlogic.mygame.models.npc.DialogOption;
-import com.badlogic.mygame.models.npc.NPCDialog;
-import com.badlogic.mygame.models.npc.NPCRoute;
-import com.badlogic.mygame.models.npc.NPCRouter;
 import com.badlogic.mygame.models.npc.NonPlayerCharacter;
 import com.badlogic.mygame.models.player.Player;
 import com.badlogic.mygame.views.windows.InteractWindow;
@@ -138,6 +133,7 @@ public class MainScreen implements Screen {
 
         if (willBeLoaded) {
             loadGame();
+
         } else {
             character.x = map.getSpawnX();
             character.y = map.getSpawnY();
@@ -251,17 +247,18 @@ public class MainScreen implements Screen {
         Preferences preferences = Gdx.app.getPreferences("myprefs");
         character = new Player(preferences.getInteger("avatar"), 64, 64,
                 preferences.getFloat("x"), preferences.getFloat("y"));
+        game.setPlayer(character);
         camera.position.x = preferences.getFloat("x");
         camera.position.y = preferences.getFloat("y");
-        mapRouter.setIndex(preferences.getInteger("mapIndex"));
+        mapRouter.setMap(preferences.getInteger("mapIndex"));
+        missionRouter.setIndex(preferences.getInteger("mission"));
         character.getInventory().fromJson(preferences.getString("inventory"));
         try {
             character.setStatsFromJson(preferences.getString("stats"));
             missionRouter.dataFromJson(preferences.getString("missionData"));
         } catch (NullPointerException e) {
-            System.out.println(e);
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
-        missionRouter.setIndex(preferences.getInteger("mission"));
     }
 
     public void drawTasks() {

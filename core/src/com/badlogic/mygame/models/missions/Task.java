@@ -1,7 +1,6 @@
 package com.badlogic.mygame.models.missions;
 
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.mygame.BilcantGame;
 
 import java.util.HashMap;
 

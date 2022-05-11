@@ -3,7 +3,6 @@ package com.badlogic.mygame.models.missions;
 import com.badlogic.mygame.BilcantGame;
 import com.badlogic.mygame.models.items.Item;
 import com.badlogic.mygame.models.player.Player;
-import com.badlogic.mygame.views.screens.EscapeTheBeesMinigameScreen;
 
 public class FirstMission extends Mission {
     //variables
