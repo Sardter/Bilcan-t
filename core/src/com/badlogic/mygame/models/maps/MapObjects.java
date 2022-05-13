@@ -144,39 +144,29 @@ public class MapObjects {
     }
 
     private void dev2() {
-        GameObject[] gameObjects = {
+        this.objects.addAll(Arrays.asList(
                 new Door("item_skins/door.png", "Obj2", "desc2",
                         64, 64, 260, 260, mapRouter, MapRouter.DEVELOPMENT),
                 new MinigameLinker("item_skins/bee.png", "Obj2", "desc2",
                         64, 64, 350, 300,
                         mapRouter.getGame(), BilcantGame.ESCAPE_THE_BEES),
                 new MinigameLinker("item_skins/table.png", "Obj2", "desc2",
-                    64, 64, 300, 100,
-                    mapRouter.getGame(), BilcantGame.FIND_THE_TABLE),
-        };
-
-        this.objects.addAll(Arrays.asList(gameObjects));
+                        64, 64, 300, 100,
+                        mapRouter.getGame(), BilcantGame.FIND_THE_TABLE)
+        ));
     }
 
     private void development() {
-        GameObject[] gameObjects = {
+        this.objects.addAll(Arrays.asList(
                 new GameObject("item_skins/laundry.png", "Obj1", "desc1",
                         64,64, 200, 200),
                 new GameObject("item_skins/pillow.png", "Obj2", "desc2",
                         64, 64, 360, 360),
                 new Door("item_skins/door.png", "Obj2", "desc2",
                         64, 64, 260, 260, mapRouter, MapRouter.DEV_2),
-
-
-
-
-                /*
-                new MinigameLinker("bucket.png", "SA building", "miniGame", 64, 64,
-                        480, 200, mapRouter.getGame(), BilcantGame.QUIZ),
-
-                 */
-
-        };
+                new Door("item_skins/door.png", "Obj2", "desc2",
+                        64, 64, -100, -100, mapRouter, MapRouter.UPPER_CAMPUS)
+        ));
 
 
 
@@ -220,14 +210,11 @@ public class MapObjects {
             NPCRoute[] routes = {
                     new NPCRoute(200, 300),
                     new NPCRoute(350, 300),
-                    //new NPCRoute(350, 250),
-                    //new NPCRoute(400, 400)
             };
             NPCRouter router = new NPCRouter(npc, routes);
             npc.setRouter(router);
         }
 
-        this.objects.addAll(Arrays.asList(gameObjects));
         this.objects.addAll(Arrays.asList(nonPlayerCharacters));
     }
 

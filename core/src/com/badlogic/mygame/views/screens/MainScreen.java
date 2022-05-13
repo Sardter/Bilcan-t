@@ -99,49 +99,11 @@ public class MainScreen implements Screen {
 
     @Override
     public void show() {
-        camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
-        camera.position.x = STARTING_POSITION_X;
-        camera.position.y = STARTING_POSITION_Y;
-        objects = new ArrayList<>();
-        stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-        batch = new SpriteBatch();
+        setUpGame();
+        setUpUI();
+    }
 
-        interactWindow = new InteractWindow("Interact", new Window.WindowStyle(
-                new BitmapFont(),
-                new Color(),
-                new TextureRegionDrawable(
-                        new TextureRegion(
-                                new Texture("itemWindowBackground.png")))
-        ));
-        npcInteractWindow = new NPCInteractWindow("NPC Interact", new Window.WindowStyle(
-                new BitmapFont(),
-                new Color(),
-                new TextureRegionDrawable(
-                        new TextureRegion(
-                                new Texture("itemWindowBackground.png")))
-        ));
-
-
-        character = game.getPlayer();
-        mapRouter = new MapRouter(this, game);
-        map = mapRouter.getMap();
-        this.objects = map.getObjects().getObjects();
-        game.initializeMissions();
-        missionRouter = game.getMissionRouter();
-
-        if (willBeLoaded) {
-            loadGame();
-
-        } else {
-            character.x = map.getSpawnX();
-            character.y = map.getSpawnY();
-            camera.position.x = map.getSpawnX();
-            camera.position.y = map.getSpawnY();
-        }
-
-
+    private void setUpUI() {
         interactContainer = new Table();
         interactContainer.setFillParent(true);
         stage.addActor(interactContainer);
@@ -165,7 +127,7 @@ public class MainScreen implements Screen {
         menuContainer.setFillParent(true);
         TextButton menuButton = new TextButton("Menu", skin1);
         TextButton resetPosition = new TextButton("Reset", skin1);
-        
+
         menuContainer.top().left();
 
         menuContainer.add(menuButton).pad(10);
@@ -213,6 +175,49 @@ public class MainScreen implements Screen {
         stage.addActor(npcInteractWindow);
     }
 
+    private void setUpGame() {
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, 800, 480);
+        camera.position.x = STARTING_POSITION_X;
+        camera.position.y = STARTING_POSITION_Y;
+        objects = new ArrayList<>();
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        batch = new SpriteBatch();
+
+        interactWindow = new InteractWindow("Interact", new Window.WindowStyle(
+                new BitmapFont(),
+                new Color(),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("itemWindowBackground.png")))
+        ));
+        npcInteractWindow = new NPCInteractWindow("NPC Interact", new Window.WindowStyle(
+                new BitmapFont(),
+                new Color(),
+                new TextureRegionDrawable(
+                        new TextureRegion(
+                                new Texture("itemWindowBackground.png")))
+        ));
+
+
+        character = game.getPlayer();
+        mapRouter = new MapRouter(this, game);
+        map = mapRouter.getMap();
+        this.objects = map.getObjects().getObjects();
+        game.initializeMissions();
+        missionRouter = game.getMissionRouter();
+
+        if (willBeLoaded) {
+            loadGame();
+
+        } else {
+            character.x = map.getSpawnX();
+            character.y = map.getSpawnY();
+            camera.position.x = map.getSpawnX();
+            camera.position.y = map.getSpawnY();
+        }
+    }
 
     public void interactOnVicinity() {
         for ( GameObject object : objects) {

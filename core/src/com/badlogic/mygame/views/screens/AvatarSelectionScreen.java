@@ -26,38 +26,40 @@ import com.badlogic.mygame.models.player.Player;
 public class AvatarSelectionScreen implements Screen {
     private BilcantGame game;
     private Stage stage;
+    private final Skin skin1, skin2;
+
 
     public AvatarSelectionScreen(BilcantGame game) {
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-
-
+        skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+        skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
     }
 
     @Override
     public void show() {
         Table table = new Table();
         table.setFillParent(true);
-        //table.setDebug(true);
         stage.addActor(table);
 
-        Skin skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
-        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
+        table.setBackground(new TextureRegionDrawable(new TextureRegion(
+                new Texture(Gdx.files.internal("menubackground.jpg")))));
 
-        TextureRegionDrawable textureRegionDrawableBg =
-                new TextureRegionDrawable(new TextureRegion(
-                        new Texture(Gdx.files.internal("menubackground.jpg"))));
+        drawLabel();
+        drawAvatars(table);
+    }
 
-
-        table.setBackground(textureRegionDrawableBg);
+    public void drawLabel() {
         Table labelContainer = new Table();
         labelContainer.add(new Label("Select Avatar", skin2)).pad(10);
         labelContainer.setFillParent(true);
         labelContainer.top();
         stage.addActor(labelContainer);
+    }
 
+    public void drawAvatars(Table table) {
         VerticalGroup mertContainer = new VerticalGroup();
         mertContainer.addActor(new Image(new TextureRegionDrawable(
                 new TextureRegion(

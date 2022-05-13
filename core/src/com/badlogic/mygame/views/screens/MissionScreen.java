@@ -27,12 +27,15 @@ import com.badlogic.mygame.models.missions.Mission;
 public class MissionScreen implements Screen {
     private final BilcantGame game;
     private Stage stage;
+    private final Skin skin1, skin2;
 
     public MissionScreen(BilcantGame game) {
         game.getMainScreen().saveGame();
         this.game = game;
         this.stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+        skin1 = new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
+        skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
     }
 
     @Override
@@ -43,11 +46,8 @@ public class MissionScreen implements Screen {
         stage.addActor(table1);
         stage.addActor(table2);
 
-        Skin skin1 =  new Skin(Gdx.files.internal("level-plane/skin/level-plane-ui.json"));
-        Skin skin2 = new Skin(Gdx.files.internal("pixthulhu/skin/pixthulhu-ui.json"));
 
-
-        final TextButton back = new TextButton("Back", skin1); // the extra argument here "small" is used to set the button to the smaller version instead of the big default version
+        final TextButton back = new TextButton("Back", skin1);
         back.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -65,10 +65,6 @@ public class MissionScreen implements Screen {
         Table missionsContainer = new Table();
         ScrollPane scrollPane = new ScrollPane(missionsContainer);
         table2.add(scrollPane).size(800, 500);
-
-
-        //final Mission[] missions = game.getMissionRouter().getCurrentMissions();
-
 
         final Mission[] missions = game.getMissionRouter().getMissions();
 

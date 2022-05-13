@@ -40,11 +40,15 @@ public class MainStoryMissionLesson extends Mission{
 
             if(!missionCompleted){
                 if(!task1.getBoolean()){
-                    player = game.getPlayer();
-                    player.addXP(10);
-                    task1.setCompleted(true);
-                    nextTask();
-                    System.out.println("task 1 done");
+                    try {
+                        player = game.getPlayer();
+                        player.addXP(10);
+                        task1.setCompleted(true);
+                        nextTask();
+                        System.out.println("task 1 done");
+                    } catch (NullPointerException e) {
+                        System.out.println(e.getStackTrace());
+                    }
                 }
             }
             return true;
