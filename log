@@ -1,0 +1,22 @@
+commit 6cc8d666006d737d69c86c52e7f99fda326cef08 (HEAD -> master, origin/master)
+Author: borahll <bora.haliloglu@ug.bilkent.edu.tr>
+Date:   Wed May 11 09:01:40 2022 +0300
+
+    10
+
+commit ef8351a77cd16db113f54acb9c5df09e9fb84c49
+Author: Sardter <sadra701@gmail.com>
+Date:   Wed May 11 03:45:53 2022 +0300
+
+    same as before
+
+commit 535e9e391548d0c0627a42e34e070997e03bfbdb
+Author: Sardter <sadra701@gmail.com>
+Date:   Wed May 11 03:45:37 2022 +0300
+
+    built desktop jar
+
+commit 0b57a505dd09eccfcdfbfa1c5a5fc71e9988b06b
+Merge: e8b9e21 8d0498d
+Author: Sardter <sadra701@gmail.com>
+Date:   Wed May 11 01:01:10 2022 +0300
